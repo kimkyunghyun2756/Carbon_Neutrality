@@ -45,4 +45,4 @@
 
 ## 시스템 아키텍쳐
 
-!(docs/img/system_Architecture.png)
+![Architecture overview](docs/img/system_Architecture.png)
