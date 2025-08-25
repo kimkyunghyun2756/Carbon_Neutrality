@@ -45,10 +45,6 @@
 
 ## 리포지토리/모듈 구조 
 
-- 길어지면 접기(HTML details)  
-  ```markdown
-  <details><summary>Project Structure</summary>
-
   ```text
     carbon-dashboard/
     ├─ apps/
