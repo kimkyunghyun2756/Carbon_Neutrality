@@ -42,3 +42,7 @@
 - **App**: Streamlit
 - **CI/CD**: GitHub Actions + GHCR
 - **Observability**: Prometheus + Grafana
+
+## 시스템 아키텍쳐
+
+!(docs/img/system_Architecture.png)
