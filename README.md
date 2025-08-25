@@ -45,45 +45,50 @@
 
 ## 리포지토리/모듈 구조 
 
-carbon-dashboard/
-├─ apps/
-│  ├─ frontend/                # Streamlit (프론트)
-│  │  ├─ app.py
-│  │  ├─ requirements.txt
-│  │  └─ Dockerfile
-│  ├─ backend/                 # FastAPI (백엔드 API)
-│  │  ├─ main.py
-│  │  ├─ api/
-│  │  │  ├─ __init__.py
-│  │  │  ├─ routers.py
-│  │  │  └─ deps.py
-│  │  ├─ schemas/              # Pydantic
-│  │  │  └─ timeseries.py
-│  │  ├─ services/             # 쿼리/도메인 로직
-│  │  │  └─ emissions.py
-│  │  ├─ requirements.txt
-│  │  └─ Dockerfile
-│  └─ etl/                     # CSV→DB 적재 + 주기 실행(CronJob)
-│     ├─ job.py
-│     ├─ requirements.txt
-│     └─ Dockerfile
-├─ packages/                   # 공용 파이썬 패키지
-│  └─ carbon_common/
-│     ├─ __init__.py
-│     ├─ config.py             # env 로딩, 설정
-│     ├─ db.py                 # SQLAlchemy 엔진/세션
-│     ├─ models.py             # SQLAlchemy 모델
-│     ├─ metrics.py            # 메트릭 코드 Enum/상수
-│     └─ utils.py              # 공용 유틸
-├─ infra/
-│  ├─ sql/schema.sql           # DB 스키마 (DDL)
-│  └─ k8s/
-│     ├─ postgres/             # StatefulSet/Service
-│     ├─ backend/              # Deployment/Service
-│     ├─ frontend/             # Deployment/Service(LoadBalancer 권장)
-│     └─ etl/                  # CronJob
-├─ .env.example
-└─ README.md
+- 길어지면 접기(HTML details)  
+  ```markdown
+  <details><summary>Project Structure</summary>
+
+  ```text
+    carbon-dashboard/
+    ├─ apps/
+    │  ├─ frontend/                # Streamlit (프론트)
+    │  │  ├─ app.py
+    │  │  ├─ requirements.txt
+    │  │  └─ Dockerfile
+    │  ├─ backend/                 # FastAPI (백엔드 API)
+    │  │  ├─ main.py
+    │  │  ├─ api/
+    │  │  │  ├─ __init__.py
+    │  │  │  ├─ routers.py
+    │  │  │  └─ deps.py
+    │  │  ├─ schemas/              # Pydantic
+    │  │  │  └─ timeseries.py
+    │  │  ├─ services/             # 쿼리/도메인 로직
+    │  │  │  └─ emissions.py
+    │  │  ├─ requirements.txt
+    │  │  └─ Dockerfile
+    │  └─ etl/                     # CSV→DB 적재 + 주기 실행(CronJob)
+    │     ├─ job.py
+    │     ├─ requirements.txt
+    │     └─ Dockerfile
+    ├─ packages/                   # 공용 파이썬 패키지
+    │  └─ carbon_common/
+    │     ├─ __init__.py
+    │     ├─ config.py             # env 로딩, 설정
+    │     ├─ db.py                 # SQLAlchemy 엔진/세션
+    │     ├─ models.py             # SQLAlchemy 모델
+    │     ├─ metrics.py            # 메트릭 코드 Enum/상수
+    │     └─ utils.py              # 공용 유틸
+    ├─ infra/
+    │  ├─ sql/schema.sql           # DB 스키마 (DDL)
+    │  └─ k8s/
+    │     ├─ postgres/             # StatefulSet/Service
+    │     ├─ backend/              # Deployment/Service
+    │     ├─ frontend/             # Deployment/Service(LoadBalancer 권장)
+    │     └─ etl/                  # CronJob
+    ├─ .env.example
+    └─ README.md
 
 
 ## 시스템 아키텍쳐
