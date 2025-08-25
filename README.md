@@ -85,7 +85,7 @@
     │     └─ etl/                  # CronJob
     ├─ .env.example
     └─ README.md
-
+```
 
 ## 시스템 아키텍쳐
 
