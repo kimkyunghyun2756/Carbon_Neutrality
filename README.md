@@ -89,4 +89,4 @@
 
 ## 시스템 아키텍쳐
 
-![Architecture overview](docs/img/system_Architecture.png)
+![Architecture overview](docs/img/system_Architecture_2.png)
