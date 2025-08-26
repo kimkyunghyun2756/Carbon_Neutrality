@@ -26,10 +26,23 @@ NODE_THRESHOLD=${NODE_THRESHOLD}
 SLEEP_SEC=${SLEEP_SEC}
 EOF
 
+##### 재시도 래퍼 #####
+RETRY_MAX=${RETRY_MAX:-5}
+RETRY_DELAY=${RETRY_DELAY:-5}
+retry() {
+  local n=0
+  until "$@"; do
+    n=$((n+1))
+    [ $n -ge $RETRY_MAX ] && echo "[ERROR] retry exceeded: $*" && return 1
+    echo "[retry $n/${RETRY_MAX}] $* ; sleep ${RETRY_DELAY}s"
+    sleep "$RETRY_DELAY"
+  done
+}
+
 echo "[0] 필수 패키지 & firewalld"
-dnf -y install dnf-plugins-core curl ca-certificates tar jq iproute \
+retry dnf -y install dnf-plugins-core curl ca-certificates tar jq iproute \
                iptables ebtables ethtool ipvsadm firewalld python3 || true
-systemctl enable --now firewalld || true
+# systemctl enable --now firewalld || true
 
 echo "[1] Docker & containerd 설치"
 dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo -y
@@ -82,6 +95,8 @@ EOF
 sysctl --system
 
 echo "[5] 방화벽(K8s/API/HTTP/Calico VXLAN)"
+retry dnf -y install firewalld
+systemctl enable --now firewalld || true
 firewall-cmd --add-port=6443/tcp --permanent      || true
 firewall-cmd --add-port=2379-2380/tcp --permanent || true
 firewall-cmd --add-port=10250/tcp --permanent     || true
@@ -273,8 +288,20 @@ systemctl daemon-reload
 systemctl enable --now after-first-worker.service
 
 echo "[13] Helm 설치"
-curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-helm version
+# 설치 디렉터리를 /usr/bin으로 강제해 PATH 문제 방지
+export HELM_INSTALL_DIR=/usr/bin
+curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash || true
+
+# 혹시 스크립트가 /usr/local/bin에 깔았다면 링크로 보완
+if [ -x /usr/local/bin/helm ] && [ ! -x /usr/bin/helm ]; then
+  ln -sf /usr/local/bin/helm /usr/bin/helm
+fi
+
+# (선택) 플러그인 대비 git 설치
+dnf -y install git || true
+
+# 최종 확인(실패해도 프로비저닝 계속)
+helm version || true
 
 echo "[완료] join: http://${API_IP}:8000/join.sh"
 echo "       워커가 조인되면 Calico가 자동으로 설치/패치됩니다."

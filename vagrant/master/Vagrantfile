@@ -2,20 +2,53 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-    config.vm.define "k8s-master" do |cfg|
-        cfg.vm.box = "generic/oracle8"
-        cfg.vm.host_name = "k8s-master"
-        cfg.vm.network "public_network", bridge: "Intel(R) Wi-Fi 6E AX211 160MHz", ip: "192.168.4.201"
-        cfg.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
-        cfg.vm.synced_folder ".", "/vagrant"
+  # SSH/부팅 안정화 (유효한 키만 사용)
+  config.ssh.keep_alive          = true
+  config.ssh.connect_retries     = 60     # 총 재시도 횟수
+  config.ssh.connect_retry_delay = 5      # 재시도 간격(초)
+  config.ssh.connect_timeout     = 30     # 1회 연결 타임아웃(초)
+  config.vm.boot_timeout         = 600    # 부팅 대기(초)
+  config.vm.box_check_update     = false
+  config.vm.define "k8s-master" do |cfg|
+    cfg.vm.box = "generic/oracle8"
+    cfg.vm.host_name = "k8s-master"
 
-        cfg.vm.provider "virtualbox" do |vb|
-            vb.name = "k8s-master"
-            vb.cpus = 4
-            vb.memory = 4096
-            vb.customize ["modifyvm", :id, "--rtcuseutc", "on", "--groups", "/k8s-carbon"]
-        end
-        cfg.vm.provision "shell", path: "master-provision.sh", privileged: true
+    # 브릿지 네트워크 (기본 라우트 변경 방지)
+    cfg.vm.network "public_network",
+      bridge: "Intel(R) Wi-Fi 6E AX211 160MHz",
+      ip: "192.168.4.200",
+      use_dhcp_assigned_default_route: false
+
+    # SSH 포워딩(옵션)
+    cfg.vm.network "forwarded_port", guest: 22, host: 60000, auto_correct: true, id: "ssh"
+
+    # 소스는 마운트하지 않음(A안)
+    cfg.vm.synced_folder ".", "/vagrant", disabled: true
+
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name   = "k8s-master"
+      vb.cpus   = 4
+      vb.memory = 6144
+      vb.customize ["modifyvm", :id, "--rtcuseutc", "on", "--groups", "/k8s-carbon"]
+      # 디버깅 필요 시 GUI 켜기:
+      # vb.gui = true
     end
-    config.vm.box_check_update = false
+
+    # 프로비저닝
+    cfg.vm.provision "shell",
+      path: "master-provision.sh",
+      privileged: true,
+      env: {
+        # 필요시 Vagrantfile에서만 바꿔도 반영됨
+        "API_IP"         => "192.168.4.200",
+        "POD_CIDR"       => "10.244.0.0/16",
+        "K8S_TRACK"      => "v1.30",
+        "CALICO_VER"     => "v3.30.2",
+        "CALICO_MTU"     => "1450",
+        "GW_IP"          => "192.168.4.1",
+        "SINGLE_NODE"    => "false",
+        "NODE_THRESHOLD" => "2",
+        "SLEEP_SEC"      => "10"
+      }
+  end
 end
