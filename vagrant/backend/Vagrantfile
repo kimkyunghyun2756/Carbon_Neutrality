@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "k8s-backend" do |cfg|
+    cfg.vm.box = "generic/oracle8"
+    cfg.vm.host_name = "k8s-backend"
+
+    # 네트워크
+    cfg.vm.network "public_network",
+      bridge: "Intel(R) Wi-Fi 6E AX211 160MHz",
+      ip: "192.168.4.203"
+
+    cfg.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
+
+    # A안: 앱 소스는 VM에 마운트하지 않음 → 기본 /vagrant 공유도 꺼도 됨
+    cfg.vm.synced_folder ".", "/vagrant", disabled: true
+
+    # VirtualBox 리소스
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name = "k8s-backend"
+      vb.cpus = 4
+      vb.memory = 4096
+      vb.customize ["modifyvm", :id, "--rtcuseutc", "on", "--groups", "/k8s-carbon"]
+    end
+
+    # 프로비저닝: 환경변수로 값 전달
+    cfg.vm.provision "shell",
+      path: "backend-provision.sh",
+      privileged: true,
+      env: {
+        "NODE_IP"     => "192.168.4.203",   # 이 노드의 IP (kubelet --node-ip)
+        "MASTER_IP"   => "192.168.4.201",   # master-provision.sh가 돌고 있는 마스터 IP
+        "JOIN_PORT"   => "8000",            # 마스터가 join.sh/config 서빙하는 포트
+        "K8S_TRACK"   => "v1.30",           # k8s 패키지 트랙
+        "NODE_LABELS" => "role=backend,tier=app",  # 라벨(옵션)
+        # "NODE_TAINTS" => "dedicated=backend:NoSchedule",  # 테인트(옵션)
+        "USE_DOCKER"  => "false"            # containerd만 쓸거면 false
+      }
+  end
+
+  config.vm.box_check_update = false
+end

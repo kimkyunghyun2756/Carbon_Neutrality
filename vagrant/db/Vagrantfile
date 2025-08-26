@@ -1,0 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "k8s-db" do |cfg|
+    cfg.vm.box = "generic/oracle8"
+    cfg.vm.host_name = "k8s-db"
+
+    # 같은 브릿지 네트워크 (어댑터 이름은 네 PC에 맞게)
+    cfg.vm.network "public_network",
+      bridge: "Intel(R) Wi-Fi 6E AX211 160MHz",
+      ip: "192.168.4.205"
+
+    cfg.vm.network "forwarded_port",
+      guest: 22, host: 60020, auto_correct: true, id: "ssh"
+
+    # A안: 소스 마운트 안 함
+    cfg.vm.synced_folder ".", "/vagrant", disabled: true
+
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name = "k8s-db"
+      vb.cpus = 2
+      vb.memory = 2048
+      vb.customize ["modifyvm", :id, "--rtcuseutc", "on", "--groups", "/k8s-carbon"]
+    end
+
+    # 프로비저닝: 환경값 전달 (원하면 여기서만 값 바꿔도 됨)
+    cfg.vm.provision "shell",
+      path: "db-provision.sh",
+      privileged: true,
+      env: {
+        "DB_IP"         => "192.168.4.205",
+        "DB_PORT"       => "5432",
+        "DB_NET_CIDR"   => "192.168.4.0/24",  # 허용할 클라이언트 대역(K8s 노드/호스트 등)
+        "POSTGRES_VER"  => "16",
+        "POSTGRES_PASS" => "root",            # postgres 슈퍼유저 비번
+        "APP_DB"        => "appdb",
+        "APP_USER"      => "app",
+        "APP_PASS"      => "apppw"
+      }
+  end
+
+  config.vm.box_check_update = false
+end

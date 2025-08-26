@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.define "k8s-master" do |cfg|
+        cfg.vm.box = "generic/oracle8"
+        cfg.vm.host_name = "k8s-master"
+        cfg.vm.network "public_network", bridge: "Intel(R) Wi-Fi 6E AX211 160MHz", ip: "192.168.4.201"
+        cfg.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
+        cfg.vm.synced_folder ".", "/vagrant"
+
+        cfg.vm.provider "virtualbox" do |vb|
+            vb.name = "k8s-master"
+            vb.cpus = 4
+            vb.memory = 4096
+            vb.customize ["modifyvm", :id, "--rtcuseutc", "on", "--groups", "/k8s-carbon"]
+        end
+        cfg.vm.provision "shell", path: "master-provision.sh", privileged: true
+    end
+    config.vm.box_check_update = false
+end
