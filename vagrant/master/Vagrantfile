@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     # 브릿지 네트워크 (기본 라우트 변경 방지)
     cfg.vm.network "public_network",
       bridge: "Intel(R) Wi-Fi 6E AX211 160MHz",
-      ip: "192.168.4.200",
+      ip: "192.168.4.201",
       use_dhcp_assigned_default_route: false
 
     # SSH 포워딩(옵션)
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
       privileged: true,
       env: {
         # 필요시 Vagrantfile에서만 바꿔도 반영됨
-        "API_IP"         => "192.168.4.200",
+        "API_IP"         => "192.168.4.201",
         "POD_CIDR"       => "10.244.0.0/16",
         "K8S_TRACK"      => "v1.30",
         "CALICO_VER"     => "v3.30.2",
