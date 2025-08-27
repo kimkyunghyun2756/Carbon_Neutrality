@@ -15,9 +15,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
-# 필요한 최소 패키지 (pandas/psycopg[binary]는 빌드툴 없이 wheel로 설치 가능)
+# 필요한 최소 패키지 (bash 포함: 런 스크립트에서 [[ ... ]] 사용)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl tini && \
+    ca-certificates curl tini bash && \
     rm -rf /var/lib/apt/lists/*
 
 # OCI 표준 라벨
@@ -40,15 +40,20 @@ RUN pip install -U pip wheel setuptools && \
 # 코드 복사 (소유권 지정)
 COPY --chown=appuser:appuser apps/etl/csv_to_pg /app/csv_to_pg
 
-# 런 스크립트 (테이블 생성 -> 적재)
-RUN printf '%s\n' \
-  '#!/usr/bin/env bash' \
-  'set -euo pipefail' \
-  'echo "[ENTRY] CSV_PATH=${CSV_PATH:-unset} CSV_TABLE=${CSV_TABLE:-unset}"' \
-  'if [[ -z "${CSV_PATH:-}" ]]; then echo "[ERROR] CSV_PATH not set"; exit 2; fi' \
-  'python -m csv_to_pg.create_table_from_csv' \
-  'python -m csv_to_pg.load_csv_to_db' \
-  > /app/run_etl.sh && chmod +x /app/run_etl.sh
+# 런 스크립트 (테이블 생성 -> 적재) — heredoc으로 생성
+RUN cat > /app/run_etl.sh <<'BASH' && \
+    chmod +x /app/run_etl.sh && \
+    chown appuser:appuser /app/run_etl.sh
+#!/usr/bin/env bash
+set -euo pipefail
+echo "[ENTRY] CSV_PATH=${CSV_PATH:-unset} CSV_TABLE=${CSV_TABLE:-unset}"
+if [[ -z "${CSV_PATH:-}" ]]; then
+  echo "[ERROR] CSV_PATH not set"
+  exit 2
+fi
+python -m csv_to_pg.create_table_from_csv
+python -m csv_to_pg.load_csv_to_db
+BASH
 
 # 디폴트 환경변수(쿠버네티스에서 override)
 ENV CSV_ENCODING=utf-8 CSV_SEP=, CSV_CHUNKSIZE=2000
