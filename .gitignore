@@ -1,5 +1,3 @@
-data/raw/
-data/imterim/
 vagrant/master/.vagrant/
 vagrant/backend/.vagrant/
 vagrant/frontend/.vagrant/
