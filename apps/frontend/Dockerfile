@@ -19,4 +19,4 @@ EXPOSE 8501
 
 USER root
 ENTRYPOINT ["/usr/bin/tini","--"]
-CMD ["bash","-lc","streamlit run /app/streamlit_app.py --server.port=${FRONTEND_PORT} --server.address=0.0.0.0 --server.headless=true"]
+CMD ["bash","-lc","streamlit run /app/app.py --server.port=${FRONTEND_PORT} --server.address=0.0.0.0 --server.headless=true"]
