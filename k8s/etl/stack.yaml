@@ -1,0 +1,83 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: data
+---
+# 민감 정보 (DB 비번 등)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: appdb-credentials
+  namespace: data
+type: Opaque
+stringData:
+  DB_USER: app
+  DB_PASSWORD: apppw
+---
+# 민감 아님 (CSV 경로/테이블 등)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: carbon-etl-config
+  namespace: data
+data:
+  DB_HOST: "192.168.4.205"
+  DB_PORT: "5432"
+  DB_NAME: "appdb"
+  CSV_PATH: "/data/Data.csv"
+  CSV_TABLE: "data"
+  CSV_ENCODING: "utf-8"
+  CSV_SEP: ","
+  CSV_CHUNKSIZE: "2000"
+---
+# CSV가 올라있는 PVC (이미 있으면 이 블록은 생략)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: carbon-data-pvc
+  namespace: data
+spec:
+  accessModes: [ ReadOnlyMany ]  # NFS면 ROX 가능; 환경에 맞게 수정
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-client   # 너의 SC 이름으로
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: carbon-etl
+  namespace: data
+spec:
+  schedule: "0 3 * * *"            # 매일 03:00
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          # 백엔드 노드에 고정
+          nodeSelector:
+            kubernetes.io/hostname: k8s-backend
+          restartPolicy: Never
+          imagePullSecrets:
+            - name: ghcr-creds       # 퍼블릭 이미지면 이 줄 삭제해도 됨
+          containers:
+            - name: etl
+              image: ghcr.io/<owner>/<repo>/carbon-etl:main   # ← 교체
+              imagePullPolicy: IfNotPresent
+              envFrom:
+                - configMapRef:
+                    name: carbon-etl-config
+                - secretRef:
+                    name: appdb-credentials
+              volumeMounts:
+                - name: csv
+                  mountPath: /data
+          volumes:
+            - name: csv
+              persistentVolumeClaim:
+                claimName: carbon-data-pvc
