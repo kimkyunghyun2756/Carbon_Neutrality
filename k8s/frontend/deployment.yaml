@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carbon-frontend
+  namespace: data
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: carbon-frontend }
+  template:
+    metadata:
+      labels: { app: carbon-frontend }
+    spec:
+      # 프론트엔드 노드 고정
+      nodeSelector:
+        kubernetes.io/hostname: k8s-frontend
+      # 외부(192.168.4.x) DB 라우팅을 위해 hostNetwork 사용
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+      - name: frontend
+        image: ghcr.io/kimkyunghyun2756/Carbon_Neutrality/carbon-frontend:main   # ← 실제 경로
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - configMapRef: { name: carbon-frontend-config }
+          - secretRef: { name: appdb-credentials }
+        ports:
+          - containerPort: 8501
+        resources:
+          requests: { cpu: "100m", memory: "256Mi" }
+          limits:   { cpu: "500m", memory: "1Gi" }
