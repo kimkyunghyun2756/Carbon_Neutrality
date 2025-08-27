@@ -1,7 +1,7 @@
 data/raw/
 data/imterim/
-vagrant/master/.vagrant
-vagrant/backend/.vagrant
-vagrant/frontend/.vagrant
-vagrant/monitoring/.vagrant
-vagrant/db/.vagrant
+vagrant/master/.vagrant/
+vagrant/backend/.vagrant/
+vagrant/frontend/.vagrant/
+vagrant/monitoring/.vagrant/
+vagrant/db/.vagrant/

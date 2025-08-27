@@ -1,0 +1,21 @@
+# .dockerignore (repo root)
+.git
+**/__pycache__/
+**/*.pyc
+**/.venv
+.vscode
+.idea
+
+# 대용량/불필요 아티팩트
+Carbon_Neutrality/data/
+k8s/
+charts/
+platform/
+vagrant/
+dist/
+build/
+
+# env/비밀 차단
+.env
+**/.env
+*.env

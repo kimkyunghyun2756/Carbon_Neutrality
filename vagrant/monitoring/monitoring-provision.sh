@@ -7,8 +7,8 @@ exec > >(tee -a /var/log/provision-monitoring.log) 2>&1
 set -euo pipefail
 
 ##### 0) Vagrant env에서 내려온 값들(없으면 기본값) #####
-NODE_IP="${NODE_IP:-192.168.4.202}"       # 이 노드 IP (kubelet --node-ip)
-MASTER_IP="${MASTER_IP:-192.168.4.201}"   # master-provision이 :8000으로 join.sh/config 서빙
+NODE_IP="${NODE_IP:-192.168.4.104}"       # 이 노드 IP (kubelet --node-ip)
+MASTER_IP="${MASTER_IP:-192.168.4.101}"   # master-provision이 :8000으로 join.sh/config 서빙
 JOIN_PORT="${JOIN_PORT:-8000}"
 K8S_TRACK="${K8S_TRACK:-v1.30}"           # pkgs.k8s.io 트랙
 USE_DOCKER="${USE_DOCKER:-false}"         # containerd만 쓰면 false
@@ -151,4 +151,4 @@ if [ -n "${NODE_LABELS}" ] || [ -n "${NODE_TAINTS}" ]; then
   fi
 fi
 
-echo "[완료] 백엔드 노드 준비 완료. node-ip=${NODE_IP}, master=${MASTER_IP}:${JOIN_PORT}"
+echo "[완료] 모니터링 노드 준비 완료. node-ip=${NODE_IP}, master=${MASTER_IP}:${JOIN_PORT}"

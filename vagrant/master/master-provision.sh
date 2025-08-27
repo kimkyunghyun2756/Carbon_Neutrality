@@ -3,7 +3,7 @@ exec > >(tee -a /var/log/provision.log) 2>&1
 set -euo pipefail
 
 ##### 사용자 변수(필요시 Vagrantfile에서 override) #####
-API_IP="${API_IP:-192.168.4.201}"         # control-plane 브리지 IP
+API_IP="${API_IP:-192.168.4.101}"         # control-plane 브리지 IP
 POD_CIDR="${POD_CIDR:-10.244.0.0/16}"     # kubeadm --pod-network-cidr와 일치
 K8S_TRACK="${K8S_TRACK:-v1.30}"           # pkgs.k8s.io 트랙
 CALICO_VER="${CALICO_VER:-v3.30.2}"       # Calico 릴리스 태그
