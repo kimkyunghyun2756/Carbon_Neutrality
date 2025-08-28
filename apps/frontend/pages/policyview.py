@@ -19,8 +19,9 @@ def render():
     st.sidebar.header("정책 데이터 필터")
     cat_selected = st.sidebar.selectbox("카테고리 선택", list(CATEGORY_COLUMNS.keys()))
 
-    # DB에서 대한민국 데이터 가져오기
     cols = CATEGORY_COLUMNS[cat_selected]
+
+    # DB에서 대한민국 데이터 전체 가져오기
     sql = text(f'''
         SELECT year::int AS year, {",".join(cols)}
         FROM "{TABLE}"
@@ -31,9 +32,11 @@ def render():
         df = pd.read_sql(sql, conn)
 
     st.subheader(f"🇰🇷 대한민국 - {cat_selected}")
-    st.dataframe(df.tail(10), use_container_width=True)
+    st.write("전체 연도 데이터")
+    st.dataframe(df, use_container_width=True)
 
     # 시각화
+    st.markdown("### 📈 시각화")
     for c in cols:
         if c in df.columns:
             st.line_chart(df.set_index("year")[c], height=250)
