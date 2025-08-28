@@ -4,7 +4,7 @@ metadata:
   name: carbon-frontend
   namespace: data
 spec:
-  replicas: 3   # 여러 노드에 분산 배치
+  replicas: 1   # 보통 hostNetwork는 1개만 쓰는 게 안전 (포트 충돌 위험)
   selector:
     matchLabels:
       app: carbon-frontend
@@ -13,6 +13,8 @@ spec:
       labels:
         app: carbon-frontend
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: frontend
         image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
