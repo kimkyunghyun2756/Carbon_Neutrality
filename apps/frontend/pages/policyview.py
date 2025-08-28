@@ -14,7 +14,7 @@ CATEGORY_COLUMNS = {
 }
 
 def render():
-    st.title("📊 탄소중립 데이터와 정책 연계")
+    st.title("탄소중립 데이터와 정책 연계")
 
     st.sidebar.header("정책 데이터 필터")
     cat_selected = st.sidebar.selectbox("카테고리 선택", list(CATEGORY_COLUMNS.keys()))
@@ -36,7 +36,7 @@ def render():
     st.dataframe(df, use_container_width=True)
 
     # 시각화
-    st.markdown("### 📈 시각화")
+    st.markdown("### 시각화")
     for c in cols:
         if c in df.columns:
             st.line_chart(df.set_index("year")[c], height=250)
