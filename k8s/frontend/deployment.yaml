@@ -18,7 +18,7 @@ spec:
       containers:
       - name: frontend
         image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         envFrom:
           - configMapRef:
               name: carbon-frontend-config
