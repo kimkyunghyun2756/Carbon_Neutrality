@@ -96,12 +96,13 @@ EOF
 sysctl --system
 
 echo "[5] 방화벽(필수 포트) 반영"
-# kubelet
-firewall-cmd --add-port=10250/tcp --permanent || true
-# NodePort (앱 노출 시)
-firewall-cmd --add-port=30000-32767/tcp --permanent || true
-# Calico VXLAN (워커에서도 필요)
-firewall-cmd --add-port=4789/udp --permanent || true
+
+firewall-cmd --add-port=10250/tcp --permanent || true # kubelet
+firewall-cmd --add-port=30000-32767/tcp --permanent || true # NodePort (앱 노출 시)
+firewall-cmd --add-port=4789/udp --permanent || true # Calico VXLAN (워커에서도 필요)
+firewall-cmd --permanent --add-port=7946/tcp || true # metallb speaker 통신
+firewall-cmd --permanent --add-port=7946/udp || true # metallb speaker 통신
+firewall-cmd --permanent --add-port=80/tcp || true # metallb
 firewall-cmd --reload || true
 
 echo "[6] 이미 조인되어 있는지 확인"
