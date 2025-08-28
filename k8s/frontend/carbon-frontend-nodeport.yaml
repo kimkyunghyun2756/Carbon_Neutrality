@@ -12,5 +12,3 @@ spec:
       port: 80
       targetPort: 8501
       nodePort: 30080   # 30000~32767 범위에서 원하는 포트
-  nodePortAddresses:
-    - 192.168.4.0/24
