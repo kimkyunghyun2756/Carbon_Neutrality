@@ -139,3 +139,10 @@ def render():
 
     section = st.sidebar.radio("매뉴얼 목차", list(manual_sections.keys()))
     st.markdown(manual_sections[section])
+    
+    if section == "1. 시스템 아키텍처":
+        st.image(
+            "https://raw.githubusercontent.com/kimkyunghyun2756/Carbon_Neutrality/main/docs/img/System_Architecture_2.png",
+            caption="시스템 아키텍처 다이어그램",
+            use_column_width=True
+        )
