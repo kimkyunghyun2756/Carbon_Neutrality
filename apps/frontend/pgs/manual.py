@@ -39,6 +39,58 @@ def render():
 
         "3. 사전 준비": """
         - VM 서버 환경: Vagrant + Oracle Linux 8.9
+        - vagrant 파일 작성
+        ```vagrantfile
+        # -*- mode: ruby -*-
+        # vi: set ft=ruby :
+
+        Vagrant.configure("2") do |config|
+          # SSH/부팅 안정화 (유효한 키만 사용)
+          config.ssh.keep_alive          = true
+          config.ssh.connect_retries     = 60     # 총 재시도 횟수
+          config.ssh.connect_retry_delay = 5      # 재시도 간격(초)
+          config.ssh.connect_timeout     = 30     # 1회 연결 타임아웃(초)
+          config.vm.boot_timeout         = 600    # 부팅 대기(초)
+          config.vm.box_check_update     = false
+          config.vm.define "k8s-master-cp" do |cfg|
+            cfg.vm.box = "generic/oracle8"
+            cfg.vm.host_name = "k8s-master-cp"
+
+            cfg.vm.network "public_network",
+              bridge: "Intel(R) Wi-Fi 6 AX201 160MHz",
+              ip: "192.168.4.101",
+              use_dhcp_assigned_default_route: false
+
+            cfg.vm.network "forwarded_port", guest: 22, host: 60000, auto_correct: true, id: "ssh"
+
+            cfg.vm.synced_folder ".", "/vagrant", disabled: true
+
+            cfg.vm.provider "virtualbox" do |vb|
+              vb.name   = "k8s-master-cp"
+              vb.cpus   = 4
+              vb.memory = 6144
+              vb.customize ["modifyvm", :id, "--rtcuseutc", "on", "--groups", "/k8s-carbon"]
+              # 디버깅 필요 시 GUI 켜기:
+              # vb.gui = true
+            end
+
+            cfg.vm.provision "shell",
+              path: "master-provision.sh",
+              privileged: true,
+              env: {
+                "API_IP"         => "192.168.4.101",
+                "POD_CIDR"       => "10.244.0.0/16",
+                "K8S_TRACK"      => "v1.30",
+                "CALICO_VER"     => "v3.30.2",
+                "CALICO_MTU"     => "1450",
+                "GW_IP"          => "192.168.4.1",
+                "SINGLE_NODE"    => "false",
+                "NODE_THRESHOLD" => "2",
+                "SLEEP_SEC"      => "10"
+              }
+          end
+        end
+        ```
         - 방화벽 포트 오픈 목록
           * 22 (SSH), 80/443 (HTTP/HTTPS), 5432 (PostgreSQL)  
           * 6443 (K8s API Server), 2379–2380 (etcd), 10250 (Kubelet)  
