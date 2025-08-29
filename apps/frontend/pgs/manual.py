@@ -1,7 +1,7 @@
 import streamlit as st
 
 def render():
-    st.title("🛠 구축 매뉴얼")
+    st.title("구축 매뉴얼")
 
     manual_sections = {
         "0. 프로젝트 목적": """
@@ -137,5 +137,5 @@ def render():
         """
     }
 
-    section = st.sidebar.radio("📚 매뉴얼 목차", list(manual_sections.keys()))
+    section = st.sidebar.radio("매뉴얼 목차", list(manual_sections.keys()))
     st.markdown(manual_sections[section])

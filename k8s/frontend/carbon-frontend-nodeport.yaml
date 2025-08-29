@@ -1,3 +1,5 @@
+# kubectl apply -f https://raw.githubusercontent.com/kimkyunghyun2756/carbon_neutrality/main/k8s/frontend/carbon-frontend-nodeport.yaml
+
 apiVersion: v1
 kind: Service
 metadata:
