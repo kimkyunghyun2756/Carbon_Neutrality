@@ -65,21 +65,15 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    env:
+      KUBECONFIG: /home/vagrant/.kube/config   # 러너 계정 kubeconfig 경로
     steps:
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v4
-        with:
-          version: 'v1.30.0'
-
-      - name: Configure Kubeconfig
-        run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > ~/.kube/config
-
       - name: Deploy to Kubernetes
         run: |
+          kubectl get nodes
           kubectl set image deployment/carbon-frontend \
             carbon-frontend=ghcr.io/${{ github.repository }}/carbon-frontend:main \
             -n data
           kubectl rollout status deployment/carbon-frontend -n data
+
