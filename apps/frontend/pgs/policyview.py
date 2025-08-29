@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import altair as alt
 from sqlalchemy import text
 from db import get_engine
 from utils.config import TABLE
@@ -39,4 +40,18 @@ def render():
     st.markdown("### 시각화")
     for c in cols:
         if c in df.columns:
-            st.line_chart(df.set_index("year")[c], height=250)
+            chart = (
+                alt.Chart(df)
+                .mark_line(point=True)
+                .encode(
+                    x=alt.X("year:O", title="연도"),
+                    y=alt.Y(f"{c}:Q", title=c),
+                    tooltip=["year", c]
+                )
+                .properties(
+                    title=f"{c} 추세 (대한민국)",
+                    width=600,
+                    height=300
+                )
+            )
+            st.altair_chart(chart, use_container_width=True)
