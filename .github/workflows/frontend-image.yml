@@ -73,7 +73,7 @@ jobs:
         run: |
           kubectl get nodes
           kubectl set image deployment/carbon-frontend \
-            carbon-frontend=ghcr.io/${{ github.repository }}/carbon-frontend:main \
+            frontend=ghcr.io/${{ github.repository }}/carbon-frontend:main \
             -n data
           kubectl rollout status deployment/carbon-frontend -n data
 
