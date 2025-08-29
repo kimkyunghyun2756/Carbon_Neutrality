@@ -5,7 +5,7 @@ from db import get_engine
 from utils.config import TABLE
 
 CATEGORY_COLUMNS = {
-    "인구·경제": ["population", "gdp", "energy_per_gdp_kwh", "co2_per_gdp_kwh"],
+    "인구·경제": ["population", "gdp", "energy_per_gdp_kwh", "co2_per_gdp_kg"],
     "총 배출 추세": ["co2_mt", "co2_including_luc_mt", "cumulative_co2_mt", "total_ghg_100y"],
     "에너지원별 배출": ["coal_co2_mt", "oil_co2_mt", "gas_co2_mt", "cement_co2_mt", "flaring_co2_mt"],
     "온실가스 종류별": ["methane_100y_t", "nitrous_oxide_100y_t", "ghg_per_capita_100y"],
