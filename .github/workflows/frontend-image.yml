@@ -32,7 +32,7 @@ jobs:
     if: needs.changes.outputs.fe == 'true' || startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     outputs:
-      image: ${{ steps.meta.outputs.tags }}
+      sha-tag: ${{ steps.meta.outputs.version }}
     steps:
       - uses: actions/checkout@v4
 
@@ -49,9 +49,7 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}/carbon-frontend
           tags: |
-            type=ref,event=branch
-            type=ref,event=tag
-            type=sha,format=long
+            type=sha,format=long   # ✅ 커밋 SHA 기반 태그
 
       - uses: docker/build-push-action@v6
         with:
@@ -73,7 +71,6 @@ jobs:
         run: |
           kubectl get nodes
           kubectl set image deployment/carbon-frontend \
-            frontend=ghcr.io/${{ github.repository }}/carbon-frontend:main \
+            frontend=ghcr.io/${{ github.repository }}/carbon-frontend:${{ needs.build.outputs.sha-tag }} \
             -n data
           kubectl rollout status deployment/carbon-frontend -n data
-
