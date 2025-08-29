@@ -27,31 +27,45 @@ def render():
 
         "2. 요구사항": """
         - OS: Oracle Linux 8.9
-        - Memory: 최소 4GB (Master/Worker 각 VM)
+        - CPU: Master 최소 2 vCPU, Worker 최소 1~2 vCPU
+        - Memory: VM당 최소 4GB
+        - Disk: VM당 최소 20GB, NFS 서버 필요
         - 네트워크: 192.168.4.101 ~ 192.168.4.105 (브릿지 + NAT)
+        - 기타
+          * GitHub 계정 및 GHCR Token
+          * Vagrant + VirtualBox
+          * DNS 혹은 /etc/hosts 설정
         """,
 
         "3. 사전 준비": """
         - VM 서버 환경: Vagrant + Oracle Linux 8.9
         - 방화벽 포트 오픈 목록
-          * 22 (SSH), 80/443 (HTTP/HTTPS), 5432 (PostgreSQL)
-          * 6443 (K8s API Server), 2379–2380 (etcd), 10250 (Kubelet)
-          * 10257, 10259 (Controller/Scheduler)
-          * 30000–32767 (NodePort)
-          * 9090 (Prometheus), 8501 (Streamlit Frontend)
+          * 22 (SSH), 80/443 (HTTP/HTTPS), 5432 (PostgreSQL)  
+          * 6443 (K8s API Server), 2379–2380 (etcd), 10250 (Kubelet)  
+          * 10257, 10259 (Controller/Scheduler)  
+          * 30000–32767 (NodePort)  
+          * 9090 (Prometheus), 8501 (Streamlit Frontend)  
         - 필수 설치 도구
-          * Git, Docker & Containerd
-          * kubectl, kubeadm, kubelet
-          * Helm
-          * PostgreSQL Client (psql)
+          * Git, Docker & Containerd  
+          * kubectl, kubeadm, kubelet  
+          * Helm  
+          * PostgreSQL Client (psql)  
         """,
 
         "4. 데이터베이스 설정 (PostgreSQL)": """
-        - PostgreSQL 선택 이유: 안정성, 오픈소스, 시계열 데이터 적합성
+        - PostgreSQL 선택 이유
+          * 오픈소스 RDBMS 중 가장 안정적이며 커뮤니티/생태계가 활발  
+          * 시계열·대용량 데이터 처리 적합 (Window Function, CTE 등 분석 쿼리 지원)  
+          * JSON/JSONB 컬럼 지원 → 반정형 데이터도 처리 가능  
+          * 확장성: TimescaleDB 같은 시계열 확장 모듈과 연동 가능  
+          * 성능 최적화 옵션 풍부 (인덱스, 파티셔닝, 병렬 쿼리)  
+          * MySQL 대비 강력한 표준 SQL 준수도 및 트랜잭션 안정성  
+          * Kubernetes 환경과 잘 맞음 (Helm chart, StatefulSet 배포 용이)  
+          * 향후 Data Warehouse, BI 툴과의 연동성 우수 (Metabase, Grafana 등)  
         - 사용자: app
         - 데이터베이스: appdb
         - conf 수정
-          * postgresql.conf → listen_addresses = '*'
+          * postgresql.conf → listen_addresses = '*'  
           * pg_hba.conf → host all all 192.168.4.0/24 md5
         - 접속 테스트
           psql -h 192.168.4.105 -U app -d appdb
@@ -59,15 +73,15 @@ def render():
 
         "5. 애플리케이션 환경 (Streamlit)": """
         - .env 구성
-          DB_HOST=192.168.4.105
-          DB_PORT=5432
-          DB_NAME=appdb
-          DB_USER=app
-          DB_PASSWORD=apppw
-          CSV_TABLE=data
-          FRONTEND_PORT=8501
-        - requirements.txt
-          streamlit, pandas, sqlalchemy, psycopg[binary], python-dotenv
+          DB_HOST=192.168.4.105  
+          DB_PORT=5432  
+          DB_NAME=appdb  
+          DB_USER=app  
+          DB_PASSWORD=apppw  
+          CSV_TABLE=data  
+          FRONTEND_PORT=8501  
+        - requirements.txt  
+          streamlit, pandas, sqlalchemy, psycopg[binary], python-dotenv  
         """,
 
         "6. 컨테이너화 (Docker)": """
@@ -81,14 +95,41 @@ def render():
         CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
         ```
         - GHCR 푸시
-          docker build -t ghcr.io/<user>/carbon-frontend:main .
-          docker push ghcr.io/<user>/carbon-frontend:main
+          docker build -t ghcr.io/kimkyunghyun2756/carbon-frontend:main .
+          docker push ghcr.io/kimkyunghyun2756/carbon-frontend:main
         """,
 
-        "7. 쿠버네티스 배포": """
+        "7. 쿠버네티스 설정 (구성 요소 & 선택 이유)": """
+        - 네트워크 플러그인: Calico
+          * 이유: CNI 중 가장 널리 사용, NetworkPolicy 지원, Vagrant 환경에서 안정적 동작  
+          * 대안: Flannel(구현 단순하지만 기능 제한), Cilium(eBPF 기반이지만 학습 곡선 높음)  
+
+        - 로드밸런서: MetalLB
+          * 이유: 온프레미스 환경에서는 클라우드 LB가 없음 → L2 모드로 로컬 IP풀 제공  
+          * 대안: Ingress-Nginx 단독 사용 가능하나 외부 접근 NodePort 의존 → 불편  
+
+        - 스토리지: NFS Subdir External Provisioner
+          * 이유: 단순, 가볍고 Vagrant/VM에서도 활용 가능  
+          * 대안: Longhorn(고가용성 제공하지만 디스크 자원 필요), Ceph(운영 복잡도 높음)  
+
+        - 모니터링: Prometheus + Grafana
+          * 이유: CNCF 표준, Helm 차트로 설치 용이, Alertmanager 확장 가능  
+          * 사이드카: Prometheus-config-reloader  
+            → ConfigMap 변경 시 자동 반영 (무중단 설정 업데이트 지원)  
+
+        - CI/CD 연동: GitHub Actions + GHCR
+          * 이유: GitHub 기반 워크플로우에 최적화, 인증/배포 Secret 관리 용이  
+          * 대안: Jenkins(더 강력하지만 무겁고 유지비용 큼)  
+
+        - 보안/비밀 관리: Kubernetes Secret
+          * DB 비밀번호, GHCR 토큰을 Secret으로 관리  
+          * 사이드카: 없고, 환경변수/Secret mount 방식 채택  
+        """,
+
+        "8. 쿠버네티스 배포": """
         - Deployment
           * replicas=1
-          * image=ghcr.io/<user>/carbon-frontend:main
+          * image=ghcr.io/kimkyunghyun2756/carbon-frontend:main
           * envFrom: ConfigMap, Secret
         - Service (NodePort)
         ```yaml
@@ -111,30 +152,30 @@ def render():
         - PVC: **NFS 기반 스토리지** 사용 (Prometheus, Grafana, Loki 데이터 보존)
         """,
 
-        "8. CI/CD 파이프라인": """
+        "9. CI/CD 파이프라인": """
         - GitHub Actions 워크플로우
         - 코드 푸시 → 자동 빌드 → GHCR Push → K8s 배포
         - 롤링 업데이트 방식으로 중단 없는 배포
         """,
 
-        "9. 모니터링 & 로깅": """
+        "10. 모니터링 & 로깅": """
         - Prometheus / Grafana 설치
         - 대시보드 확인
         - Alert 설정 (미선택)
         """,
 
-        "10. 문제 해결 (Troubleshooting)": """
+        "11. 문제 해결 (Troubleshooting)": """
         - Vagrant Calico: kubeadm join 시 CIDR 감지 문제 → 감지기 설정 필요
         - Pod CrashLoopBackOff
-          * 원인: 잘못된 이미지, env 설정 오류, PVC 바인딩 실패
-          * 해결: kubectl describe/logs 확인 후 수정
+          * 원인: 잘못된 이미지, env 설정 오류, PVC 바인딩 실패  
+          * 해결: kubectl describe/logs 확인 후 수정  
         - 이미지 Pull 실패
-          * 원인: imagePullSecret 미설정, GHCR 인증 실패
-          * 해결: kubectl create secret docker-registry 로 GHCR secret 등록
+          * 원인: imagePullSecret 미설정, GHCR 인증 실패  
+          * 해결: kubectl create secret docker-registry 로 GHCR secret 등록  
         - DB 연결 오류
-          * 원인: 방화벽 미개방, pg_hba.conf 미설정, 잘못된 비밀번호
-          * 해결: 5432 포트 확인, conf 수정 후 PostgreSQL 재시작
-        """
+          * 원인: 방화벽 미개방, pg_hba.conf 미설정, 잘못된 비밀번호  
+          * 해결: 5432 포트 확인, conf 수정 후 PostgreSQL 재시작  
+        """ 
     }
 
     section = st.sidebar.radio("매뉴얼 목차", list(manual_sections.keys()))
