@@ -9,7 +9,7 @@ st.set_page_config(page_title="Carbon Dashboard", layout="wide")
 page = st.sidebar.radio("Pages", [
     "구축 매뉴얼",
     "데이터-정책 연계표",
-    "CSV 전체 데이터"
+    "CSV 전체 데이터",
     "Dashboard"
 ])
 
