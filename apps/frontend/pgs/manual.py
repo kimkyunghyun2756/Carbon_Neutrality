@@ -120,7 +120,7 @@ def render():
         "9. 모니터링 & 로깅": """
         - Prometheus / Grafana 설치
         - 대시보드 확인
-        - Alert 설정 (선택적)
+        - Alert 설정 (미선택)
         """,
 
         "10. 문제 해결 (Troubleshooting)": """

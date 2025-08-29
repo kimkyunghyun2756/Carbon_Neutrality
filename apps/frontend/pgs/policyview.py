@@ -5,12 +5,12 @@ from db import get_engine
 from utils.config import TABLE
 
 CATEGORY_COLUMNS = {
-    "인구·경제": ["population", "gdp", "energy_per_gdp", "co2_per_gdp"],
-    "총 배출 추세": ["co2_mt", "co2_including_luc", "cumulative_co2", "total_ghg_100y"],
-    "에너지원별 배출": ["coal_co2", "oil_co2", "gas_co2", "cement_co2", "flaring_co2"],
-    "온실가스 종류별": ["methane", "nitrous_oxide", "ghg_per_capita"],
-    "토지·흡수원": ["land_use_change_co2", "cumulative_luc_co2"],
-    "효율/국민 체감 지표": ["co2_per_capita", "co2_per_unit_energy"]
+    "인구·경제": ["population", "gdp", "energy_per_gdp_kwh", "co2_per_gdp_kwh"],
+    "총 배출 추세": ["co2_mt", "co2_including_luc_mt", "cumulative_co2_mt", "total_ghg_100y"],
+    "에너지원별 배출": ["coal_co2_mt", "oil_co2_mt", "gas_co2_mt", "cement_co2_mt", "flaring_co2_mt"],
+    "온실가스 종류별": ["methane_100y_t", "nitrous_oxide_100y_t", "ghg_per_capita_100y"],
+    "토지·흡수원": ["land_use_change_co2_mt", "cumulative_luc_co2_mt"],
+    "효율/국민 체감 지표": ["co2_per_capita_t", "co2_per_unit_energy_kw_kwh"]
 }
 
 def render():
