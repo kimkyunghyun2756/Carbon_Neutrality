@@ -1,0 +1,81 @@
+apiVersion: v1
+items:
+- apiVersion: storage.k8s.io/v1
+  kind: CSINode
+  metadata:
+    annotations:
+      storage.alpha.kubernetes.io/migrated-plugins: kubernetes.io/aws-ebs,kubernetes.io/azure-disk,kubernetes.io/azure-file,kubernetes.io/cinder,kubernetes.io/gce-pd,kubernetes.io/vsphere-volume
+    creationTimestamp: "2025-08-27T01:59:44Z"
+    name: k8s-backend
+    ownerReferences:
+    - apiVersion: v1
+      kind: Node
+      name: k8s-backend
+      uid: caf828a5-b137-496c-96f9-fe5d9e172cee
+    resourceVersion: "4027"
+    uid: a15ebbe7-783a-499d-b9eb-99f5cf8bb69c
+  spec:
+    drivers:
+    - name: csi.tigera.io
+      nodeID: k8s-backend
+      topologyKeys: null
+- apiVersion: storage.k8s.io/v1
+  kind: CSINode
+  metadata:
+    annotations:
+      storage.alpha.kubernetes.io/migrated-plugins: kubernetes.io/aws-ebs,kubernetes.io/azure-disk,kubernetes.io/azure-file,kubernetes.io/cinder,kubernetes.io/gce-pd,kubernetes.io/vsphere-volume
+    creationTimestamp: "2025-08-27T02:17:14Z"
+    name: k8s-frontend
+    ownerReferences:
+    - apiVersion: v1
+      kind: Node
+      name: k8s-frontend
+      uid: 72e79692-a27e-4783-8848-44796594f1bb
+    resourceVersion: "6193"
+    uid: 66f04e63-3bb2-4f6d-b4a2-04dcc101633b
+  spec:
+    drivers:
+    - name: csi.tigera.io
+      nodeID: k8s-frontend
+      topologyKeys: null
+- apiVersion: storage.k8s.io/v1
+  kind: CSINode
+  metadata:
+    annotations:
+      storage.alpha.kubernetes.io/migrated-plugins: kubernetes.io/aws-ebs,kubernetes.io/azure-disk,kubernetes.io/azure-file,kubernetes.io/cinder,kubernetes.io/gce-pd,kubernetes.io/vsphere-volume
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    name: k8s-master-cp
+    ownerReferences:
+    - apiVersion: v1
+      kind: Node
+      name: k8s-master-cp
+      uid: 01935b14-02a0-4673-8888-06fa8e143ac0
+    resourceVersion: "876727"
+    uid: 87aa4274-ef05-41f4-a5e2-fa0c67112f74
+  spec:
+    drivers:
+    - name: csi.tigera.io
+      nodeID: k8s-master-cp
+      topologyKeys: null
+- apiVersion: storage.k8s.io/v1
+  kind: CSINode
+  metadata:
+    annotations:
+      storage.alpha.kubernetes.io/migrated-plugins: kubernetes.io/aws-ebs,kubernetes.io/azure-disk,kubernetes.io/azure-file,kubernetes.io/cinder,kubernetes.io/gce-pd,kubernetes.io/vsphere-volume
+    creationTimestamp: "2025-08-27T01:42:04Z"
+    name: k8s-monitoring
+    ownerReferences:
+    - apiVersion: v1
+      kind: Node
+      name: k8s-monitoring
+      uid: 4b20d3ed-222e-475a-8a6a-c4585b3886bb
+    resourceVersion: "1816"
+    uid: a8abf0ec-592d-4f5a-8923-aeb385704acb
+  spec:
+    drivers:
+    - name: csi.tigera.io
+      nodeID: k8s-monitoring
+      topologyKeys: null
+kind: List
+metadata:
+  resourceVersion: ""

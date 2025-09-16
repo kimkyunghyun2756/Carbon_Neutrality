@@ -1,0 +1,15 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d8v7dl_0254ce19-6243-481c-80fc-7cddf4bcb3f4","leaseDurationSeconds":15,"acquireTime":"2025-09-01T09:35:38Z","renewTime":"2025-09-01T09:57:32Z","leaderTransitions":18}'
+    creationTimestamp: "2025-08-28T06:38:16Z"
+    name: cluster.local-nfs-provisioner-nfs-subdir-external-provisioner
+    namespace: nfs-provisioner
+    resourceVersion: "705414"
+    uid: 76195abc-fadb-4465-a951-942b26471e00
+kind: List
+metadata:
+  resourceVersion: ""

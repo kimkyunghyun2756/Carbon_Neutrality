@@ -1,0 +1,51 @@
+apiVersion: v1
+items:
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: goldmane
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Goldmane
+      name: default
+      uid: 6d657107-94ee-4c2e-a139-a6f20e5849cc
+    resourceVersion: "1168"
+    uid: 7b0f296f-7329-4bc9-a5ac-13773dc5a269
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: goldmane
+  subjects:
+  - kind: ServiceAccount
+    name: goldmane
+    namespace: calico-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: tigera-operator-secrets
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Installation
+      name: default
+      uid: 55efc27a-ab47-47c5-80f3-3c474ac3753a
+    resourceVersion: "1132"
+    uid: 861ef730-65ee-4523-b779-946263450a79
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: tigera-operator-secrets
+  subjects:
+  - kind: ServiceAccount
+    name: tigera-operator
+    namespace: tigera-operator
+kind: List
+metadata:
+  resourceVersion: ""

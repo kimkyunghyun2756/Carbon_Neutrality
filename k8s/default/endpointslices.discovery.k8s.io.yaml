@@ -1,0 +1,55 @@
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 192.168.4.101
+    conditions:
+      ready: true
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:44Z"
+    generation: 5
+    labels:
+      kubernetes.io/service-name: kubernetes
+    name: kubernetes
+    namespace: default
+    resourceVersion: "89889"
+    uid: b8084dd3-342f-4c8a-839b-090c098e6344
+  ports:
+  - name: https
+    port: 6443
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints: null
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-08-28T14:12:31Z"
+    creationTimestamp: "2025-08-28T05:41:52Z"
+    generateName: prometheus-operator-
+    generation: 16
+    labels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/name: prometheus-operator
+      app.kubernetes.io/version: 0.85.0
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: prometheus-operator
+      service.kubernetes.io/headless: ""
+    name: prometheus-operator-wgw42
+    namespace: default
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: prometheus-operator
+      uid: d74038c7-b7ea-49dc-b562-b9945f6e816f
+    resourceVersion: "271450"
+    uid: 825f4c42-1fd8-4164-8b5c-0296bd4dc120
+  ports: null
+kind: List
+metadata:
+  resourceVersion: ""

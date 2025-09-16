@@ -1,0 +1,25 @@
+apiVersion: v1
+items:
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPPool
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"generation":1,"creationTimestamp":"2025-08-27T01:42:33Z","labels":{"app.kubernetes.io/managed-by":"tigera-operator"}}'
+    creationTimestamp: "2025-08-27T01:42:33Z"
+    generation: 6
+    name: default-ipv4-ippool
+    resourceVersion: "100193"
+    uid: f5af4bb3-33c4-4d22-ac30-051b31180a1e
+  spec:
+    allowedUses:
+    - Workload
+    - Tunnel
+    blockSize: 26
+    cidr: 10.244.0.0/16
+    ipipMode: Always
+    natOutgoing: true
+    nodeSelector: all()
+    vxlanMode: Never
+kind: List
+metadata:
+  resourceVersion: ""

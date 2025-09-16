@@ -99,9 +99,7 @@ retry dnf -y install firewalld
 systemctl enable --now firewalld || true
 firewall-cmd --add-port=6443/tcp --permanent      || true
 firewall-cmd --add-port=2379-2380/tcp --permanent || true
-firewall-cmd --add-port=10250/tcp --permanent     || true
-firewall-cmd --add-port=10257/tcp --permanent     || true
-firewall-cmd --add-port=10259/tcp --permanent     || true
+firewall-cmd --add-port=10250-10259/tcp --permanent     || true
 firewall-cmd --add-port=4789/udp --permanent      || true  # Calico VXLAN
 firewall-cmd --add-port=8000/tcp --permanent      || true  # join HTTP
 firewall-cmd --reload || true

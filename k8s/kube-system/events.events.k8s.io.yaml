@@ -1,0 +1,33 @@
+apiVersion: v1
+items:
+- apiVersion: events.k8s.io/v1
+  deprecatedCount: 2581
+  deprecatedFirstTimestamp: "2025-09-15T01:04:15Z"
+  deprecatedLastTimestamp: "2025-09-16T02:50:25Z"
+  deprecatedSource:
+    component: kubelet
+    host: k8s-master-cp
+  eventTime: null
+  kind: Event
+  metadata:
+    creationTimestamp: "2025-09-16T00:05:25Z"
+    name: calico-node-nckjw.18654f26646b8885
+    namespace: kube-system
+    resourceVersion: "908045"
+    uid: 4f2cbae4-844b-4106-866c-35e979ff7656
+  note: |
+    (combined from similar events): Readiness probe failed: 2025-09-16 02:50:25.811 [INFO][37927] confd/health.go 180: Number of node(s) with BGP peering established = 0
+    calico/node is not ready: BIRD is not ready: BGP not established with 192.168.4.103,192.168.4.102,192.168.4.104
+  reason: Unhealthy
+  regarding:
+    apiVersion: v1
+    fieldPath: spec.containers{calico-node}
+    kind: Pod
+    name: calico-node-nckjw
+    namespace: kube-system
+    resourceVersion: "876242"
+    uid: b9f70535-886a-4c23-ae25-14c6b99c24c0
+  type: Warning
+kind: List
+metadata:
+  resourceVersion: ""

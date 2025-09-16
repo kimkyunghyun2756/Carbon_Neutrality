@@ -1,0 +1,482 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2025-09-02T03:00:00Z"
+    finalizers:
+    - batch.kubernetes.io/job-tracking
+    generateName: carbon-etl-29279700-
+    labels:
+      batch.kubernetes.io/controller-uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+      batch.kubernetes.io/job-name: carbon-etl-29279700
+      controller-uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+      job-name: carbon-etl-29279700
+    name: carbon-etl-29279700-mqkm7
+    namespace: data
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Job
+      name: carbon-etl-29279700
+      uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+    resourceVersion: "773861"
+    uid: 4a318f4c-893d-480f-8b9c-43230102f985
+  spec:
+    containers:
+    - envFrom:
+      - configMapRef:
+          name: carbon-etl-config
+      - secretRef:
+          name: appdb-credentials
+      image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-etl:main
+      imagePullPolicy: Always
+      name: etl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /data
+        name: csv
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-sndgl
+        readOnly: true
+    dnsPolicy: ClusterFirstWithHostNet
+    enableServiceLinks: true
+    hostNetwork: true
+    imagePullSecrets:
+    - name: ghcr-creds
+    nodeSelector:
+      kubernetes.io/hostname: k8s-backend
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: csv
+      persistentVolumeClaim:
+        claimName: carbon-data-pvc
+    - name: kube-api-access-sndgl
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-02T03:00:00Z"
+      message: '0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane:
+        }, 3 node(s) had untolerated taint {node.kubernetes.io/unreachable: }. preemption:
+        0/4 nodes are available: 4 Preemption is not helpful for scheduling.'
+      reason: Unschedulable
+      status: "False"
+      type: PodScheduled
+    phase: Pending
+    qosClass: BestEffort
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2025-08-29T05:04:18Z"
+    creationTimestamp: "2025-08-29T05:04:18Z"
+    deletionGracePeriodSeconds: 30
+    deletionTimestamp: "2025-09-01T09:35:35Z"
+    generateName: carbon-frontend-7df495597c-
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 7df495597c
+    name: carbon-frontend-7df495597c-4mwf7
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: carbon-frontend-7df495597c
+      uid: 5255f8dd-3837-4532-9e9b-a9d57837adc5
+    resourceVersion: "701746"
+    uid: 40f89cb7-9658-4b3f-9e58-f1605ceaf4b9
+  spec:
+    containers:
+    - envFrom:
+      - configMapRef:
+          name: carbon-frontend-config
+      - secretRef:
+          name: appdb-credentials
+      image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+      imagePullPolicy: Always
+      name: frontend
+      ports:
+      - containerPort: 8501
+        hostPort: 8501
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-8ftj4
+        readOnly: true
+    dnsPolicy: ClusterFirstWithHostNet
+    enableServiceLinks: true
+    hostNetwork: true
+    nodeName: k8s-frontend
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-8ftj4
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-29T05:04:24Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-29T05:04:19Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:29:58Z"
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-29T05:04:24Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-29T05:04:18Z"
+      status: "True"
+      type: PodScheduled
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:35:05Z"
+      message: 'Taint manager: deleting due to NoExecute taint'
+      reason: DeletionByTaintManager
+      status: "True"
+      type: DisruptionTarget
+    containerStatuses:
+    - containerID: containerd://2896912a0b478ef2248b004ebd584205ccc79b88d95aa253236860852ee4a432
+      image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+      imageID: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend@sha256:8a5a0f3c8648ccc109185733aa438baea7edd9e17f7ae4a355cfb688f97dcc54
+      lastState: {}
+      name: frontend
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2025-08-29T05:04:24Z"
+    hostIP: 192.168.4.102
+    hostIPs:
+    - ip: 192.168.4.102
+    phase: Running
+    podIP: 192.168.4.102
+    podIPs:
+    - ip: 192.168.4.102
+    qosClass: Burstable
+    startTime: "2025-08-29T05:04:19Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2025-08-29T05:04:18Z"
+    creationTimestamp: "2025-09-01T09:58:20Z"
+    generateName: carbon-frontend-7df495597c-
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 7df495597c
+    name: carbon-frontend-7df495597c-qcvsz
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: carbon-frontend-7df495597c
+      uid: 5255f8dd-3837-4532-9e9b-a9d57837adc5
+    resourceVersion: "705595"
+    uid: 7007db6b-af37-41d1-87e7-fd6cc2d2f20e
+  spec:
+    containers:
+    - envFrom:
+      - configMapRef:
+          name: carbon-frontend-config
+      - secretRef:
+          name: appdb-credentials
+      image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+      imagePullPolicy: Always
+      name: frontend
+      ports:
+      - containerPort: 8501
+        hostPort: 8501
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-kmpt7
+        readOnly: true
+    dnsPolicy: ClusterFirstWithHostNet
+    enableServiceLinks: true
+    hostNetwork: true
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-kmpt7
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:58:21Z"
+      message: '0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane:
+        }, 3 node(s) had untolerated taint {node.kubernetes.io/unreachable: }. preemption:
+        0/4 nodes are available: 4 Preemption is not helpful for scheduling.'
+      reason: Unschedulable
+      status: "False"
+      type: PodScheduled
+    phase: Pending
+    qosClass: Burstable
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2025-08-29T05:04:18Z"
+    creationTimestamp: "2025-09-01T09:35:05Z"
+    deletionGracePeriodSeconds: 30
+    deletionTimestamp: "2025-09-01T09:58:49Z"
+    generateName: carbon-frontend-7df495597c-
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 7df495597c
+    name: carbon-frontend-7df495597c-rlcr2
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: carbon-frontend-7df495597c
+      uid: 5255f8dd-3837-4532-9e9b-a9d57837adc5
+    resourceVersion: "705534"
+    uid: c774c93c-6b0a-4fd4-b7b3-13ad2174a0cd
+  spec:
+    containers:
+    - envFrom:
+      - configMapRef:
+          name: carbon-frontend-config
+      - secretRef:
+          name: appdb-credentials
+      image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+      imagePullPolicy: Always
+      name: frontend
+      ports:
+      - containerPort: 8501
+        hostPort: 8501
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-hz5n9
+        readOnly: true
+    dnsPolicy: ClusterFirstWithHostNet
+    enableServiceLinks: true
+    hostNetwork: true
+    nodeName: k8s-backend
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-hz5n9
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:37:58Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:35:06Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:53:13Z"
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:37:58Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:35:06Z"
+      status: "True"
+      type: PodScheduled
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:58:19Z"
+      message: 'Taint manager: deleting due to NoExecute taint'
+      reason: DeletionByTaintManager
+      status: "True"
+      type: DisruptionTarget
+    containerStatuses:
+    - containerID: containerd://66a7ab3ebdc03a8c59395403ffe004d35b992ccdf0fbfdcdd02248e5081c4cf5
+      image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+      imageID: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend@sha256:8a5a0f3c8648ccc109185733aa438baea7edd9e17f7ae4a355cfb688f97dcc54
+      lastState: {}
+      name: frontend
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2025-09-01T09:37:58Z"
+    hostIP: 192.168.4.103
+    hostIPs:
+    - ip: 192.168.4.103
+    phase: Running
+    podIP: 192.168.4.103
+    podIPs:
+    - ip: 192.168.4.103
+    qosClass: Burstable
+    startTime: "2025-09-01T09:35:06Z"
+kind: List
+metadata:
+  resourceVersion: ""

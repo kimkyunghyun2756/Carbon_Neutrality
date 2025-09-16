@@ -1,0 +1,97 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-08-27T01:42:18Z"
+    generation: 1
+    labels:
+      k8s-app: tigera-operator
+      name: tigera-operator
+      pod-template-hash: 8bb6c747f
+    name: tigera-operator-8bb6c747f
+    namespace: tigera-operator
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: tigera-operator
+      uid: 2983c912-08f8-4fe8-a619-96b09acc16e9
+    resourceVersion: "705497"
+    uid: 978087cb-1ba7-4579-968d-092ac3c970c0
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        name: tigera-operator
+        pod-template-hash: 8bb6c747f
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          k8s-app: tigera-operator
+          name: tigera-operator
+          pod-template-hash: 8bb6c747f
+      spec:
+        containers:
+        - args:
+          - -manage-crds=true
+          command:
+          - operator
+          env:
+          - name: WATCH_NAMESPACE
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: OPERATOR_NAME
+            value: tigera-operator
+          - name: TIGERA_OPERATOR_INIT_IMAGE_VERSION
+            value: v1.38.3
+          envFrom:
+          - configMapRef:
+              name: kubernetes-services-endpoint
+              optional: true
+          image: quay.io/tigera/operator:v1.38.3
+          imagePullPolicy: IfNotPresent
+          name: tigera-operator
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/calico
+            name: var-lib-calico
+            readOnly: true
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: tigera-operator
+        serviceAccountName: tigera-operator
+        terminationGracePeriodSeconds: 60
+        tolerations:
+        - effect: NoExecute
+          operator: Exists
+        - effect: NoSchedule
+          operator: Exists
+        volumes:
+        - hostPath:
+            path: /var/lib/calico
+            type: ""
+          name: var-lib-calico
+  status:
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    replicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

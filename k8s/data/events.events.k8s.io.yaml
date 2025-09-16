@@ -1,0 +1,65 @@
+apiVersion: v1
+items:
+- action: Scheduling
+  apiVersion: events.k8s.io/v1
+  deprecatedFirstTimestamp: null
+  deprecatedLastTimestamp: null
+  deprecatedSource: {}
+  eventTime: "2025-09-16T00:00:25.372254Z"
+  kind: Event
+  metadata:
+    creationTimestamp: "2025-09-16T00:00:25Z"
+    name: carbon-etl-29279700-mqkm7.18659a3f1a4302ca
+    namespace: data
+    resourceVersion: "906461"
+    uid: 201ec861-997a-48e7-b968-668332d856d3
+  note: '0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane:
+    }, 3 node(s) had untolerated taint {node.kubernetes.io/unreachable: }. preemption:
+    0/4 nodes are available: 4 Preemption is not helpful for scheduling.'
+  reason: FailedScheduling
+  regarding:
+    apiVersion: v1
+    kind: Pod
+    name: carbon-etl-29279700-mqkm7
+    namespace: data
+    resourceVersion: "773861"
+    uid: 4a318f4c-893d-480f-8b9c-43230102f985
+  reportingController: default-scheduler
+  reportingInstance: default-scheduler-k8s-master-cp
+  series:
+    count: 30
+    lastObservedTime: "2025-09-16T02:25:26.268875Z"
+  type: Warning
+- action: Scheduling
+  apiVersion: events.k8s.io/v1
+  deprecatedFirstTimestamp: null
+  deprecatedLastTimestamp: null
+  deprecatedSource: {}
+  eventTime: "2025-09-16T00:00:25.372619Z"
+  kind: Event
+  metadata:
+    creationTimestamp: "2025-09-16T00:00:25Z"
+    name: carbon-frontend-7df495597c-qcvsz.18659a3f1a487d0c
+    namespace: data
+    resourceVersion: "906458"
+    uid: 38f48302-5bdd-47b2-92a6-9924df035ad2
+  note: '0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane:
+    }, 3 node(s) had untolerated taint {node.kubernetes.io/unreachable: }. preemption:
+    0/4 nodes are available: 4 Preemption is not helpful for scheduling.'
+  reason: FailedScheduling
+  regarding:
+    apiVersion: v1
+    kind: Pod
+    name: carbon-frontend-7df495597c-qcvsz
+    namespace: data
+    resourceVersion: "705595"
+    uid: 7007db6b-af37-41d1-87e7-fd6cc2d2f20e
+  reportingController: default-scheduler
+  reportingInstance: default-scheduler-k8s-master-cp
+  series:
+    count: 30
+    lastObservedTime: "2025-09-16T02:25:26.268994Z"
+  type: Warning
+kind: List
+metadata:
+  resourceVersion: ""

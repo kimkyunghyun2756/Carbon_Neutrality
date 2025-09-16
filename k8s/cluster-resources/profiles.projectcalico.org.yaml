@@ -1,0 +1,938 @@
+apiVersion: v1
+items:
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: null
+    name: projectcalico-default-allow
+    resourceVersion: "1"
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:34Z"
+    name: kns.calico-apiserver
+    resourceVersion: 1063/
+    uid: 225e14e1-6f8f-4a9d-9b51-96ff9ae4656a
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: calico-apiserver
+      pcns.name: calico-apiserver
+      pcns.pod-security.kubernetes.io/enforce: restricted
+      pcns.pod-security.kubernetes.io/enforce-version: latest
+      pcns.projectcalico.org/name: calico-apiserver
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: kns.calico-system
+    resourceVersion: 99416/
+    uid: c0261569-5edd-437b-94e8-85715a673d4d
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: calico-system
+      pcns.name: calico-system
+      pcns.pod-security.kubernetes.io/enforce: privileged
+      pcns.pod-security.kubernetes.io/enforce-version: latest
+      pcns.projectcalico.org/name: calico-system
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T08:34:31Z"
+    name: kns.data
+    resourceVersion: 29515/
+    uid: dab948ed-4bde-49ac-9339-c91ddfbf3b5a
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: data
+      pcns.projectcalico.org/name: data
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    name: kns.default
+    resourceVersion: 42/
+    uid: 1caf6128-ef76-400a-a88a-c885030114a1
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: default
+      pcns.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    name: kns.kube-node-lease
+    resourceVersion: 40/
+    uid: 9cb2a3c1-5c75-4bfb-a6fb-c5065f7cac17
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: kube-node-lease
+      pcns.projectcalico.org/name: kube-node-lease
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    name: kns.kube-public
+    resourceVersion: 33/
+    uid: d5765c5c-7626-4370-895c-60fbd477de34
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: kube-public
+      pcns.projectcalico.org/name: kube-public
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    name: kns.kube-system
+    resourceVersion: 17/
+    uid: 63307cd8-174b-498c-b700-712c89eb53d9
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: kube-system
+      pcns.projectcalico.org/name: kube-system
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T06:15:38Z"
+    name: kns.monitoring
+    resourceVersion: 77344/
+    uid: cd786b01-28d4-4e9e-975d-c24b87f745f8
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: monitoring
+      pcns.projectcalico.org/name: monitoring
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T05:32:55Z"
+    name: kns.nfs-provisioner
+    resourceVersion: 71282/
+    uid: 34a82b44-9eec-42b9-984a-ef79c975223e
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: nfs-provisioner
+      pcns.projectcalico.org/name: nfs-provisioner
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:18Z"
+    name: kns.tigera-operator
+    resourceVersion: 876637/
+    uid: c7d11420-5871-4131-bdfc-b16dc0fd1e83
+  spec:
+    egress:
+    - action: Allow
+      destination: {}
+      source: {}
+    ingress:
+    - action: Allow
+      destination: {}
+      source: {}
+    labelsToApply:
+      pcns.kubernetes.io/metadata.name: tigera-operator
+      pcns.name: tigera-operator
+      pcns.pod-security.kubernetes.io/enforce: privileged
+      pcns.projectcalico.org/name: tigera-operator
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:34Z"
+    name: ksa.calico-apiserver.calico-apiserver
+    resourceVersion: /1067
+    uid: 401a3990-c5e4-4daa-af12-12a44220f1b7
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: calico-apiserver
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:34Z"
+    name: ksa.calico-apiserver.default
+    resourceVersion: /1064
+    uid: 35268b07-e0bb-4506-ba46-2f5992c7c965
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:39Z"
+    name: ksa.calico-system.calico-cni-plugin
+    resourceVersion: /1212
+    uid: 37284dae-3cb9-41a5-af40-103103fa3b0e
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: calico-cni-plugin
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:39Z"
+    name: ksa.calico-system.calico-kube-controllers
+    resourceVersion: /1242
+    uid: e7f251e7-4552-4a93-a7f9-0e3920985059
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: calico-kube-controllers
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: ksa.calico-system.calico-node
+    resourceVersion: /1200
+    uid: e7e2aa4f-834e-44ed-948a-1908d4f86b52
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: calico-node
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: ksa.calico-system.calico-typha
+    resourceVersion: /1170
+    uid: 97e3b8c1-2c0b-4abe-8aba-6ec987b28de2
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: calico-typha
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:39Z"
+    name: ksa.calico-system.csi-node-driver
+    resourceVersion: /1240
+    uid: 2a67d052-2d64-4fe1-8fe1-bb8b506f5700
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: csi-node-driver
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: ksa.calico-system.default
+    resourceVersion: /1131
+    uid: f59f9e38-6173-4e2e-9090-4d7ef09a3b8e
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: ksa.calico-system.goldmane
+    resourceVersion: /1156
+    uid: 494c8465-1179-48e2-a3bf-53dcdee12657
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: goldmane
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: ksa.calico-system.whisker
+    resourceVersion: /1140
+    uid: df888c4d-e1d3-4a8e-817f-4feb17ac7362
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: whisker
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T08:34:31Z"
+    name: ksa.data.default
+    resourceVersion: /27363
+    uid: 9e2c249f-9b8a-4bdc-a5cf-77e220011934
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.default.default
+    resourceVersion: /372
+    uid: 2ceae4df-4bcd-4e60-bfe2-c5ffdc5e069a
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T05:41:52Z"
+    name: ksa.default.prometheus-operator
+    resourceVersion: /72626
+    uid: a433c72f-e8b3-4eb4-b8e0-6b8c236a372b
+  spec:
+    labelsToApply:
+      pcsa.app.kubernetes.io/component: controller
+      pcsa.app.kubernetes.io/name: prometheus-operator
+      pcsa.app.kubernetes.io/version: 0.85.0
+      pcsa.projectcalico.org/name: prometheus-operator
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:59Z"
+    name: ksa.kube-node-lease.default
+    resourceVersion: /373
+    uid: fac41606-ec26-468c-b02e-aefcf515af15
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:59Z"
+    name: ksa.kube-public.default
+    resourceVersion: /374
+    uid: 62ea5a38-69ca-4215-be10-5c8fadcca87f
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.attachdetach-controller
+    resourceVersion: /260
+    uid: 0d4da055-2e46-4078-8a1f-0d050036ad5f
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: attachdetach-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.bootstrap-signer
+    resourceVersion: /284
+    uid: 4fcb3d85-012f-4726-8138-51ca0d5c79b2
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: bootstrap-signer
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T06:52:13Z"
+    name: ksa.kube-system.calico-cni-plugin
+    resourceVersion: /83360
+    uid: bb03fc45-c822-4419-88a3-a12d7e5182ca
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: calico-cni-plugin
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T06:52:13Z"
+    name: ksa.kube-system.calico-kube-controllers
+    resourceVersion: /83355
+    uid: 8c03873f-66ed-43fe-881f-63e3b9521cf8
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: calico-kube-controllers
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T06:52:13Z"
+    name: ksa.kube-system.calico-node
+    resourceVersion: /83359
+    uid: 89ff1a81-c5f3-4861-8269-78ab4e8c34d4
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: calico-node
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.certificate-controller
+    resourceVersion: /259
+    uid: 0a5fe1b2-48c3-4a6e-bf52-4f391da33101
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: certificate-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.clusterrole-aggregation-controller
+    resourceVersion: /266
+    uid: 56711299-8b9f-4028-99aa-38970ecc408e
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: clusterrole-aggregation-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.coredns
+    resourceVersion: /270
+    uid: 5716cb04-d894-4a4c-8f5d-419cd5577ecd
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: coredns
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.cronjob-controller
+    resourceVersion: /279
+    uid: 1fa08276-8f02-4c53-be51-b944766e49b5
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: cronjob-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.daemon-set-controller
+    resourceVersion: /345
+    uid: 59e21740-6922-4d15-b5fe-37dcdd957952
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: daemon-set-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:59Z"
+    name: ksa.kube-system.default
+    resourceVersion: /375
+    uid: 2a1d1a0f-4010-4f5f-bf5e-9332e0b70464
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:46Z"
+    name: ksa.kube-system.deployment-controller
+    resourceVersion: /300
+    uid: 2200abd6-ff66-4866-b77d-3c3683aa156e
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: deployment-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:46Z"
+    name: ksa.kube-system.disruption-controller
+    resourceVersion: /301
+    uid: e1b36182-a3c2-4338-bd8a-db6f24be5e89
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: disruption-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.endpoint-controller
+    resourceVersion: /258
+    uid: ccf03ef8-6865-4b78-a327-489303804b14
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: endpoint-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.endpointslice-controller
+    resourceVersion: /347
+    uid: b43fd7d8-acaf-4636-9d19-731e1748443b
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: endpointslice-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:46Z"
+    name: ksa.kube-system.endpointslicemirroring-controller
+    resourceVersion: /290
+    uid: 6ad06431-20b6-4cb4-b6eb-ee58d074b5c8
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: endpointslicemirroring-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:47Z"
+    name: ksa.kube-system.ephemeral-volume-controller
+    resourceVersion: /310
+    uid: 9ef5e5cf-32f5-43dd-8040-17ed2d5e76b0
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: ephemeral-volume-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:47Z"
+    name: ksa.kube-system.expand-controller
+    resourceVersion: /306
+    uid: 90bbd03f-59a5-4c32-8e01-645a554deba5
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: expand-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:46Z"
+    name: ksa.kube-system.generic-garbage-collector
+    resourceVersion: /295
+    uid: d13a5e88-d12f-491f-a442-9c06ff7ff955
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: generic-garbage-collector
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.horizontal-pod-autoscaler
+    resourceVersion: /265
+    uid: dd9e4961-d81a-4c72-b423-a4cd056d1a1f
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: horizontal-pod-autoscaler
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:48Z"
+    name: ksa.kube-system.job-controller
+    resourceVersion: /318
+    uid: 504c5dd0-5d3e-4ab6-a230-7801f04d6d1f
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: job-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.kube-proxy
+    resourceVersion: /277
+    uid: 4c8ecb7d-3a3b-4fca-9497-8a276a1c74c7
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: kube-proxy
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:47Z"
+    name: ksa.kube-system.legacy-service-account-token-cleaner
+    resourceVersion: /316
+    uid: d290556f-c76f-4dc7-bf39-c0ce182e8ba1
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: legacy-service-account-token-cleaner
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.namespace-controller
+    resourceVersion: /349
+    uid: 7abae082-8712-4fb1-90a9-a60b2517d8e4
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: namespace-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:46Z"
+    name: ksa.kube-system.node-controller
+    resourceVersion: /302
+    uid: 9ad87546-4ea4-42e8-9e84-ef7826a3e585
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: node-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.persistent-volume-binder
+    resourceVersion: /350
+    uid: 3416b7a3-0bcc-47b8-8bfe-00831642b1f9
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: persistent-volume-binder
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.pod-garbage-collector
+    resourceVersion: /342
+    uid: 81c47f1f-ea9e-4eb7-bbd9-026a857cd5be
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: pod-garbage-collector
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.pv-protection-controller
+    resourceVersion: /262
+    uid: 5e12c4a8-2a04-4a3d-8885-c24352455dd1
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: pv-protection-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:47Z"
+    name: ksa.kube-system.pvc-protection-controller
+    resourceVersion: /314
+    uid: 25904d2c-10a7-4e0e-8b66-ee4079329151
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: pvc-protection-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.replicaset-controller
+    resourceVersion: /346
+    uid: 9e0396de-1130-47d9-bcde-ce1aa9e9530e
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: replicaset-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.replication-controller
+    resourceVersion: /348
+    uid: fafec37b-851e-4750-81a0-6da2732bd90f
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: replication-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.resourcequota-controller
+    resourceVersion: /264
+    uid: 6ffb7836-b235-422d-8e73-f89344fad659
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: resourcequota-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.root-ca-cert-publisher
+    resourceVersion: /263
+    uid: 7d09b46e-a934-4787-81ce-a992e489fa43
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: root-ca-cert-publisher
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:47Z"
+    name: ksa.kube-system.service-account-controller
+    resourceVersion: /317
+    uid: bfd32cba-f59e-4c79-9823-d651910e2423
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: service-account-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.service-controller
+    resourceVersion: /343
+    uid: af74e023-0509-4519-8938-291925c75c8b
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: service-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.statefulset-controller
+    resourceVersion: /271
+    uid: 339333f8-0d74-4ce9-ac07-93c8516b9ed9
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: statefulset-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:48Z"
+    name: ksa.kube-system.token-cleaner
+    resourceVersion: /319
+    uid: 0d572916-6fc9-4680-aaa7-03b3c90b623c
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: token-cleaner
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:47Z"
+    name: ksa.kube-system.ttl-after-finished-controller
+    resourceVersion: /315
+    uid: d07dd267-b1b9-4525-ad14-5c2be64d4219
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: ttl-after-finished-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: ksa.kube-system.ttl-controller
+    resourceVersion: /261
+    uid: 955d8d5c-7802-4a89-8049-3c142f025ceb
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: ttl-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:58Z"
+    name: ksa.kube-system.validatingadmissionpolicy-status-controller
+    resourceVersion: /344
+    uid: b896e451-e8d0-4d4f-be75-e70882c8534f
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: validatingadmissionpolicy-status-controller
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T06:15:38Z"
+    name: ksa.monitoring.default
+    resourceVersion: /77345
+    uid: 89eab7b5-c4ba-417e-88bb-f37c5f0d04a6
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:04Z"
+    name: ksa.monitoring.kube-prometheus-grafana
+    resourceVersion: /104179
+    uid: 7a56441f-ed7a-4360-ab8d-2cb1c1e12b67
+  spec:
+    labelsToApply:
+      pcsa.app.kubernetes.io/instance: kube-prometheus
+      pcsa.app.kubernetes.io/managed-by: Helm
+      pcsa.app.kubernetes.io/name: grafana
+      pcsa.app.kubernetes.io/version: 12.1.0
+      pcsa.helm.sh/chart: grafana-9.3.6
+      pcsa.projectcalico.org/name: kube-prometheus-grafana
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:04Z"
+    name: ksa.monitoring.kube-prometheus-kube-prome-alertmanager
+    resourceVersion: /104180
+    uid: f4089a36-b793-4269-81bf-07bd1f466d19
+  spec:
+    labelsToApply:
+      pcsa.app: kube-prometheus-stack-alertmanager
+      pcsa.app.kubernetes.io/component: alertmanager
+      pcsa.app.kubernetes.io/instance: kube-prometheus
+      pcsa.app.kubernetes.io/managed-by: Helm
+      pcsa.app.kubernetes.io/name: kube-prometheus-stack-alertmanager
+      pcsa.app.kubernetes.io/part-of: kube-prometheus-stack
+      pcsa.app.kubernetes.io/version: 77.0.2
+      pcsa.chart: kube-prometheus-stack-77.0.2
+      pcsa.heritage: Helm
+      pcsa.projectcalico.org/name: kube-prometheus-kube-prome-alertmanager
+      pcsa.release: kube-prometheus
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:04Z"
+    name: ksa.monitoring.kube-prometheus-kube-prome-operator
+    resourceVersion: /104178
+    uid: fc2d611b-69ad-4ee3-9ee2-e46dbebfe2ab
+  spec:
+    labelsToApply:
+      pcsa.app: kube-prometheus-stack-operator
+      pcsa.app.kubernetes.io/component: prometheus-operator
+      pcsa.app.kubernetes.io/instance: kube-prometheus
+      pcsa.app.kubernetes.io/managed-by: Helm
+      pcsa.app.kubernetes.io/name: kube-prometheus-stack-prometheus-operator
+      pcsa.app.kubernetes.io/part-of: kube-prometheus-stack
+      pcsa.app.kubernetes.io/version: 77.0.2
+      pcsa.chart: kube-prometheus-stack-77.0.2
+      pcsa.heritage: Helm
+      pcsa.projectcalico.org/name: kube-prometheus-kube-prome-operator
+      pcsa.release: kube-prometheus
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:04Z"
+    name: ksa.monitoring.kube-prometheus-kube-prome-prometheus
+    resourceVersion: /104183
+    uid: b2d4e51e-e95d-4c2f-a524-5af724287cb4
+  spec:
+    labelsToApply:
+      pcsa.app: kube-prometheus-stack-prometheus
+      pcsa.app.kubernetes.io/component: prometheus
+      pcsa.app.kubernetes.io/instance: kube-prometheus
+      pcsa.app.kubernetes.io/managed-by: Helm
+      pcsa.app.kubernetes.io/name: kube-prometheus-stack-prometheus
+      pcsa.app.kubernetes.io/part-of: kube-prometheus-stack
+      pcsa.app.kubernetes.io/version: 77.0.2
+      pcsa.chart: kube-prometheus-stack-77.0.2
+      pcsa.heritage: Helm
+      pcsa.projectcalico.org/name: kube-prometheus-kube-prome-prometheus
+      pcsa.release: kube-prometheus
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:04Z"
+    name: ksa.monitoring.kube-prometheus-kube-state-metrics
+    resourceVersion: /104181
+    uid: 866b3f71-529a-4c4f-bd1d-002f6b010917
+  spec:
+    labelsToApply:
+      pcsa.app.kubernetes.io/component: metrics
+      pcsa.app.kubernetes.io/instance: kube-prometheus
+      pcsa.app.kubernetes.io/managed-by: Helm
+      pcsa.app.kubernetes.io/name: kube-state-metrics
+      pcsa.app.kubernetes.io/part-of: kube-state-metrics
+      pcsa.app.kubernetes.io/version: 2.16.0
+      pcsa.helm.sh/chart: kube-state-metrics-6.1.5
+      pcsa.projectcalico.org/name: kube-prometheus-kube-state-metrics
+      pcsa.release: kube-prometheus
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:04Z"
+    name: ksa.monitoring.kube-prometheus-prometheus-node-exporter
+    resourceVersion: /104182
+    uid: 3eabf580-3fb2-4a11-9c0a-88ee85434ef0
+  spec:
+    labelsToApply:
+      pcsa.app.kubernetes.io/component: metrics
+      pcsa.app.kubernetes.io/instance: kube-prometheus
+      pcsa.app.kubernetes.io/managed-by: Helm
+      pcsa.app.kubernetes.io/name: prometheus-node-exporter
+      pcsa.app.kubernetes.io/part-of: prometheus-node-exporter
+      pcsa.app.kubernetes.io/version: 1.9.1
+      pcsa.helm.sh/chart: prometheus-node-exporter-4.47.3
+      pcsa.projectcalico.org/name: kube-prometheus-prometheus-node-exporter
+      pcsa.release: kube-prometheus
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T05:32:55Z"
+    name: ksa.nfs-provisioner.default
+    resourceVersion: /71283
+    uid: 18c7be3f-e335-4f1c-8933-009635e97e6a
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-28T05:33:12Z"
+    name: ksa.nfs-provisioner.nfs-provisioner-nfs-subdir-external-provisioner
+    resourceVersion: /71320
+    uid: d11e04fa-7d02-40e9-be65-c153ef78aecb
+  spec:
+    labelsToApply:
+      pcsa.app: nfs-subdir-external-provisioner
+      pcsa.app.kubernetes.io/managed-by: Helm
+      pcsa.chart: nfs-subdir-external-provisioner-4.0.18
+      pcsa.heritage: Helm
+      pcsa.projectcalico.org/name: nfs-provisioner-nfs-subdir-external-provisioner
+      pcsa.release: nfs-provisioner
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:18Z"
+    name: ksa.tigera-operator.default
+    resourceVersion: /978
+    uid: 741c6bf9-3549-451d-929c-3e9187e434ad
+  spec:
+    labelsToApply:
+      pcsa.projectcalico.org/name: default
+- apiVersion: projectcalico.org/v3
+  kind: Profile
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:18Z"
+    name: ksa.tigera-operator.tigera-operator
+    resourceVersion: /876639
+    uid: 9d51bdef-a85c-437d-8092-41ef659f458f
+  spec:
+    labelsToApply:
+      pcsa.k8s-app: tigera-operator
+      pcsa.projectcalico.org/name: tigera-operator
+kind: List
+metadata:
+  resourceVersion: ""

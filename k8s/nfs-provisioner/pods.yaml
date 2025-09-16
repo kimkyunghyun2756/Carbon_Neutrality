@@ -1,0 +1,277 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cni.projectcalico.org/containerID: 6a571439cc7868cf57dd71651a125fb2a8d25880908139f66be292ebc27f0ef8
+      cni.projectcalico.org/podIP: 10.244.58.52/32
+      cni.projectcalico.org/podIPs: 10.244.58.52/32
+    creationTimestamp: "2025-08-30T08:24:03Z"
+    deletionGracePeriodSeconds: 30
+    deletionTimestamp: "2025-09-01T09:35:35Z"
+    generateName: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d-
+    labels:
+      app: nfs-subdir-external-provisioner
+      pod-template-hash: 7867ff685d
+      release: nfs-provisioner
+    name: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d228z8
+    namespace: nfs-provisioner
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d
+      uid: dfb6ed82-8b9c-42af-a48f-f7ad5854f4b5
+    resourceVersion: "701745"
+    uid: 29d32298-b47a-40cd-8064-834b02cc0043
+  spec:
+    containers:
+    - env:
+      - name: PROVISIONER_NAME
+        value: cluster.local/nfs-provisioner-nfs-subdir-external-provisioner
+      - name: NFS_SERVER
+        value: 192.168.4.104
+      - name: NFS_PATH
+        value: /srv/nfs/kubedata
+      image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+      imagePullPolicy: IfNotPresent
+      name: nfs-subdir-external-provisioner
+      resources: {}
+      securityContext: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /persistentvolumes
+        name: nfs-subdir-external-provisioner-root
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-pjdjh
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k8s-frontend
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: nfs-provisioner-nfs-subdir-external-provisioner
+    serviceAccountName: nfs-provisioner-nfs-subdir-external-provisioner
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: nfs-subdir-external-provisioner-root
+      nfs:
+        path: /srv/nfs/kubedata
+        server: 192.168.4.104
+    - name: kube-api-access-pjdjh
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T00:48:58Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-30T08:24:04Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:29:55Z"
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T00:48:58Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-30T08:24:04Z"
+      status: "True"
+      type: PodScheduled
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:35:05Z"
+      message: 'Taint manager: deleting due to NoExecute taint'
+      reason: DeletionByTaintManager
+      status: "True"
+      type: DisruptionTarget
+    containerStatuses:
+    - containerID: containerd://ee24935748b8967815c7dc16b202dc4b900ac72d93647239408d867a71ae1f93
+      image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+      imageID: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner@sha256:63d5e04551ec8b5aae83b6f35938ca5ddc50a88d85492d9731810c31591fa4c9
+      lastState: {}
+      name: nfs-subdir-external-provisioner
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2025-09-01T00:48:57Z"
+    hostIP: 192.168.4.102
+    hostIPs:
+    - ip: 192.168.4.102
+    phase: Running
+    podIP: 10.244.58.52
+    podIPs:
+    - ip: 10.244.58.52
+    qosClass: BestEffort
+    startTime: "2025-08-30T08:24:04Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cni.projectcalico.org/containerID: 5e9d2999e081f6170e0aac3d7a641d8fb715739c54b54b334f0968b02dccaab3
+      cni.projectcalico.org/podIP: 10.244.134.224/32
+      cni.projectcalico.org/podIPs: 10.244.134.224/32
+    creationTimestamp: "2025-09-01T09:35:05Z"
+    generateName: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d-
+    labels:
+      app: nfs-subdir-external-provisioner
+      pod-template-hash: 7867ff685d
+      release: nfs-provisioner
+    name: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d8v7dl
+    namespace: nfs-provisioner
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d
+      uid: dfb6ed82-8b9c-42af-a48f-f7ad5854f4b5
+    resourceVersion: "705496"
+    uid: c34583fc-4441-4c83-847c-b04c3618789a
+  spec:
+    containers:
+    - env:
+      - name: PROVISIONER_NAME
+        value: cluster.local/nfs-provisioner-nfs-subdir-external-provisioner
+      - name: NFS_SERVER
+        value: 192.168.4.104
+      - name: NFS_PATH
+        value: /srv/nfs/kubedata
+      image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+      imagePullPolicy: IfNotPresent
+      name: nfs-subdir-external-provisioner
+      resources: {}
+      securityContext: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /persistentvolumes
+        name: nfs-subdir-external-provisioner-root
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-rqdlr
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k8s-monitoring
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: nfs-provisioner-nfs-subdir-external-provisioner
+    serviceAccountName: nfs-provisioner-nfs-subdir-external-provisioner
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: nfs-subdir-external-provisioner-root
+      nfs:
+        path: /srv/nfs/kubedata
+        server: 192.168.4.104
+    - name: kube-api-access-rqdlr
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:35:15Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:35:06Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:58:10Z"
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:35:15Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:35:06Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://2170263a021028fc4fe1c235d53a2e5781bd01088efbd0921343d76bd8158221
+      image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+      imageID: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner@sha256:63d5e04551ec8b5aae83b6f35938ca5ddc50a88d85492d9731810c31591fa4c9
+      lastState: {}
+      name: nfs-subdir-external-provisioner
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2025-09-01T09:35:14Z"
+    hostIP: 192.168.4.104
+    hostIPs:
+    - ip: 192.168.4.104
+    phase: Running
+    podIP: 10.244.134.224
+    podIPs:
+    - ip: 10.244.134.224
+    qosClass: BestEffort
+    startTime: "2025-09-01T09:35:06Z"
+kind: List
+metadata:
+  resourceVersion: ""

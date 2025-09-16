@@ -1,0 +1,150 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:18Z"
+    generateName: tigera-operator-8bb6c747f-
+    labels:
+      k8s-app: tigera-operator
+      name: tigera-operator
+      pod-template-hash: 8bb6c747f
+    name: tigera-operator-8bb6c747f-hxdq5
+    namespace: tigera-operator
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: tigera-operator-8bb6c747f
+      uid: 978087cb-1ba7-4579-968d-092ac3c970c0
+    resourceVersion: "705492"
+    uid: 72a59dfb-b730-4177-a52d-d6bafca82f2c
+  spec:
+    containers:
+    - args:
+      - -manage-crds=true
+      command:
+      - operator
+      env:
+      - name: WATCH_NAMESPACE
+      - name: POD_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.name
+      - name: OPERATOR_NAME
+        value: tigera-operator
+      - name: TIGERA_OPERATOR_INIT_IMAGE_VERSION
+        value: v1.38.3
+      envFrom:
+      - configMapRef:
+          name: kubernetes-services-endpoint
+          optional: true
+      image: quay.io/tigera/operator:v1.38.3
+      imagePullPolicy: IfNotPresent
+      name: tigera-operator
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/lib/calico
+        name: var-lib-calico
+        readOnly: true
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-htwnm
+        readOnly: true
+    dnsPolicy: ClusterFirstWithHostNet
+    enableServiceLinks: true
+    hostNetwork: true
+    nodeName: k8s-monitoring
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: tigera-operator
+    serviceAccountName: tigera-operator
+    terminationGracePeriodSeconds: 60
+    tolerations:
+    - effect: NoExecute
+      operator: Exists
+    - effect: NoSchedule
+      operator: Exists
+    volumes:
+    - hostPath:
+        path: /var/lib/calico
+        type: ""
+      name: var-lib-calico
+    - name: kube-api-access-htwnm
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-27T01:42:28Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-27T01:42:18Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T09:58:09Z"
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-01T00:47:41Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2025-08-27T01:42:18Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://c89a746214cde165389342d737aead16cd3ec8c13b06a9408dbbc8e921745efd
+      image: quay.io/tigera/operator:v1.38.3
+      imageID: quay.io/tigera/operator@sha256:dbf1bad0def7b5955dc8e4aeee96e23ead0bc5822f6872518e685cd0ed484121
+      lastState:
+        terminated:
+          containerID: containerd://17bdb4acb4a8486465d7248ca767fb9f44f99783a707abfffbec787ed5e4cbb2
+          exitCode: 1
+          finishedAt: "2025-09-01T00:47:24Z"
+          reason: Error
+          startedAt: "2025-08-30T07:57:06Z"
+      name: tigera-operator
+      ready: true
+      restartCount: 23
+      started: true
+      state:
+        running:
+          startedAt: "2025-09-01T00:47:40Z"
+    hostIP: 192.168.4.104
+    hostIPs:
+    - ip: 192.168.4.104
+    phase: Running
+    podIP: 192.168.4.104
+    podIPs:
+    - ip: 192.168.4.104
+    qosClass: BestEffort
+    startTime: "2025-08-27T01:42:18Z"
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,65 @@
+apiVersion: v1
+items:
+- action: Scheduling
+  apiVersion: events.k8s.io/v1
+  deprecatedFirstTimestamp: null
+  deprecatedLastTimestamp: null
+  deprecatedSource: {}
+  eventTime: "2025-09-16T00:00:25.372903Z"
+  kind: Event
+  metadata:
+    creationTimestamp: "2025-09-16T00:00:25Z"
+    name: kube-prometheus-grafana-6d49f76fd6-nf2vn.18659a3f1a4cd124
+    namespace: monitoring
+    resourceVersion: "906459"
+    uid: d6b2f41e-45be-454c-ac8b-62e24c187a31
+  note: '0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane:
+    }, 3 node(s) had untolerated taint {node.kubernetes.io/unreachable: }. preemption:
+    0/4 nodes are available: 4 Preemption is not helpful for scheduling.'
+  reason: FailedScheduling
+  regarding:
+    apiVersion: v1
+    kind: Pod
+    name: kube-prometheus-grafana-6d49f76fd6-nf2vn
+    namespace: monitoring
+    resourceVersion: "705598"
+    uid: f6b3574e-e706-431c-8705-07d029aba14c
+  reportingController: default-scheduler
+  reportingInstance: default-scheduler-k8s-master-cp
+  series:
+    count: 30
+    lastObservedTime: "2025-09-16T02:25:56.272213Z"
+  type: Warning
+- action: Scheduling
+  apiVersion: events.k8s.io/v1
+  deprecatedFirstTimestamp: null
+  deprecatedLastTimestamp: null
+  deprecatedSource: {}
+  eventTime: "2025-09-16T00:00:25.373138Z"
+  kind: Event
+  metadata:
+    creationTimestamp: "2025-09-16T00:00:25Z"
+    name: kube-prometheus-kube-prome-operator-5c799fc89d-6xn5b.18659a3f1a5066d7
+    namespace: monitoring
+    resourceVersion: "906460"
+    uid: a5229169-d5ff-4ed0-b81b-8b9d5da9b91d
+  note: '0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane:
+    }, 3 node(s) had untolerated taint {node.kubernetes.io/unreachable: }. preemption:
+    0/4 nodes are available: 4 Preemption is not helpful for scheduling.'
+  reason: FailedScheduling
+  regarding:
+    apiVersion: v1
+    kind: Pod
+    name: kube-prometheus-kube-prome-operator-5c799fc89d-6xn5b
+    namespace: monitoring
+    resourceVersion: "705591"
+    uid: 865438ee-8376-49da-9228-b8e30e37fd57
+  reportingController: default-scheduler
+  reportingInstance: default-scheduler-k8s-master-cp
+  series:
+    count: 30
+    lastObservedTime: "2025-09-16T02:25:56.273219Z"
+  type: Warning
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,148 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  count: 85
+  eventTime: null
+  firstTimestamp: "2025-09-15T01:03:18Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{calico-kube-controllers}
+    kind: Pod
+    name: calico-kube-controllers-855d76474d-qvdh7
+    namespace: calico-system
+    resourceVersion: "465672"
+    uid: 1aa3c18a-f6a6-489e-be0e-d17a9f91dd10
+  kind: Event
+  lastTimestamp: "2025-09-16T02:40:26Z"
+  message: Container image "docker.io/calico/kube-controllers:v3.30.2" already present
+    on machine
+  metadata:
+    creationTimestamp: "2025-09-16T02:40:26Z"
+    name: calico-kube-controllers-855d76474d-qvdh7.18654f191d2c1a86
+    namespace: calico-system
+    resourceVersion: "907252"
+    uid: c972b797-f603-4420-bc47-b72ca7f6a60b
+  reason: Pulled
+  reportingComponent: kubelet
+  reportingInstance: k8s-master-cp
+  source:
+    component: kubelet
+    host: k8s-master-cp
+  type: Normal
+- apiVersion: v1
+  count: 1432
+  eventTime: null
+  firstTimestamp: "2025-09-15T01:04:21Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{calico-kube-controllers}
+    kind: Pod
+    name: calico-kube-controllers-855d76474d-qvdh7
+    namespace: calico-system
+    resourceVersion: "465672"
+    uid: 1aa3c18a-f6a6-489e-be0e-d17a9f91dd10
+  kind: Event
+  lastTimestamp: "2025-09-16T02:50:24Z"
+  message: Back-off restarting failed container calico-kube-controllers in pod calico-kube-controllers-855d76474d-qvdh7_calico-system(1aa3c18a-f6a6-489e-be0e-d17a9f91dd10)
+  metadata:
+    creationTimestamp: "2025-09-16T00:10:21Z"
+    name: calico-kube-controllers-855d76474d-qvdh7.18654f27c7a480c1
+    namespace: calico-system
+    resourceVersion: "908042"
+    uid: 669f5045-2635-4ab1-acc3-fb89e5f19964
+  reason: BackOff
+  reportingComponent: kubelet
+  reportingInstance: k8s-master-cp
+  source:
+    component: kubelet
+    host: k8s-master-cp
+  type: Warning
+- apiVersion: v1
+  count: 75
+  eventTime: null
+  firstTimestamp: "2025-09-15T01:05:23Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{calico-kube-controllers}
+    kind: Pod
+    name: calico-kube-controllers-855d76474d-qvdh7
+    namespace: calico-system
+    resourceVersion: "465672"
+    uid: 1aa3c18a-f6a6-489e-be0e-d17a9f91dd10
+  kind: Event
+  lastTimestamp: "2025-09-16T02:10:23Z"
+  message: |
+    Liveness probe failed: Error initializing datastore: connection is unauthorized: clusterinformations.crd.projectcalico.org "default" is forbidden: User "system:serviceaccount:calico-system:calico-kube-controllers" cannot get resource "clusterinformations" in API group "crd.projectcalico.org" at the cluster scope
+  metadata:
+    creationTimestamp: "2025-09-16T00:01:23Z"
+    name: calico-kube-controllers-855d76474d-qvdh7.18654f3616f16647
+    namespace: calico-system
+    resourceVersion: "904865"
+    uid: 18c24afa-5b15-4723-b04f-0d9b1ca2b263
+  reason: Unhealthy
+  reportingComponent: kubelet
+  reportingInstance: k8s-master-cp
+  source:
+    component: kubelet
+    host: k8s-master-cp
+  type: Warning
+- apiVersion: v1
+  count: 5
+  eventTime: null
+  firstTimestamp: "2025-09-16T01:33:24Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.containers{calico-kube-controllers}
+    kind: Pod
+    name: calico-kube-controllers-855d76474d-qvdh7
+    namespace: calico-system
+    resourceVersion: "465672"
+    uid: 1aa3c18a-f6a6-489e-be0e-d17a9f91dd10
+  kind: Event
+  lastTimestamp: "2025-09-16T02:35:23Z"
+  message: |
+    (combined from similar events): Liveness probe failed: Error initializing datastore: connection is unauthorized: clusterinformations.crd.projectcalico.org "default" is forbidden: User "system:serviceaccount:calico-system:calico-kube-controllers" cannot get resource "clusterinformations" in API group "crd.projectcalico.org" at the cluster scope
+  metadata:
+    creationTimestamp: "2025-09-16T02:35:23Z"
+    name: calico-kube-controllers-855d76474d-qvdh7.18659f52307f533d
+    namespace: calico-system
+    resourceVersion: "906852"
+    uid: 1085569b-ff56-4bd9-9cbf-b9ecd45969ab
+  reason: Unhealthy
+  reportingComponent: ""
+  reportingInstance: ""
+  source:
+    component: kubelet
+    host: k8s-master-cp
+  type: Warning
+- apiVersion: v1
+  count: 1766
+  eventTime: null
+  firstTimestamp: "2025-09-15T01:02:55Z"
+  involvedObject:
+    apiVersion: v1
+    fieldPath: spec.initContainers{install-cni}
+    kind: Pod
+    name: calico-node-mpnn9
+    namespace: calico-system
+    resourceVersion: "876036"
+    uid: 7bd8a3f4-9b6d-4a1b-ab60-548159e68a1c
+  kind: Event
+  lastTimestamp: "2025-09-16T02:50:26Z"
+  message: Back-off restarting failed container install-cni in pod calico-node-mpnn9_calico-system(7bd8a3f4-9b6d-4a1b-ab60-548159e68a1c)
+  metadata:
+    creationTimestamp: "2025-09-16T00:00:26Z"
+    name: calico-node-mpnn9.18654f13915ffe84
+    namespace: calico-system
+    resourceVersion: "908046"
+    uid: 0d46c387-7e02-4e98-9118-a4a76d4f1397
+  reason: BackOff
+  reportingComponent: kubelet
+  reportingInstance: k8s-master-cp
+  source:
+    component: kubelet
+    host: k8s-master-cp
+  type: Warning
+kind: List
+metadata:
+  resourceVersion: ""

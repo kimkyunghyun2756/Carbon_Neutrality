@@ -1,0 +1,138 @@
+apiVersion: v1
+items:
+- apiVersion: operator.tigera.io/v1
+  kind: TigeraStatus
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:37Z"
+    generation: 1
+    name: apiserver
+    resourceVersion: "704788"
+    uid: 2efddd67-f072-4545-b6d9-b6140db65aff
+  spec: {}
+  status:
+    conditions:
+    - lastTransitionTime: "2025-09-01T09:53:15Z"
+      message: Deployment "calico-apiserver/calico-apiserver" is not available (awaiting
+        1 replicas)
+      observedGeneration: 1
+      reason: ResourceNotReady
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2025-08-27T01:42:37Z"
+      observedGeneration: 1
+      reason: Unknown
+      status: "False"
+      type: Degraded
+    - lastTransitionTime: "2025-09-01T09:53:15Z"
+      observedGeneration: 1
+      reason: Unknown
+      status: "False"
+      type: Available
+- apiVersion: operator.tigera.io/v1
+  kind: TigeraStatus
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:37Z"
+    generation: 1
+    name: calico
+    resourceVersion: "462207"
+    uid: cac208a1-6295-4b44-892c-43a04905e0cf
+  spec: {}
+  status:
+    conditions:
+    - lastTransitionTime: "2025-08-28T07:57:58Z"
+      message: 'Invalid Installation provided: IPIP encapsulation requires that BGP
+        is enabled'
+      observedGeneration: 7
+      reason: InvalidConfigurationError
+      status: "True"
+      type: Degraded
+- apiVersion: operator.tigera.io/v1
+  kind: TigeraStatus
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:37Z"
+    generation: 1
+    name: goldmane
+    resourceVersion: "617739"
+    uid: c2b0bc7b-8832-4936-a50b-968f98bb0b80
+  spec: {}
+  status:
+    conditions:
+    - lastTransitionTime: "2025-08-30T05:55:39Z"
+      message: All objects available
+      observedGeneration: 1
+      reason: AllObjectsAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2025-08-27T01:44:47Z"
+      message: All Objects Available
+      observedGeneration: 1
+      reason: AllObjectsAvailable
+      status: "False"
+      type: Progressing
+    - lastTransitionTime: "2025-08-27T01:42:42Z"
+      message: All Objects Available
+      observedGeneration: 1
+      reason: AllObjectsAvailable
+      status: "False"
+      type: Degraded
+- apiVersion: operator.tigera.io/v1
+  kind: TigeraStatus
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:37Z"
+    generation: 1
+    name: ippools
+    resourceVersion: "462330"
+    uid: b2ecf17d-05f3-4f94-a97c-89711e5d5050
+  spec: {}
+  status:
+    conditions:
+    - lastTransitionTime: "2025-08-28T09:59:00Z"
+      message: All Objects Available
+      observedGeneration: 7
+      reason: AllObjectsAvailable
+      status: "False"
+      type: Degraded
+    - lastTransitionTime: "2025-08-28T09:59:00Z"
+      message: All objects available
+      observedGeneration: 7
+      reason: AllObjectsAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2025-08-27T01:42:42Z"
+      message: All Objects Available
+      observedGeneration: 7
+      reason: AllObjectsAvailable
+      status: "False"
+      type: Progressing
+- apiVersion: operator.tigera.io/v1
+  kind: TigeraStatus
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:37Z"
+    generation: 1
+    name: whisker
+    resourceVersion: "702185"
+    uid: 4d829a48-0d90-4d85-a933-4656946f87f8
+  spec: {}
+  status:
+    conditions:
+    - lastTransitionTime: "2025-09-01T09:36:36Z"
+      message: All objects available
+      observedGeneration: 2
+      reason: AllObjectsAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2025-09-01T09:36:36Z"
+      message: All Objects Available
+      observedGeneration: 2
+      reason: AllObjectsAvailable
+      status: "False"
+      type: Progressing
+    - lastTransitionTime: "2025-08-28T08:31:33Z"
+      message: All Objects Available
+      observedGeneration: 2
+      reason: AllObjectsAvailable
+      status: "False"
+      type: Degraded
+kind: List
+metadata:
+  resourceVersion: ""

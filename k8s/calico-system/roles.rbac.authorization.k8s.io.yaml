@@ -1,0 +1,32 @@
+apiVersion: v1
+items:
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: goldmane
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Goldmane
+      name: default
+      uid: 6d657107-94ee-4c2e-a139-a6f20e5849cc
+    resourceVersion: "1166"
+    uid: 4b584666-524e-487b-9ef3-c68571a76cab
+  rules:
+  - apiGroups:
+    - ""
+    resources:
+    - configmaps
+    verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,334 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-15T01:03:19Z"
+    creationTimestamp: "2025-08-27T00:28:59Z"
+    labels:
+      k8s-app: kube-dns
+      kubernetes.io/cluster-service: "true"
+      kubernetes.io/name: CoreDNS
+    name: kube-dns
+    namespace: kube-system
+    resourceVersion: "876631"
+    uid: 67bf58fa-6038-44ab-ae91-c04ef4a2a89b
+  subsets:
+  - addresses:
+    - ip: 10.244.43.18
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: coredns-86f89cb554-rn4xm
+        namespace: kube-system
+        uid: 82e80534-ca41-4055-80c6-7e4d306c72ba
+    - ip: 10.244.43.19
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: coredns-86f89cb554-fdzc5
+        namespace: kube-system
+        uid: d269350e-3a1e-4a40-b245-f2c1cc65488c
+    ports:
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+    - name: dns
+      port: 53
+      protocol: UDP
+    - name: metrics
+      port: 9153
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-15T01:03:19Z"
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app: kube-prometheus-stack-coredns
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      jobLabel: coredns
+      release: kube-prometheus
+      service.kubernetes.io/headless: ""
+    name: kube-prometheus-kube-prome-coredns
+    namespace: kube-system
+    resourceVersion: "876634"
+    uid: 0adbd044-0573-409d-b0d0-da34995124fc
+  subsets:
+  - addresses:
+    - ip: 10.244.43.18
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: coredns-86f89cb554-rn4xm
+        namespace: kube-system
+        uid: 82e80534-ca41-4055-80c6-7e4d306c72ba
+    - ip: 10.244.43.19
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: coredns-86f89cb554-fdzc5
+        namespace: kube-system
+        uid: d269350e-3a1e-4a40-b245-f2c1cc65488c
+    ports:
+    - name: http-metrics
+      port: 9153
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app: kube-prometheus-stack-kube-controller-manager
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      jobLabel: kube-controller-manager
+      release: kube-prometheus
+      service.kubernetes.io/headless: ""
+    name: kube-prometheus-kube-prome-kube-controller-manager
+    namespace: kube-system
+    resourceVersion: "615938"
+    uid: 4fb1479a-d473-469b-bb9d-f7be03718bb4
+  subsets:
+  - addresses:
+    - ip: 192.168.4.101
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: kube-controller-manager-k8s-master-cp
+        namespace: kube-system
+        uid: 10934a45-d795-4ae3-a0af-0e6cb1913ea0
+    ports:
+    - name: http-metrics
+      port: 10257
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app: kube-prometheus-stack-kube-etcd
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      jobLabel: kube-etcd
+      release: kube-prometheus
+      service.kubernetes.io/headless: ""
+    name: kube-prometheus-kube-prome-kube-etcd
+    namespace: kube-system
+    resourceVersion: "615935"
+    uid: a2455cb4-c864-4012-bcaf-16c30df1c8cb
+  subsets:
+  - addresses:
+    - ip: 192.168.4.101
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: etcd-k8s-master-cp
+        namespace: kube-system
+        uid: d5b06f9b-567c-45b2-a1aa-3b8e0beb0a0b
+    ports:
+    - name: http-metrics
+      port: 2381
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-01T09:58:09Z"
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app: kube-prometheus-stack-kube-proxy
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      jobLabel: kube-proxy
+      release: kube-prometheus
+      service.kubernetes.io/headless: ""
+    name: kube-prometheus-kube-prome-kube-proxy
+    namespace: kube-system
+    resourceVersion: "705488"
+    uid: b6f2eeff-0559-4f5f-96ab-cfa239e7dfce
+  subsets:
+  - addresses:
+    - ip: 192.168.4.101
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: kube-proxy-bsm6w
+        namespace: kube-system
+        uid: e06bb31b-a9bd-45bd-870f-26e1a8da88db
+    notReadyAddresses:
+    - ip: 192.168.4.102
+      nodeName: k8s-frontend
+      targetRef:
+        kind: Pod
+        name: kube-proxy-25cr5
+        namespace: kube-system
+        uid: faa44d7f-8b25-4814-bb48-85b3a88579ec
+    - ip: 192.168.4.103
+      nodeName: k8s-backend
+      targetRef:
+        kind: Pod
+        name: kube-proxy-7btjx
+        namespace: kube-system
+        uid: 96f5919a-ffb7-4562-8ec9-fadc2f325480
+    - ip: 192.168.4.104
+      nodeName: k8s-monitoring
+      targetRef:
+        kind: Pod
+        name: kube-proxy-jshxd
+        namespace: kube-system
+        uid: 47d8539d-8ef4-45be-9e8a-929a5a467508
+    ports:
+    - name: http-metrics
+      port: 10249
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app: kube-prometheus-stack-kube-scheduler
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      jobLabel: kube-scheduler
+      release: kube-prometheus
+      service.kubernetes.io/headless: ""
+    name: kube-prometheus-kube-prome-kube-scheduler
+    namespace: kube-system
+    resourceVersion: "615948"
+    uid: 2454257a-471f-4929-8ad7-4020a10777a9
+  subsets:
+  - addresses:
+    - ip: 192.168.4.101
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: kube-scheduler-k8s-master-cp
+        namespace: kube-system
+        uid: 3e006d68-c85b-428b-9b3d-1e8f306e14b4
+    ports:
+    - name: http-metrics
+      port: 10259
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:36Z"
+    labels:
+      app.kubernetes.io/managed-by: prometheus-operator
+      app.kubernetes.io/name: kubelet
+      k8s-app: kubelet
+    name: kube-prometheus-kube-prome-kubelet
+    namespace: kube-system
+    resourceVersion: "104606"
+    uid: afa1b60e-220f-4ddb-b006-7a3fa30b2e53
+  subsets:
+  - addresses:
+    - ip: 192.168.4.103
+      nodeName: k8s-backend
+      targetRef:
+        kind: Node
+        name: k8s-backend
+        uid: caf828a5-b137-496c-96f9-fe5d9e172cee
+    - ip: 192.168.4.102
+      nodeName: k8s-frontend
+      targetRef:
+        kind: Node
+        name: k8s-frontend
+        uid: 72e79692-a27e-4783-8848-44796594f1bb
+    - ip: 192.168.4.101
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Node
+        name: k8s-master-cp
+        uid: 01935b14-02a0-4673-8888-06fa8e143ac0
+    - ip: 192.168.4.104
+      nodeName: k8s-monitoring
+      targetRef:
+        kind: Node
+        name: k8s-monitoring
+        uid: 4b20d3ed-222e-475a-8a6a-c4585b3886bb
+    ports:
+    - name: https-metrics
+      port: 10250
+      protocol: TCP
+    - name: http-metrics
+      port: 10255
+      protocol: TCP
+    - name: cadvisor
+      port: 4194
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T05:42:13Z"
+    labels:
+      app.kubernetes.io/managed-by: prometheus-operator
+      app.kubernetes.io/name: kubelet
+      k8s-app: kubelet
+    name: kubelet
+    namespace: kube-system
+    resourceVersion: "72699"
+    uid: 16335fac-890b-494e-a449-138bf8705d97
+  subsets:
+  - addresses:
+    - ip: 192.168.4.103
+      nodeName: k8s-backend
+      targetRef:
+        kind: Node
+        name: k8s-backend
+        uid: caf828a5-b137-496c-96f9-fe5d9e172cee
+    - ip: 192.168.4.102
+      nodeName: k8s-frontend
+      targetRef:
+        kind: Node
+        name: k8s-frontend
+        uid: 72e79692-a27e-4783-8848-44796594f1bb
+    - ip: 192.168.4.101
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Node
+        name: k8s-master-cp
+        uid: 01935b14-02a0-4673-8888-06fa8e143ac0
+    - ip: 192.168.4.104
+      nodeName: k8s-monitoring
+      targetRef:
+        kind: Node
+        name: k8s-monitoring
+        uid: 4b20d3ed-222e-475a-8a6a-c4585b3886bb
+    ports:
+    - name: https-metrics
+      port: 10250
+      protocol: TCP
+    - name: http-metrics
+      port: 10255
+      protocol: TCP
+    - name: cadvisor
+      port: 4194
+      protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""

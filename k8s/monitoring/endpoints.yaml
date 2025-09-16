@@ -1,0 +1,240 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:15Z"
+    labels:
+      managed-by: prometheus-operator
+      operated-alertmanager: "true"
+      service.kubernetes.io/headless: ""
+    name: alertmanager-operated
+    namespace: monitoring
+    resourceVersion: "272226"
+    uid: b3faea80-c3ef-472f-b4c6-f7eea2fd173f
+  subsets:
+  - addresses:
+    - hostname: alertmanager-kube-prometheus-kube-prome-alertmanager-0
+      ip: 10.244.58.46
+      nodeName: k8s-frontend
+      targetRef:
+        kind: Pod
+        name: alertmanager-kube-prometheus-kube-prome-alertmanager-0
+        namespace: monitoring
+        uid: 0a8f5ee3-2fb8-4b3c-9fae-f0303b30811b
+    ports:
+    - name: udp-mesh
+      port: 9094
+      protocol: UDP
+    - name: tcp-mesh
+      port: 9094
+      protocol: TCP
+    - name: http-web
+      port: 9093
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: grafana
+      app.kubernetes.io/version: 12.1.0
+      helm.sh/chart: grafana-9.3.6
+    name: kube-prometheus-grafana
+    namespace: monitoring
+    resourceVersion: "705556"
+    uid: 8ae21dc5-0f0c-41cd-84e0-3bef306b7aa7
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app: kube-prometheus-stack-alertmanager
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      release: kube-prometheus
+      self-monitor: "true"
+    name: kube-prometheus-kube-prome-alertmanager
+    namespace: monitoring
+    resourceVersion: "701781"
+    uid: 75bee295-99a6-4d9b-a34c-9e02e0a27135
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T08:50:06Z"
+    labels:
+      app: kube-prometheus-stack-operator
+      app.kubernetes.io/component: prometheus-operator
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: kube-prometheus-stack-prometheus-operator
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      release: kube-prometheus
+    name: kube-prometheus-kube-prome-operator
+    namespace: monitoring
+    resourceVersion: "705548"
+    uid: b838ee81-c931-4684-b1e1-8c2bccd349eb
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-01T09:58:09Z"
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app: kube-prometheus-stack-prometheus
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      release: kube-prometheus
+      self-monitor: "true"
+    name: kube-prometheus-kube-prome-prometheus
+    namespace: monitoring
+    resourceVersion: "705473"
+    uid: 29babed8-d7f6-40d1-8653-2c639b5d5d8b
+  subsets:
+  - notReadyAddresses:
+    - ip: 10.244.134.223
+      nodeName: k8s-monitoring
+      targetRef:
+        kind: Pod
+        name: prometheus-kube-prometheus-kube-prome-prometheus-0
+        namespace: monitoring
+        uid: e46ee20f-8a7d-48fb-9c36-6ea98c8cd405
+    ports:
+    - name: http-web
+      port: 9090
+      protocol: TCP
+    - appProtocol: http
+      name: reloader-web
+      port: 8080
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-01T09:58:10Z"
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app.kubernetes.io/component: metrics
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: kube-state-metrics
+      app.kubernetes.io/part-of: kube-state-metrics
+      app.kubernetes.io/version: 2.16.0
+      helm.sh/chart: kube-state-metrics-6.1.5
+      release: kube-prometheus
+    name: kube-prometheus-kube-state-metrics
+    namespace: monitoring
+    resourceVersion: "705504"
+    uid: 6e0353a9-10f2-49f6-986a-64335a1a5035
+  subsets:
+  - notReadyAddresses:
+    - ip: 10.244.134.225
+      nodeName: k8s-monitoring
+      targetRef:
+        kind: Pod
+        name: kube-prometheus-kube-state-metrics-675769bbc6-7bvkh
+        namespace: monitoring
+        uid: 9a0c7d7f-86c8-4ec5-b9dc-21e601893b9b
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-01T09:58:09Z"
+    creationTimestamp: "2025-08-28T08:50:05Z"
+    labels:
+      app.kubernetes.io/component: metrics
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: prometheus-node-exporter
+      app.kubernetes.io/part-of: prometheus-node-exporter
+      app.kubernetes.io/version: 1.9.1
+      helm.sh/chart: prometheus-node-exporter-4.47.3
+      jobLabel: node-exporter
+      release: kube-prometheus
+    name: kube-prometheus-prometheus-node-exporter
+    namespace: monitoring
+    resourceVersion: "705491"
+    uid: 5727c825-168b-4063-9da5-26e13f4bd96c
+  subsets:
+  - addresses:
+    - ip: 192.168.4.101
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: kube-prometheus-prometheus-node-exporter-7tm6z
+        namespace: monitoring
+        uid: 586aeed7-471b-4bd6-88c0-11c177e682fe
+    notReadyAddresses:
+    - ip: 192.168.4.102
+      nodeName: k8s-frontend
+      targetRef:
+        kind: Pod
+        name: kube-prometheus-prometheus-node-exporter-nhvv4
+        namespace: monitoring
+        uid: 6be28bd7-ddce-4df5-8dde-8feca34f611d
+    - ip: 192.168.4.103
+      nodeName: k8s-backend
+      targetRef:
+        kind: Pod
+        name: kube-prometheus-prometheus-node-exporter-7r7hg
+        namespace: monitoring
+        uid: 07f543d7-ecfa-4849-bb62-4ebd36d83d6d
+    - ip: 192.168.4.104
+      nodeName: k8s-monitoring
+      targetRef:
+        kind: Pod
+        name: kube-prometheus-prometheus-node-exporter-zx8tw
+        namespace: monitoring
+        uid: 79f960c0-532f-435a-bf97-efc7fc40e51d
+    ports:
+    - name: http-metrics
+      port: 9100
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-01T09:58:09Z"
+    creationTimestamp: "2025-08-28T08:50:16Z"
+    labels:
+      managed-by: prometheus-operator
+      operated-prometheus: "true"
+      service.kubernetes.io/headless: ""
+    name: prometheus-operated
+    namespace: monitoring
+    resourceVersion: "705471"
+    uid: 00208d2e-8156-4cc0-accf-09beedc0efe1
+  subsets:
+  - notReadyAddresses:
+    - hostname: prometheus-kube-prometheus-kube-prome-prometheus-0
+      ip: 10.244.134.223
+      nodeName: k8s-monitoring
+      targetRef:
+        kind: Pod
+        name: prometheus-kube-prometheus-kube-prome-prometheus-0
+        namespace: monitoring
+        uid: e46ee20f-8a7d-48fb-9c36-6ea98c8cd405
+    ports:
+    - name: http-web
+      port: 9090
+      protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""

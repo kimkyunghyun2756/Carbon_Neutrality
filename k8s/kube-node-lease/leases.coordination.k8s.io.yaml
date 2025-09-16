@@ -1,0 +1,73 @@
+apiVersion: v1
+items:
+- apiVersion: coordination.k8s.io/v1
+  kind: Lease
+  metadata:
+    creationTimestamp: "2025-08-27T01:59:43Z"
+    name: k8s-backend
+    namespace: kube-node-lease
+    ownerReferences:
+    - apiVersion: v1
+      kind: Node
+      name: k8s-backend
+      uid: caf828a5-b137-496c-96f9-fe5d9e172cee
+    resourceVersion: "704623"
+    uid: b338aa44-0478-4976-84eb-adcb516eda19
+  spec:
+    holderIdentity: k8s-backend
+    leaseDurationSeconds: 40
+    renewTime: "2025-09-01T09:52:32.298636Z"
+- apiVersion: coordination.k8s.io/v1
+  kind: Lease
+  metadata:
+    creationTimestamp: "2025-08-27T02:17:13Z"
+    name: k8s-frontend
+    namespace: kube-node-lease
+    ownerReferences:
+    - apiVersion: v1
+      kind: Node
+      name: k8s-frontend
+      uid: 72e79692-a27e-4783-8848-44796594f1bb
+    resourceVersion: "700913"
+    uid: 9502b5e8-e50e-4674-8e02-72aed44af23a
+  spec:
+    holderIdentity: k8s-frontend
+    leaseDurationSeconds: 40
+    renewTime: "2025-09-01T09:29:09.783761Z"
+- apiVersion: coordination.k8s.io/v1
+  kind: Lease
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: k8s-master-cp
+    namespace: kube-node-lease
+    ownerReferences:
+    - apiVersion: v1
+      kind: Node
+      name: k8s-master-cp
+      uid: 01935b14-02a0-4673-8888-06fa8e143ac0
+    resourceVersion: "908106"
+    uid: b502e6c7-d020-4e76-8555-6dbfe45aff1b
+  spec:
+    holderIdentity: k8s-master-cp
+    leaseDurationSeconds: 40
+    renewTime: "2025-09-16T02:51:10.494721Z"
+- apiVersion: coordination.k8s.io/v1
+  kind: Lease
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:14Z"
+    name: k8s-monitoring
+    namespace: kube-node-lease
+    ownerReferences:
+    - apiVersion: v1
+      kind: Node
+      name: k8s-monitoring
+      uid: 4b20d3ed-222e-475a-8a6a-c4585b3886bb
+    resourceVersion: "705396"
+    uid: ac989523-7f79-4b13-8d5f-363457beee85
+  spec:
+    holderIdentity: k8s-monitoring
+    leaseDurationSeconds: 40
+    renewTime: "2025-09-01T09:57:26.046730Z"
+kind: List
+metadata:
+  resourceVersion: ""

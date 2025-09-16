@@ -1,0 +1,90 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: nfs-provisioner
+      meta.helm.sh/release-namespace: nfs-provisioner
+    creationTimestamp: "2025-08-28T05:33:12Z"
+    generation: 1
+    labels:
+      app: nfs-subdir-external-provisioner
+      app.kubernetes.io/managed-by: Helm
+      chart: nfs-subdir-external-provisioner-4.0.18
+      heritage: Helm
+      release: nfs-provisioner
+    name: nfs-provisioner-nfs-subdir-external-provisioner
+    namespace: nfs-provisioner
+    resourceVersion: "705501"
+    uid: f4c9b177-a989-484a-9481-0334939524e1
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: nfs-subdir-external-provisioner
+        release: nfs-provisioner
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: nfs-subdir-external-provisioner
+          release: nfs-provisioner
+      spec:
+        containers:
+        - env:
+          - name: PROVISIONER_NAME
+            value: cluster.local/nfs-provisioner-nfs-subdir-external-provisioner
+          - name: NFS_SERVER
+            value: 192.168.4.104
+          - name: NFS_PATH
+            value: /srv/nfs/kubedata
+          image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+          imagePullPolicy: IfNotPresent
+          name: nfs-subdir-external-provisioner
+          resources: {}
+          securityContext: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /persistentvolumes
+            name: nfs-subdir-external-provisioner-root
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: nfs-provisioner-nfs-subdir-external-provisioner
+        serviceAccountName: nfs-provisioner-nfs-subdir-external-provisioner
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: nfs-subdir-external-provisioner-root
+          nfs:
+            path: /srv/nfs/kubedata
+            server: 192.168.4.104
+  status:
+    conditions:
+    - lastTransitionTime: "2025-08-28T05:33:12Z"
+      lastUpdateTime: "2025-08-28T05:33:23Z"
+      message: ReplicaSet "nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d"
+        has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2025-09-01T09:58:10Z"
+      lastUpdateTime: "2025-09-01T09:58:10Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    observedGeneration: 1
+    replicas: 1
+    unavailableReplicas: 1
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,190 @@
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.244.43.22
+    conditions:
+      ready: false
+      serving: false
+      terminating: false
+    nodeName: k8s-master-cp
+    targetRef:
+      kind: Pod
+      name: calico-kube-controllers-855d76474d-qvdh7
+      namespace: calico-system
+      uid: 1aa3c18a-f6a6-489e-be0e-d17a9f91dd10
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2025-08-27T01:44:44Z"
+    generateName: calico-kube-controllers-metrics-
+    generation: 14
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      k8s-app: calico-kube-controllers
+      kubernetes.io/service-name: calico-kube-controllers-metrics
+      service.kubernetes.io/headless: ""
+    name: calico-kube-controllers-metrics-9mp84
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: calico-kube-controllers-metrics
+      uid: 38d98074-f574-40d6-964b-a2af6f2266d2
+    resourceVersion: "876663"
+    uid: 9301fe8d-21b4-492a-814c-213972b099e3
+  ports:
+  - name: metrics-port
+    port: 9094
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 192.168.4.103
+    conditions:
+      ready: false
+      serving: false
+      terminating: false
+    nodeName: k8s-backend
+    targetRef:
+      kind: Pod
+      name: calico-typha-5ddbc99969-dvss2
+      namespace: calico-system
+      uid: 6936fe93-0f81-4882-b04e-0818eff9d0e2
+  - addresses:
+    - 192.168.4.104
+    conditions:
+      ready: false
+      serving: false
+      terminating: false
+    nodeName: k8s-monitoring
+    targetRef:
+      kind: Pod
+      name: calico-typha-5ddbc99969-r4cb6
+      namespace: calico-system
+      uid: 0bd162fa-9839-49b7-8bce-ae49b7506c60
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-01T09:58:09Z"
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    generateName: calico-typha-
+    generation: 77
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      k8s-app: calico-typha
+      kubernetes.io/service-name: calico-typha
+    name: calico-typha-2xbtk
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: calico-typha
+      uid: bd31fe0a-3072-42d9-8dc1-f2224294e4ef
+    resourceVersion: "705482"
+    uid: ddb0c898-1b36-4397-abc2-8504e5d6dd0f
+  ports:
+  - name: calico-typha
+    port: 5473
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.244.43.17
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: k8s-master-cp
+    targetRef:
+      kind: Pod
+      name: goldmane-858946f5bb-q99kx
+      namespace: calico-system
+      uid: e0c92560-331f-4cbd-9a5c-8cdb286ce920
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-15T01:03:32Z"
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    generateName: goldmane-
+    generation: 138
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: goldmane
+    name: goldmane-t6w72
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: goldmane
+      uid: c8b3906b-7bd6-4d51-86b5-db878330784a
+    resourceVersion: "876738"
+    uid: b85c2bf8-77e7-4c2b-b971-af0c64f58b69
+  ports:
+  - name: ""
+    port: 7443
+    protocol: TCP
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.244.58.49
+    conditions:
+      ready: false
+      serving: false
+      terminating: true
+    nodeName: k8s-frontend
+    targetRef:
+      kind: Pod
+      name: whisker-686b76cc7f-knmrv
+      namespace: calico-system
+      uid: c5a5566f-673c-4568-aa1f-25f644bdda20
+  - addresses:
+    - 10.244.43.24
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: k8s-master-cp
+    targetRef:
+      kind: Pod
+      name: whisker-686b76cc7f-hqc5d
+      namespace: calico-system
+      uid: b10a7179-e3d8-44a6-afa0-43d4f7aa84d5
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-15T01:03:24Z"
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    generateName: whisker-
+    generation: 64
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: whisker
+    name: whisker-dlhsv
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: whisker
+      uid: 4c24a2fb-6d45-44bf-ba98-4fef963c822b
+    resourceVersion: "876698"
+    uid: b69ae999-4819-4d84-97b7-79828a8cc78e
+  ports:
+  - name: ""
+    port: 8081
+    protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,73 @@
+apiVersion: v1
+items:
+- apiVersion: batch/v1
+  kind: CronJob
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"batch/v1","kind":"CronJob","metadata":{"annotations":{},"name":"carbon-etl","namespace":"data"},"spec":{"concurrencyPolicy":"Forbid","failedJobsHistoryLimit":2,"jobTemplate":{"spec":{"backoffLimit":1,"template":{"spec":{"containers":[{"envFrom":[{"configMapRef":{"name":"carbon-etl-config"}},{"secretRef":{"name":"appdb-credentials"}}],"image":"ghcr.io/\u003cowner\u003e/\u003crepo\u003e/carbon-etl:main","imagePullPolicy":"IfNotPresent","name":"etl","volumeMounts":[{"mountPath":"/data","name":"csv"}]}],"imagePullSecrets":[{"name":"ghcr-creds"}],"nodeSelector":{"kubernetes.io/hostname":"k8s-backend"},"restartPolicy":"Never","volumes":[{"name":"csv","persistentVolumeClaim":{"claimName":"carbon-data-pvc"}}]}}}},"schedule":"0 3 * * *","successfulJobsHistoryLimit":1}}
+      kubernetes.io/change-cause: kubectl set image cronjob/carbon-etl etl=ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-etl:main
+        --namespace=data --record=true
+    creationTimestamp: "2025-08-27T09:00:11Z"
+    generation: 4
+    name: carbon-etl
+    namespace: data
+    resourceVersion: "773856"
+    uid: 242e7262-b93c-4df8-9e9e-ab5fd13bf6c8
+  spec:
+    concurrencyPolicy: Forbid
+    failedJobsHistoryLimit: 2
+    jobTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        backoffLimit: 1
+        template:
+          metadata:
+            creationTimestamp: null
+          spec:
+            containers:
+            - envFrom:
+              - configMapRef:
+                  name: carbon-etl-config
+              - secretRef:
+                  name: appdb-credentials
+              image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-etl:main
+              imagePullPolicy: Always
+              name: etl
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+              volumeMounts:
+              - mountPath: /data
+                name: csv
+            dnsPolicy: ClusterFirstWithHostNet
+            hostNetwork: true
+            imagePullSecrets:
+            - name: ghcr-creds
+            nodeSelector:
+              kubernetes.io/hostname: k8s-backend
+            restartPolicy: Never
+            schedulerName: default-scheduler
+            securityContext: {}
+            terminationGracePeriodSeconds: 30
+            volumes:
+            - name: csv
+              persistentVolumeClaim:
+                claimName: carbon-data-pvc
+    schedule: 0 3 * * *
+    successfulJobsHistoryLimit: 1
+    suspend: false
+  status:
+    active:
+    - apiVersion: batch/v1
+      kind: Job
+      name: carbon-etl-29279700
+      namespace: data
+      resourceVersion: "773854"
+      uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+    lastScheduleTime: "2025-09-02T03:00:00Z"
+    lastSuccessfulTime: "2025-09-01T03:06:32Z"
+kind: List
+metadata:
+  resourceVersion: ""

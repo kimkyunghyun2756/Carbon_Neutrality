@@ -1,0 +1,55 @@
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 192.168.4.102
+    conditions:
+      ready: false
+      serving: false
+      terminating: true
+    nodeName: k8s-frontend
+    targetRef:
+      kind: Pod
+      name: carbon-frontend-7df495597c-4mwf7
+      namespace: data
+      uid: 40f89cb7-9658-4b3f-9e58-f1605ceaf4b9
+  - addresses:
+    - 192.168.4.103
+    conditions:
+      ready: false
+      serving: false
+      terminating: true
+    nodeName: k8s-backend
+    targetRef:
+      kind: Pod
+      name: carbon-frontend-7df495597c-rlcr2
+      namespace: data
+      uid: c774c93c-6b0a-4fd4-b7b3-13ad2174a0cd
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2025-08-29T00:12:41Z"
+    generateName: carbon-frontend-nodeport-
+    generation: 77
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: carbon-frontend-nodeport
+    name: carbon-frontend-nodeport-jlz46
+    namespace: data
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: carbon-frontend-nodeport
+      uid: ebb75275-0332-44a1-917e-73f15d77f238
+    resourceVersion: "705542"
+    uid: 3efd5a00-46f0-4e30-ad0d-a8babe48a510
+  ports:
+  - name: http
+    port: 8501
+    protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""

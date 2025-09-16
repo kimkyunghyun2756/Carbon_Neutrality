@@ -1,0 +1,1274 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "1"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-08-27T01:42:39Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/name: calico-kube-controllers
+      k8s-app: calico-kube-controllers
+      pod-template-hash: 855d76474d
+    name: calico-kube-controllers-855d76474d
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: calico-kube-controllers
+      uid: e540be19-78ee-4fdf-91e7-54ae08e6bcf0
+    resourceVersion: "100450"
+    uid: 24911a48-f8a6-4c81-84f8-f5b887982807
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        k8s-app: calico-kube-controllers
+        pod-template-hash: 855d76474d
+    template:
+      metadata:
+        annotations:
+          hash.operator.tigera.io/system: afea2595203eb027afcee25a2f11a6666a8de557
+          tigera-operator.hash.operator.tigera.io/tigera-ca-private: 5f743f2255e41a9cd64955293fe5e45073601b70
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: calico-kube-controllers
+          k8s-app: calico-kube-controllers
+          pod-template-hash: 855d76474d
+        name: calico-kube-controllers
+        namespace: calico-system
+      spec:
+        containers:
+        - env:
+          - name: KUBE_CONTROLLERS_CONFIG_NAME
+            value: default
+          - name: DATASTORE_TYPE
+            value: kubernetes
+          - name: ENABLED_CONTROLLERS
+            value: node,loadbalancer
+          - name: DISABLE_KUBE_CONTROLLERS_CONFIG_API
+            value: "false"
+          - name: KUBERNETES_SERVICE_HOST
+            value: 10.96.0.1
+          - name: KUBERNETES_SERVICE_PORT
+            value: "443"
+          - name: CA_CRT_PATH
+            value: /etc/pki/tls/certs/tigera-ca-bundle.crt
+          image: docker.io/calico/kube-controllers:v3.30.2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+              - /usr/bin/check-status
+              - -l
+            failureThreshold: 6
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          name: calico-kube-controllers
+          readinessProbe:
+            exec:
+              command:
+              - /usr/bin/check-status
+              - -r
+            failureThreshold: 3
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 0
+            runAsNonRoot: true
+            runAsUser: 999
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/pki/tls/certs
+            name: tigera-ca-bundle
+            readOnly: true
+          - mountPath: /etc/pki/tls/cert.pem
+            name: tigera-ca-bundle
+            readOnly: true
+            subPath: ca-bundle.crt
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        priorityClassName: system-cluster-critical
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: calico-kube-controllers
+        serviceAccountName: calico-kube-controllers
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+        - key: CriticalAddonsOnly
+          operator: Exists
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: tigera-ca-bundle
+          name: tigera-ca-bundle
+  status:
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "2"
+      deployment.kubernetes.io/max-replicas: "4"
+      deployment.kubernetes.io/revision: "7"
+      deployment.kubernetes.io/revision-history: 1,3,5
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    generation: 11
+    labels:
+      app.kubernetes.io/name: calico-typha
+      k8s-app: calico-typha
+      pod-template-hash: 5ddbc99969
+    name: calico-typha-5ddbc99969
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: calico-typha
+      uid: e1796379-68cd-4b03-a5d4-f6b25f49de24
+    resourceVersion: "705481"
+    uid: d6947d3a-c2c5-4908-9667-30b670aa70f7
+  spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        k8s-app: calico-typha
+        pod-template-hash: 5ddbc99969
+    template:
+      metadata:
+        annotations:
+          hash.operator.tigera.io/system: afea2595203eb027afcee25a2f11a6666a8de557
+          tigera-operator.hash.operator.tigera.io/tigera-ca-private: 5f743f2255e41a9cd64955293fe5e45073601b70
+          tigera-operator.hash.operator.tigera.io/typha-certs: 753841804f48f1c467130f812a74ac1f6b1391dd
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: calico-typha
+          k8s-app: calico-typha
+          pod-template-hash: 5ddbc99969
+      spec:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: k8s-app
+                    operator: In
+                    values:
+                    - calico-typha
+                topologyKey: topology.kubernetes.io/zone
+              weight: 1
+        containers:
+        - env:
+          - name: TYPHA_LOGSEVERITYSCREEN
+            value: info
+          - name: TYPHA_LOGFILEPATH
+            value: none
+          - name: TYPHA_LOGSEVERITYSYS
+            value: none
+          - name: TYPHA_CONNECTIONREBALANCINGMODE
+            value: kubernetes
+          - name: TYPHA_DATASTORETYPE
+            value: kubernetes
+          - name: TYPHA_HEALTHENABLED
+            value: "true"
+          - name: TYPHA_HEALTHPORT
+            value: "9098"
+          - name: TYPHA_K8SNAMESPACE
+            value: calico-system
+          - name: TYPHA_CAFILE
+            value: /etc/pki/tls/certs/tigera-ca-bundle.crt
+          - name: TYPHA_SERVERCERTFILE
+            value: /typha-certs/tls.crt
+          - name: TYPHA_SERVERKEYFILE
+            value: /typha-certs/tls.key
+          - name: TYPHA_SHUTDOWNTIMEOUTSECS
+            value: "300"
+          - name: TYPHA_CLIENTCN
+            value: typha-client
+          - name: KUBERNETES_SERVICE_HOST
+            value: 10.96.0.1
+          - name: KUBERNETES_SERVICE_PORT
+            value: "443"
+          image: docker.io/calico/typha:v3.30.2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              host: localhost
+              path: /liveness
+              port: 9098
+              scheme: HTTP
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          name: calico-typha
+          ports:
+          - containerPort: 5473
+            name: calico-typha
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              host: localhost
+              path: /readiness
+              port: 9098
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/pki/tls/certs
+            name: tigera-ca-bundle
+            readOnly: true
+          - mountPath: /etc/pki/tls/cert.pem
+            name: tigera-ca-bundle
+            readOnly: true
+            subPath: ca-bundle.crt
+          - mountPath: /typha-certs
+            name: typha-certs
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        hostNetwork: true
+        nodeSelector:
+          kubernetes.io/os: linux
+        priorityClassName: system-cluster-critical
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: calico-typha
+        serviceAccountName: calico-typha
+        terminationGracePeriodSeconds: 300
+        tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - effect: NoSchedule
+          operator: Exists
+        - effect: NoExecute
+          operator: Exists
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: tigera-ca-bundle
+          name: tigera-ca-bundle
+        - name: typha-certs
+          secret:
+            defaultMode: 420
+            secretName: typha-certs
+  status:
+    fullyLabeledReplicas: 2
+    observedGeneration: 11
+    replicas: 2
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "2"
+      deployment.kubernetes.io/max-replicas: "4"
+      deployment.kubernetes.io/revision: "6"
+      deployment.kubernetes.io/revision-history: 2,4
+    creationTimestamp: "2025-08-28T06:53:00Z"
+    generation: 9
+    labels:
+      app.kubernetes.io/name: calico-typha
+      k8s-app: calico-typha
+      pod-template-hash: "8495648756"
+    name: calico-typha-8495648756
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: calico-typha
+      uid: e1796379-68cd-4b03-a5d4-f6b25f49de24
+    resourceVersion: "99060"
+    uid: 9e03cf9e-ccba-4032-b1b0-47abe92f2211
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        k8s-app: calico-typha
+        pod-template-hash: "8495648756"
+    template:
+      metadata:
+        annotations:
+          hash.operator.tigera.io/system: afea2595203eb027afcee25a2f11a6666a8de557
+          tigera-operator.hash.operator.tigera.io/tigera-ca-private: 5f743f2255e41a9cd64955293fe5e45073601b70
+          tigera-operator.hash.operator.tigera.io/typha-certs: 753841804f48f1c467130f812a74ac1f6b1391dd
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: calico-typha
+          k8s-app: calico-typha
+          pod-template-hash: "8495648756"
+      spec:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: k8s-app
+                    operator: In
+                    values:
+                    - calico-typha
+                topologyKey: topology.kubernetes.io/zone
+              weight: 1
+            requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  k8s-app: calico-typha
+              namespaces:
+              - kube-system
+              topologyKey: kubernetes.io/hostname
+        containers:
+        - env:
+          - name: TYPHA_LOGSEVERITYSCREEN
+            value: info
+          - name: TYPHA_LOGFILEPATH
+            value: none
+          - name: TYPHA_LOGSEVERITYSYS
+            value: none
+          - name: TYPHA_CONNECTIONREBALANCINGMODE
+            value: kubernetes
+          - name: TYPHA_DATASTORETYPE
+            value: kubernetes
+          - name: TYPHA_HEALTHENABLED
+            value: "true"
+          - name: TYPHA_HEALTHPORT
+            value: "9098"
+          - name: TYPHA_K8SNAMESPACE
+            value: calico-system
+          - name: TYPHA_CAFILE
+            value: /etc/pki/tls/certs/tigera-ca-bundle.crt
+          - name: TYPHA_SERVERCERTFILE
+            value: /typha-certs/tls.crt
+          - name: TYPHA_SERVERKEYFILE
+            value: /typha-certs/tls.key
+          - name: TYPHA_SHUTDOWNTIMEOUTSECS
+            value: "300"
+          - name: TYPHA_CLIENTCN
+            value: typha-client
+          - name: KUBERNETES_SERVICE_HOST
+            value: 10.96.0.1
+          - name: KUBERNETES_SERVICE_PORT
+            value: "443"
+          image: docker.io/calico/typha:v3.30.2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              host: localhost
+              path: /liveness
+              port: 9098
+              scheme: HTTP
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          name: calico-typha
+          ports:
+          - containerPort: 5473
+            name: calico-typha
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              host: localhost
+              path: /readiness
+              port: 9098
+              scheme: HTTP
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/pki/tls/certs
+            name: tigera-ca-bundle
+            readOnly: true
+          - mountPath: /etc/pki/tls/cert.pem
+            name: tigera-ca-bundle
+            readOnly: true
+            subPath: ca-bundle.crt
+          - mountPath: /typha-certs
+            name: typha-certs
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        hostNetwork: true
+        nodeSelector:
+          kubernetes.io/os: linux
+        priorityClassName: system-cluster-critical
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: calico-typha
+        serviceAccountName: calico-typha
+        terminationGracePeriodSeconds: 300
+        tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - effect: NoSchedule
+          operator: Exists
+        - effect: NoExecute
+          operator: Exists
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: tigera-ca-bundle
+          name: tigera-ca-bundle
+        - name: typha-certs
+          secret:
+            defaultMode: 420
+            secretName: typha-certs
+  status:
+    observedGeneration: 9
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "1"
+      deployment.kubernetes.io/revision: "1"
+      tigera-operator.hash.operator.tigera.io/goldmane-key-pair: b960de22d19b05339842808ede836827528b9ceb
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/name: goldmane
+      k8s-app: goldmane
+      pod-template-hash: 858946f5bb
+    name: goldmane-858946f5bb
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: goldmane
+      uid: d5ce381e-b546-483e-98c3-9ede1c17454a
+    resourceVersion: "876740"
+    uid: 746388fb-d871-4b2f-8b9a-dec086c46a0f
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        k8s-app: goldmane
+        pod-template-hash: 858946f5bb
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: goldmane
+          k8s-app: goldmane
+          pod-template-hash: 858946f5bb
+        name: goldmane
+      spec:
+        containers:
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: PORT
+            value: "7443"
+          - name: SERVER_CERT_PATH
+            value: /goldmane-key-pair/tls.crt
+          - name: SERVER_KEY_PATH
+            value: /goldmane-key-pair/tls.key
+          - name: CA_CERT_PATH
+            value: /etc/pki/tls/certs/tigera-ca-bundle.crt
+          - name: PUSH_URL
+            value: https://guardian.calico-system.svc.cluster.local:443/api/v1/flows/bulk
+          - name: FILE_CONFIG_PATH
+            value: /config/config.json
+          - name: HEALTH_ENABLED
+            value: "true"
+          image: docker.io/calico/goldmane:v3.30.2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+              - /health
+              - -live
+            failureThreshold: 3
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: goldmane
+          readinessProbe:
+            exec:
+              command:
+              - /health
+              - -ready
+            failureThreshold: 3
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /config
+            name: config
+            readOnly: true
+          - mountPath: /etc/pki/tls/certs
+            name: goldmane-ca-bundle
+            readOnly: true
+          - mountPath: /goldmane-key-pair
+            name: goldmane-key-pair
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: goldmane
+        serviceAccountName: goldmane
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+        - key: CriticalAddonsOnly
+          operator: Exists
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: goldmane
+          name: config
+        - configMap:
+            defaultMode: 420
+            name: goldmane-ca-bundle
+          name: goldmane-ca-bundle
+        - name: goldmane-key-pair
+          secret:
+            defaultMode: 420
+            secretName: goldmane-key-pair
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "1"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/name: whisker
+      k8s-app: whisker
+      pod-template-hash: 5b87f98745
+    name: whisker-5b87f98745
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: whisker
+      uid: d6f82292-1f74-4743-9e06-387c5dbf740b
+    resourceVersion: "1342"
+    uid: 7f269ca9-e6c2-47a0-987a-7330dd42c602
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        k8s-app: whisker
+        pod-template-hash: 5b87f98745
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: whisker
+          k8s-app: whisker
+          pod-template-hash: 5b87f98745
+        name: whisker
+      spec:
+        containers:
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: CALICO_VERSION
+          - name: CLUSTER_ID
+          - name: CLUSTER_TYPE
+          - name: NOTIFICATIONS
+            value: Enabled
+          image: docker.io/calico/whisker:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: PORT
+            value: "3002"
+          - name: GOLDMANE_HOST
+            value: goldmane.calico-system.svc.cluster.local:7443
+          - name: TLS_CERT_PATH
+            value: /whisker-backend-key-pair/tls.crt
+          - name: TLS_KEY_PATH
+            value: /whisker-backend-key-pair/tls.key
+          image: docker.io/calico/whisker-backend:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker-backend
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /whisker-backend-key-pair
+            name: whisker-backend-key-pair
+            readOnly: true
+          - mountPath: /etc/pki/tls/certs
+            name: whisker-ca-bundle
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: whisker
+        serviceAccountName: whisker
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+        - key: CriticalAddonsOnly
+          operator: Exists
+        volumes:
+        - name: whisker-backend-key-pair
+          secret:
+            defaultMode: 420
+            secretName: whisker-backend-key-pair
+        - configMap:
+            defaultMode: 420
+            name: whisker-ca-bundle
+          name: whisker-ca-bundle
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "1"
+      deployment.kubernetes.io/revision: "8"
+      deployment.kubernetes.io/revision-history: 4,6
+    creationTimestamp: "2025-08-28T07:45:03Z"
+    generation: 8
+    labels:
+      app.kubernetes.io/name: whisker
+      k8s-app: whisker
+      pod-template-hash: 684f4f56db
+    name: whisker-684f4f56db
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: whisker
+      uid: d6f82292-1f74-4743-9e06-387c5dbf740b
+    resourceVersion: "100987"
+    uid: f66b6519-1e65-4692-ad5f-391f653f78c6
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        k8s-app: whisker
+        pod-template-hash: 684f4f56db
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: whisker
+          k8s-app: whisker
+          pod-template-hash: 684f4f56db
+        name: whisker
+      spec:
+        containers:
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: CALICO_VERSION
+            value: v3.30.2
+          - name: CLUSTER_ID
+            value: b62ba9b63299458495c9ba50e273f5ff
+          - name: CLUSTER_TYPE
+            value: typha,kdd,k8s,operator,kubeadm,bgp
+          - name: NOTIFICATIONS
+            value: Enabled
+          image: docker.io/calico/whisker:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: PORT
+            value: "3002"
+          - name: GOLDMANE_HOST
+            value: goldmane.calico-system.svc.cluster.local:7443
+          - name: TLS_CERT_PATH
+            value: /whisker-backend-key-pair/tls.crt
+          - name: TLS_KEY_PATH
+            value: /whisker-backend-key-pair/tls.key
+          image: docker.io/calico/whisker-backend:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker-backend
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /whisker-backend-key-pair
+            name: whisker-backend-key-pair
+            readOnly: true
+          - mountPath: /etc/pki/tls/certs
+            name: whisker-ca-bundle
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: whisker
+        serviceAccountName: whisker
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+        - key: CriticalAddonsOnly
+          operator: Exists
+        volumes:
+        - name: whisker-backend-key-pair
+          secret:
+            defaultMode: 420
+            secretName: whisker-backend-key-pair
+        - configMap:
+            defaultMode: 420
+            name: whisker-ca-bundle
+          name: whisker-ca-bundle
+  status:
+    observedGeneration: 8
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "1"
+      deployment.kubernetes.io/revision: "9"
+      deployment.kubernetes.io/revision-history: 5,7
+    creationTimestamp: "2025-08-28T08:01:35Z"
+    generation: 5
+    labels:
+      app.kubernetes.io/name: whisker
+      k8s-app: whisker
+      pod-template-hash: 686b76cc7f
+    name: whisker-686b76cc7f
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: whisker
+      uid: d6f82292-1f74-4743-9e06-387c5dbf740b
+    resourceVersion: "876699"
+    uid: 447bff6d-2762-406e-b90e-fc4f538d30d6
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        k8s-app: whisker
+        pod-template-hash: 686b76cc7f
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: whisker
+          k8s-app: whisker
+          pod-template-hash: 686b76cc7f
+        name: whisker
+      spec:
+        containers:
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: CALICO_VERSION
+            value: v3.27.3
+          - name: CLUSTER_ID
+            value: b62ba9b63299458495c9ba50e273f5ff
+          - name: CLUSTER_TYPE
+            value: typha,kdd,k8s,operator,kubeadm,bgp
+          - name: NOTIFICATIONS
+            value: Enabled
+          image: docker.io/calico/whisker:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: PORT
+            value: "3002"
+          - name: GOLDMANE_HOST
+            value: goldmane.calico-system.svc.cluster.local:7443
+          - name: TLS_CERT_PATH
+            value: /whisker-backend-key-pair/tls.crt
+          - name: TLS_KEY_PATH
+            value: /whisker-backend-key-pair/tls.key
+          image: docker.io/calico/whisker-backend:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker-backend
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /whisker-backend-key-pair
+            name: whisker-backend-key-pair
+            readOnly: true
+          - mountPath: /etc/pki/tls/certs
+            name: whisker-ca-bundle
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: whisker
+        serviceAccountName: whisker
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+        - key: CriticalAddonsOnly
+          operator: Exists
+        volumes:
+        - name: whisker-backend-key-pair
+          secret:
+            defaultMode: 420
+            secretName: whisker-backend-key-pair
+        - configMap:
+            defaultMode: 420
+            name: whisker-ca-bundle
+          name: whisker-ca-bundle
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 5
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "1"
+      deployment.kubernetes.io/revision: "3"
+    creationTimestamp: "2025-08-27T01:43:45Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/name: whisker
+      k8s-app: whisker
+      pod-template-hash: 7864fb847c
+    name: whisker-7864fb847c
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: whisker
+      uid: d6f82292-1f74-4743-9e06-387c5dbf740b
+    resourceVersion: "84246"
+    uid: aa531bcf-0504-4c86-932f-127fbcafe7e0
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        k8s-app: whisker
+        pod-template-hash: 7864fb847c
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: whisker
+          k8s-app: whisker
+          pod-template-hash: 7864fb847c
+        name: whisker
+      spec:
+        containers:
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: CALICO_VERSION
+            value: v3.30.2
+          - name: CLUSTER_ID
+            value: b62ba9b63299458495c9ba50e273f5ff
+          - name: CLUSTER_TYPE
+            value: typha,kdd,k8s,operator,kubeadm
+          - name: NOTIFICATIONS
+            value: Enabled
+          image: docker.io/calico/whisker:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: PORT
+            value: "3002"
+          - name: GOLDMANE_HOST
+            value: goldmane.calico-system.svc.cluster.local:7443
+          - name: TLS_CERT_PATH
+            value: /whisker-backend-key-pair/tls.crt
+          - name: TLS_KEY_PATH
+            value: /whisker-backend-key-pair/tls.key
+          image: docker.io/calico/whisker-backend:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker-backend
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /whisker-backend-key-pair
+            name: whisker-backend-key-pair
+            readOnly: true
+          - mountPath: /etc/pki/tls/certs
+            name: whisker-ca-bundle
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: whisker
+        serviceAccountName: whisker
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+        - key: CriticalAddonsOnly
+          operator: Exists
+        volumes:
+        - name: whisker-backend-key-pair
+          secret:
+            defaultMode: 420
+            secretName: whisker-backend-key-pair
+        - configMap:
+            defaultMode: 420
+            name: whisker-ca-bundle
+          name: whisker-ca-bundle
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "1"
+      deployment.kubernetes.io/revision: "2"
+    creationTimestamp: "2025-08-27T01:42:52Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/name: whisker
+      k8s-app: whisker
+      pod-template-hash: 7c744cd948
+    name: whisker-7c744cd948
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: whisker
+      uid: d6f82292-1f74-4743-9e06-387c5dbf740b
+    resourceVersion: "1586"
+    uid: 73e32f21-688f-4cb8-b468-8bb3514bc4e3
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        k8s-app: whisker
+        pod-template-hash: 7c744cd948
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/name: whisker
+          k8s-app: whisker
+          pod-template-hash: 7c744cd948
+        name: whisker
+      spec:
+        containers:
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: CALICO_VERSION
+          - name: CLUSTER_ID
+            value: b62ba9b63299458495c9ba50e273f5ff
+          - name: CLUSTER_TYPE
+            value: typha,kdd
+          - name: NOTIFICATIONS
+            value: Enabled
+          image: docker.io/calico/whisker:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        - env:
+          - name: LOG_LEVEL
+            value: INFO
+          - name: PORT
+            value: "3002"
+          - name: GOLDMANE_HOST
+            value: goldmane.calico-system.svc.cluster.local:7443
+          - name: TLS_CERT_PATH
+            value: /whisker-backend-key-pair/tls.crt
+          - name: TLS_KEY_PATH
+            value: /whisker-backend-key-pair/tls.key
+          image: docker.io/calico/whisker-backend:v3.30.2
+          imagePullPolicy: IfNotPresent
+          name: whisker-backend
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 10001
+            runAsNonRoot: true
+            runAsUser: 10001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /whisker-backend-key-pair
+            name: whisker-backend-key-pair
+            readOnly: true
+          - mountPath: /etc/pki/tls/certs
+            name: whisker-ca-bundle
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: whisker
+        serviceAccountName: whisker
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+        - key: CriticalAddonsOnly
+          operator: Exists
+        volumes:
+        - name: whisker-backend-key-pair
+          secret:
+            defaultMode: 420
+            secretName: whisker-backend-key-pair
+        - configMap:
+            defaultMode: 420
+            name: whisker-ca-bundle
+          name: whisker-ca-bundle
+  status:
+    observedGeneration: 2
+    replicas: 0
+kind: List
+metadata:
+  resourceVersion: ""

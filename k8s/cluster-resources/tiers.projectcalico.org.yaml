@@ -1,0 +1,35 @@
+apiVersion: v1
+items:
+- apiVersion: projectcalico.org/v3
+  kind: Tier
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:51Z"
+    name: adminnetworkpolicy
+    resourceVersion: "1329"
+    uid: 34e865fe-906a-472a-a0e8-7e67198054d2
+  spec:
+    defaultAction: Pass
+    order: 1000
+- apiVersion: projectcalico.org/v3
+  kind: Tier
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:51Z"
+    name: baselineadminnetworkpolicy
+    resourceVersion: "1331"
+    uid: 8f6b830a-1167-4d4b-94f9-fe89b5445336
+  spec:
+    defaultAction: Pass
+    order: 10000000
+- apiVersion: projectcalico.org/v3
+  kind: Tier
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:51Z"
+    name: default
+    resourceVersion: "1327"
+    uid: dec28bed-8d67-44f6-933e-0afbbca11d57
+  spec:
+    defaultAction: Deny
+    order: 1000000
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,80 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "1"
+      deployment.kubernetes.io/revision: "1"
+      meta.helm.sh/release-name: nfs-provisioner
+      meta.helm.sh/release-namespace: nfs-provisioner
+    creationTimestamp: "2025-08-28T05:33:12Z"
+    generation: 1
+    labels:
+      app: nfs-subdir-external-provisioner
+      pod-template-hash: 7867ff685d
+      release: nfs-provisioner
+    name: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d
+    namespace: nfs-provisioner
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: nfs-provisioner-nfs-subdir-external-provisioner
+      uid: f4c9b177-a989-484a-9481-0334939524e1
+    resourceVersion: "705499"
+    uid: dfb6ed82-8b9c-42af-a48f-f7ad5854f4b5
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: nfs-subdir-external-provisioner
+        pod-template-hash: 7867ff685d
+        release: nfs-provisioner
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: nfs-subdir-external-provisioner
+          pod-template-hash: 7867ff685d
+          release: nfs-provisioner
+      spec:
+        containers:
+        - env:
+          - name: PROVISIONER_NAME
+            value: cluster.local/nfs-provisioner-nfs-subdir-external-provisioner
+          - name: NFS_SERVER
+            value: 192.168.4.104
+          - name: NFS_PATH
+            value: /srv/nfs/kubedata
+          image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+          imagePullPolicy: IfNotPresent
+          name: nfs-subdir-external-provisioner
+          resources: {}
+          securityContext: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /persistentvolumes
+            name: nfs-subdir-external-provisioner-root
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: nfs-provisioner-nfs-subdir-external-provisioner
+        serviceAccountName: nfs-provisioner-nfs-subdir-external-provisioner
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: nfs-subdir-external-provisioner-root
+          nfs:
+            path: /srv/nfs/kubedata
+            server: 192.168.4.104
+  status:
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    replicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

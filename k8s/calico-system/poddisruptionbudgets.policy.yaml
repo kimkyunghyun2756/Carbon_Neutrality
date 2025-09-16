@@ -1,0 +1,39 @@
+apiVersion: v1
+items:
+- apiVersion: policy/v1
+  kind: PodDisruptionBudget
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    generation: 1
+    name: calico-typha
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Installation
+      name: default
+      uid: 55efc27a-ab47-47c5-80f3-3c474ac3753a
+    resourceVersion: "705479"
+    uid: ca783310-c2c3-4e8a-958a-f4e8a11088f2
+  spec:
+    maxUnavailable: 1
+    selector:
+      matchLabels:
+        k8s-app: calico-typha
+  status:
+    conditions:
+    - lastTransitionTime: "2025-09-01T09:53:13Z"
+      message: ""
+      observedGeneration: 1
+      reason: InsufficientPods
+      status: "False"
+      type: DisruptionAllowed
+    currentHealthy: 0
+    desiredHealthy: 1
+    disruptionsAllowed: 0
+    expectedPods: 2
+    observedGeneration: 1
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,176 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:34Z"
+    labels:
+      kubernetes.io/metadata.name: calico-apiserver
+      name: calico-apiserver
+      pod-security.kubernetes.io/enforce: restricted
+      pod-security.kubernetes.io/enforce-version: latest
+    name: calico-apiserver
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: APIServer
+      name: default
+      uid: 790cb36e-1494-48d4-b189-1ddf9fa3d0be
+    resourceVersion: "1063"
+    uid: 447a2887-f6f1-4ab9-9b8a-69ff5927a656
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"name":"calico-system"}}
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    labels:
+      kubernetes.io/metadata.name: calico-system
+      name: calico-system
+      pod-security.kubernetes.io/enforce: privileged
+      pod-security.kubernetes.io/enforce-version: latest
+    name: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Installation
+      name: default
+      uid: 55efc27a-ab47-47c5-80f3-3c474ac3753a
+    resourceVersion: "99416"
+    uid: 0364a896-7abb-43de-9417-a18e5ae6bcb2
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"name":"data"}}
+    creationTimestamp: "2025-08-27T08:34:31Z"
+    labels:
+      kubernetes.io/metadata.name: data
+    name: data
+    resourceVersion: "29515"
+    uid: 5b9d12b7-d27b-4935-939c-93b8fbfddc5a
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    labels:
+      kubernetes.io/metadata.name: default
+    name: default
+    resourceVersion: "42"
+    uid: 38f58614-f76e-4050-a851-13a1c0802885
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    labels:
+      kubernetes.io/metadata.name: kube-node-lease
+    name: kube-node-lease
+    resourceVersion: "40"
+    uid: 394dc583-3aae-4bdf-a6df-a360fa3e35e8
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    labels:
+      kubernetes.io/metadata.name: kube-public
+    name: kube-public
+    resourceVersion: "33"
+    uid: ab6e3a3a-6e64-430e-893a-06df2bee7b2c
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    labels:
+      kubernetes.io/metadata.name: kube-system
+    name: kube-system
+    resourceVersion: "17"
+    uid: c60c3e1b-e8d2-4931-b700-8e3491d7ca9b
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2025-08-28T06:15:38Z"
+    labels:
+      kubernetes.io/metadata.name: monitoring
+    name: monitoring
+    resourceVersion: "77344"
+    uid: b31ed680-142b-4e79-97ba-43d2e1efa21f
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2025-08-28T05:32:55Z"
+    labels:
+      kubernetes.io/metadata.name: nfs-provisioner
+    name: nfs-provisioner
+    resourceVersion: "71282"
+    uid: 2c15d422-7937-429d-9852-f79e93ae447c
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"labels":{"name":"tigera-operator","pod-security.kubernetes.io/enforce":"privileged"},"name":"tigera-operator"}}
+    creationTimestamp: "2025-08-27T01:42:18Z"
+    labels:
+      kubernetes.io/metadata.name: tigera-operator
+      name: tigera-operator
+      pod-security.kubernetes.io/enforce: privileged
+    name: tigera-operator
+    resourceVersion: "876637"
+    uid: e38b2804-1a8e-418c-bd3f-8db603bf78c1
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+kind: List
+metadata:
+  resourceVersion: ""

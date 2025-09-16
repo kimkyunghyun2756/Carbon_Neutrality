@@ -1,0 +1,18 @@
+apiVersion: v1
+items:
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMConfig
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-27T01:43:44Z"
+    generation: 1
+    name: default
+    resourceVersion: "1590"
+    uid: 34740cd0-8a81-4d40-8e61-a2a925e054db
+  spec:
+    autoAllocateBlocks: true
+    strictAffinity: false
+kind: List
+metadata:
+  resourceVersion: ""

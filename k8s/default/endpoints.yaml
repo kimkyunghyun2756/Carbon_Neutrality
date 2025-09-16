@@ -1,0 +1,35 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:44Z"
+    labels:
+      endpointslice.kubernetes.io/skip-mirror: "true"
+    name: kubernetes
+    namespace: default
+    resourceVersion: "89888"
+    uid: 35842e6f-64df-4c5a-9b9c-204ee6db9b3c
+  subsets:
+  - addresses:
+    - ip: 192.168.4.101
+    ports:
+    - name: https
+      port: 6443
+      protocol: TCP
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-28T05:41:52Z"
+    labels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/name: prometheus-operator
+      app.kubernetes.io/version: 0.85.0
+      service.kubernetes.io/headless: ""
+    name: prometheus-operator
+    namespace: default
+    resourceVersion: "257820"
+    uid: db4dea9a-a773-4a1a-867a-f1f269228461
+kind: List
+metadata:
+  resourceVersion: ""

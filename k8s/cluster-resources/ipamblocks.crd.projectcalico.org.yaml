@@ -1,0 +1,929 @@
+apiVersion: v1
+items:
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMBlock
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-27T01:43:48Z"
+    generation: 1549
+    name: 10-244-134-192-26
+    resourceVersion: "701880"
+    uid: 46d0294c-355a-40b7-832e-0d81a8d7d912
+  spec:
+    affinity: host:k8s-monitoring
+    allocations:
+    - null
+    - null
+    - 0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 1
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 3
+    - 4
+    - 5
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 2
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    attributes:
+    - handle_id: k8s-pod-network.e8e77b8ecdb0af07dc7294d22d8ca6891b6ae61e521e452f0b7d311d8f699d24
+      secondary:
+        namespace: calico-system
+        node: k8s-monitoring
+        pod: csi-node-driver-zrfzk
+        timestamp: 2025-08-27 01:43:58.673266265 +0000 UTC
+    - handle_id: ipip-tunnel-addr-k8s-monitoring
+      secondary:
+        node: k8s-monitoring
+        type: ipipTunnelAddress
+    - handle_id: k8s-pod-network.b633f83fb4441976c0ba6505a319b9298b1ef898b8ca86054a824529773ba163
+      secondary:
+        namespace: kube-system
+        node: k8s-monitoring
+        pod: calico-kube-controllers-ddf655445-4mhpt
+        timestamp: 2025-08-28 10:04:11.268105132 +0000 UTC
+    - handle_id: k8s-pod-network.bdf7bb9b6516414742df3ee5afd684bff14e94bfb7e38cad2e87be1584278c75
+      secondary:
+        namespace: monitoring
+        node: k8s-monitoring
+        pod: prometheus-kube-prometheus-kube-prome-prometheus-0
+        timestamp: 2025-09-01 00:48:06.655519451 +0000 UTC
+    - handle_id: k8s-pod-network.5e9d2999e081f6170e0aac3d7a641d8fb715739c54b54b334f0968b02dccaab3
+      secondary:
+        namespace: nfs-provisioner
+        node: k8s-monitoring
+        pod: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d8v7dl
+        timestamp: 2025-09-01 09:35:08.916525654 +0000 UTC
+    - handle_id: k8s-pod-network.3a5f1f1bac869c93a4429d4db08ccfae3d5adaafb437e0ee851699d0e1998ee7
+      secondary:
+        namespace: monitoring
+        node: k8s-monitoring
+        pod: kube-prometheus-kube-state-metrics-675769bbc6-7bvkh
+        timestamp: 2025-09-01 09:35:08.998697497 +0000 UTC
+    cidr: 10.244.134.192/26
+    deleted: false
+    sequenceNumber: 1756259028003643481
+    sequenceNumberForAllocation:
+      "0": 1756259028003643436
+      "1": 1756259028003643424
+      "2": 1756259028003641935
+      "3": 1756259028003643426
+      "4": 1756259028003643380
+      "5": 1756259028003643428
+      "6": 1756259028003643430
+      "7": 1756259028003643386
+      "8": 1756259028003643432
+      "9": 1756259028003643384
+      "10": 1756259028003643434
+      "11": 1756259028003643438
+      "12": 1756259028003641951
+      "13": 1756259028003643382
+      "14": 1756259028003643440
+      "15": 1756259028003643442
+      "16": 1756259028003643444
+      "17": 1756259028003643446
+      "18": 1756259028003643448
+      "19": 1756259028003643450
+      "20": 1756259028003643452
+      "21": 1756259028003643454
+      "22": 1756259028003643456
+      "23": 1756259028003643458
+      "24": 1756259028003643460
+      "25": 1756259028003643462
+      "26": 1756259028003643464
+      "27": 1756259028003643466
+      "28": 1756259028003643468
+      "29": 1756259028003643470
+      "30": 1756259028003643472
+      "31": 1756259028003643478
+      "32": 1756259028003643479
+      "33": 1756259028003643480
+      "34": 1756259028003643366
+      "35": 1756259028003643368
+      "36": 1756259028003643370
+      "37": 1756259028003643372
+      "38": 1756259028003643374
+      "39": 1756259028003643376
+      "40": 1756259028003643378
+      "41": 1756259028003643388
+      "42": 1756259028003643390
+      "43": 1756259028003642132
+      "44": 1756259028003642133
+      "45": 1756259028003642134
+      "46": 1756259028003642135
+      "47": 1756259028003642136
+      "48": 1756259028003643392
+      "49": 1756259028003643394
+      "50": 1756259028003643396
+      "51": 1756259028003643398
+      "52": 1756259028003643400
+      "53": 1756259028003643402
+      "54": 1756259028003643404
+      "55": 1756259028003643406
+      "56": 1756259028003643408
+      "57": 1756259028003643410
+      "58": 1756259028003643412
+      "59": 1756259028003643414
+      "60": 1756259028003643416
+      "61": 1756259028003643418
+      "62": 1756259028003643419
+      "63": 1756259028003643422
+    strictAffinity: false
+    unallocated:
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 4
+    - 13
+    - 9
+    - 7
+    - 41
+    - 42
+    - 48
+    - 49
+    - 50
+    - 51
+    - 52
+    - 53
+    - 54
+    - 55
+    - 56
+    - 57
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 63
+    - 1
+    - 3
+    - 5
+    - 6
+    - 8
+    - 10
+    - 0
+    - 11
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 45
+    - 28
+    - 30
+    - 46
+    - 47
+    - 29
+    - 44
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMBlock
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-27T02:01:11Z"
+    generation: 51
+    name: 10-244-148-192-26
+    resourceVersion: "701903"
+    uid: 87405653-12f6-46fc-a708-1fc7a2621cfa
+  spec:
+    affinity: host:k8s-backend
+    allocations:
+    - null
+    - 0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 1
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 2
+    - 3
+    - 4
+    - 5
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    attributes:
+    - handle_id: k8s-pod-network.41d334c41cb32f7d558dfcfa875d7710c5783a57c09f814797a3a1de948731a1
+      secondary:
+        namespace: calico-system
+        node: k8s-backend
+        pod: csi-node-driver-nx2nr
+        timestamp: 2025-08-27 02:01:23.369081802 +0000 UTC
+    - handle_id: ipip-tunnel-addr-k8s-backend
+      secondary:
+        node: k8s-backend
+        type: ipipTunnelAddress
+    - handle_id: k8s-pod-network.93c7854e2021c9ea0de4a742233168ee583566ccb3638e1278ff0ae5b052b20b
+      secondary:
+        namespace: kube-system
+        node: k8s-backend
+        pod: coredns-86f89cb554-lcxdb
+        timestamp: 2025-09-01 09:35:08.73696521 +0000 UTC
+    - handle_id: k8s-pod-network.20638bae42955cccc4e5bb8bfdda636356d59113efb908a346a2e1b7929c4b7b
+      secondary:
+        namespace: calico-apiserver
+        node: k8s-backend
+        pod: calico-apiserver-5d8c5f665c-2z26l
+        timestamp: 2025-09-01 09:35:09.740723411 +0000 UTC
+    - handle_id: k8s-pod-network.492ca2433571671156ee793bcdcb758d8f4e7f82a713a3dfa5046e4caf6cffab
+      secondary:
+        namespace: monitoring
+        node: k8s-backend
+        pod: kube-prometheus-grafana-6d49f76fd6-twnmx
+        timestamp: 2025-09-01 09:35:09.416051967 +0000 UTC
+    - handle_id: k8s-pod-network.235bba5fdec6aa169e3015f88776f807405e76621a7642caa8407648e3c4e68c
+      secondary:
+        namespace: monitoring
+        node: k8s-backend
+        pod: kube-prometheus-kube-prome-operator-5c799fc89d-9hjht
+        timestamp: 2025-09-01 09:35:09.741826687 +0000 UTC
+    cidr: 10.244.148.192/26
+    deleted: false
+    sequenceNumber: 1756260071605024740
+    sequenceNumberForAllocation:
+      "0": 1756260071605024690
+      "1": 1756260071605024691
+      "2": 1756260071605024692
+      "3": 1756260071605024693
+      "4": 1756260071605024694
+      "5": 1756260071605024696
+      "6": 1756260071605024698
+      "7": 1756260071605024700
+      "8": 1756260071605024702
+      "9": 1756260071605024704
+      "11": 1756260071605024708
+      "12": 1756260071605024711
+      "13": 1756260071605024712
+      "14": 1756260071605024715
+      "15": 1756260071605024717
+      "16": 1756260071605024718
+      "17": 1756260071605024721
+      "18": 1756260071605024723
+      "19": 1756260071605024725
+      "20": 1756260071605024727
+      "21": 1756260071605024728
+      "22": 1756260071605024729
+      "23": 1756260071605024730
+      "24": 1756260071605024736
+      "25": 1756260071605024737
+      "26": 1756260071605024738
+      "27": 1756260071605024739
+    strictAffinity: false
+    unallocated:
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+    - 49
+    - 50
+    - 51
+    - 52
+    - 53
+    - 54
+    - 55
+    - 56
+    - 57
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 63
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 3
+    - 13
+    - 12
+    - 14
+    - 16
+    - 15
+    - 17
+    - 0
+    - 19
+    - 23
+    - 22
+    - 20
+    - 2
+    - 21
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMBlock
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-27T01:43:44Z"
+    generation: 43
+    name: 10-244-43-0-26
+    resourceVersion: "876694"
+    uid: 72f98279-4f60-4a6e-9aa0-872e78b895c0
+  spec:
+    affinity: host:k8s-master-cp
+    allocations:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    attributes:
+    - handle_id: ipip-tunnel-addr-k8s-master-cp
+      secondary:
+        node: k8s-master-cp
+        type: ipipTunnelAddress
+    - handle_id: k8s-pod-network.0944bf0163a511a8031a4c3470cbd259b6d4568a2f0bc9d0d9d815a162006d82
+      secondary:
+        namespace: calico-system
+        node: k8s-master-cp
+        pod: goldmane-858946f5bb-q99kx
+        timestamp: 2025-09-15 01:03:10.575008503 +0000 UTC
+    - handle_id: k8s-pod-network.9f733e303daa9382bf10af5c27f335bc3db4012c296c3a78fe3158153c3f5244
+      secondary:
+        namespace: kube-system
+        node: k8s-master-cp
+        pod: coredns-86f89cb554-rn4xm
+        timestamp: 2025-09-15 01:03:12.408471205 +0000 UTC
+    - handle_id: k8s-pod-network.0a44cbb10ba5337e9c9e4a0ec963f0d8440c0f77d8533f36e65140ce35cdd4d2
+      secondary:
+        namespace: kube-system
+        node: k8s-master-cp
+        pod: coredns-86f89cb554-fdzc5
+        timestamp: 2025-09-15 01:03:13.493895497 +0000 UTC
+    - handle_id: k8s-pod-network.064f59a727c5e521d02ab9ef1d751487d57584f4e3c9c3acacd9317bb0cae2ec
+      secondary:
+        namespace: calico-apiserver
+        node: k8s-master-cp
+        pod: calico-apiserver-5d8c5f665c-fldcp
+        timestamp: 2025-09-15 01:03:09.955129484 +0000 UTC
+    - handle_id: k8s-pod-network.0d345bf02efdd3d342978f8508586a297ae5d0184202b70e77db296f6c53cdd5
+      secondary:
+        namespace: kube-system
+        node: k8s-master-cp
+        pod: calico-kube-controllers-ddf655445-kjzpb
+        timestamp: 2025-09-15 01:03:14.038723938 +0000 UTC
+    - handle_id: k8s-pod-network.33d672b4ffdf4911493fa95608aba0276a6ff3eb35773b20cf2e1306e3a25ea7
+      secondary:
+        namespace: calico-system
+        node: k8s-master-cp
+        pod: calico-kube-controllers-855d76474d-qvdh7
+        timestamp: 2025-09-15 01:03:10.976908204 +0000 UTC
+    - handle_id: k8s-pod-network.b0535ad24819d5f5f5bad491d698dba9e1d5dfa8a91f878f1d6be46d43158169
+      secondary:
+        namespace: calico-apiserver
+        node: k8s-master-cp
+        pod: calico-apiserver-5d8c5f665c-lfgzr
+        timestamp: 2025-09-15 01:03:17.315888157 +0000 UTC
+    - handle_id: k8s-pod-network.524b10ec70514fbef4df99f29befa2074ee053e81fbcacc079780c6435e666ec
+      secondary:
+        namespace: calico-system
+        node: k8s-master-cp
+        pod: whisker-686b76cc7f-hqc5d
+        timestamp: 2025-09-15 01:03:21.343521707 +0000 UTC
+    - handle_id: k8s-pod-network.0e63c5ed5db5906f6855cda450eb5ee06641a9c11b0bffc46e5fd7d171706e31
+      secondary:
+        namespace: calico-system
+        node: k8s-master-cp
+        pod: csi-node-driver-w6gf4
+        timestamp: 2025-09-15 01:03:23.496958727 +0000 UTC
+    cidr: 10.244.43.0/26
+    deleted: false
+    sequenceNumber: 1756259024761637424
+    sequenceNumberForAllocation:
+      "0": 1756259024761637382
+      "1": 1756259024761637383
+      "2": 1756259024761637384
+      "3": 1756259024761637385
+      "4": 1756259024761637386
+      "5": 1756259024761637387
+      "6": 1756259024761637388
+      "7": 1756259024761637389
+      "8": 1756259024761637390
+      "9": 1756259024761637395
+      "10": 1756259024761637397
+      "11": 1756259024761637399
+      "12": 1756259024761637401
+      "13": 1756259024761637402
+      "14": 1756259024761637403
+      "15": 1756259024761637404
+      "16": 1756259024761637405
+      "17": 1756259024761637412
+      "18": 1756259024761637413
+      "19": 1756259024761637414
+      "20": 1756259024761637416
+      "21": 1756259024761637417
+      "22": 1756259024761637418
+      "23": 1756259024761637419
+      "24": 1756259024761637421
+      "25": 1756259024761637423
+    strictAffinity: false
+    unallocated:
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+    - 49
+    - 50
+    - 51
+    - 52
+    - 53
+    - 54
+    - 55
+    - 56
+    - 57
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 63
+    - 8
+    - 5
+    - 7
+    - 1
+    - 9
+    - 10
+    - 0
+    - 16
+    - 2
+    - 6
+    - 12
+    - 15
+    - 13
+    - 4
+    - 14
+    - 3
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMBlock
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-27T02:18:27Z"
+    generation: 557
+    name: 10-244-58-0-26
+    resourceVersion: "617818"
+    uid: defe1eb9-47c5-475f-9137-2a1a007fc83c
+  spec:
+    affinity: host:k8s-frontend
+    allocations:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 0
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - 2
+    - 4
+    - 1
+    - 3
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    attributes:
+    - handle_id: ipip-tunnel-addr-k8s-frontend
+      secondary:
+        node: k8s-frontend
+        type: ipipTunnelAddress
+    - handle_id: k8s-pod-network.82eeeafb086fd852681ce1c29ba9a54828c3079b44c296dcdcd24cb03dc430d1
+      secondary:
+        namespace: monitoring
+        node: k8s-frontend
+        pod: alertmanager-kube-prometheus-kube-prome-alertmanager-0
+        timestamp: 2025-08-28 14:16:11.195411585 +0000 UTC
+    - handle_id: k8s-pod-network.145b7fe455468b597c213b2a688cfc50b0321e2b70ce77871fcbf15a010001d8
+      secondary:
+        namespace: calico-system
+        node: k8s-frontend
+        pod: csi-node-driver-k5c9l
+        timestamp: 2025-08-28 14:16:11.436421948 +0000 UTC
+    - handle_id: k8s-pod-network.fec56b38560b4e08f6b37cb8794296b14e670e50c469161ad83252b1d1854039
+      secondary:
+        namespace: monitoring
+        node: k8s-frontend
+        pod: kube-prometheus-grafana-6d49f76fd6-m285w
+        timestamp: 2025-08-29 04:53:57.669625492 +0000 UTC
+    - handle_id: k8s-pod-network.6e814f3377699dd12bc16f7525dbecb9a719d4da6e7895768b96aaea14dbb0b2
+      secondary:
+        namespace: kube-system
+        node: k8s-frontend
+        pod: coredns-86f89cb554-nmpt7
+        timestamp: 2025-08-29 04:53:58.097267429 +0000 UTC
+    - handle_id: k8s-pod-network.f0f869a27fca76a5ca9c2dfd44fcff9252497b3daef1473457f39efd241791a2
+      secondary:
+        namespace: monitoring
+        node: k8s-frontend
+        pod: kube-prometheus-kube-state-metrics-675769bbc6-t5d4f
+        timestamp: 2025-08-29 04:53:57.830897002 +0000 UTC
+    - handle_id: k8s-pod-network.f4e0b26c9facd002b577c6585f43b7f9c7c345f1f4a7475552b9aaa615a14837
+      secondary:
+        namespace: calico-system
+        node: k8s-frontend
+        pod: whisker-686b76cc7f-knmrv
+        timestamp: 2025-08-29 04:53:59.510491589 +0000 UTC
+    - handle_id: k8s-pod-network.1f7203c6671c5649dd460233508a0c9d006828e32a2a922d88c98ad9bfcc20ef
+      secondary:
+        namespace: calico-apiserver
+        node: k8s-frontend
+        pod: calico-apiserver-5d8c5f665c-cdzpl
+        timestamp: 2025-08-29 04:53:59.555472808 +0000 UTC
+    - handle_id: k8s-pod-network.87d2d56238490ce00e66c60d62d8e680a39d92022dbc37f3d02fa376a487ccb7
+      secondary:
+        namespace: monitoring
+        node: k8s-frontend
+        pod: kube-prometheus-kube-prome-operator-5c799fc89d-rs9mf
+        timestamp: 2025-08-30 08:24:05.519679675 +0000 UTC
+    - handle_id: k8s-pod-network.6a571439cc7868cf57dd71651a125fb2a8d25880908139f66be292ebc27f0ef8
+      secondary:
+        namespace: nfs-provisioner
+        node: k8s-frontend
+        pod: nfs-provisioner-nfs-subdir-external-provisioner-7867ff685d228z8
+        timestamp: 2025-09-01 00:48:54.160541886 +0000 UTC
+    cidr: 10.244.58.0/26
+    deleted: false
+    sequenceNumber: 1756261107382006155
+    sequenceNumberForAllocation:
+      "0": 1756261107382006109
+      "1": 1756261107382005600
+      "2": 1756261107382006067
+      "3": 1756261107382006071
+      "4": 1756261107382006061
+      "5": 1756261107382006065
+      "6": 1756261107382006069
+      "7": 1756261107382005611
+      "8": 1756261107382006073
+      "9": 1756261107382006075
+      "10": 1756261107382006077
+      "11": 1756261107382006081
+      "12": 1756261107382006079
+      "13": 1756261107382006083
+      "14": 1756261107382006089
+      "15": 1756261107382006085
+      "16": 1756261107382006087
+      "17": 1756261107382006095
+      "18": 1756261107382006091
+      "19": 1756261107382006093
+      "20": 1756261107382005636
+      "21": 1756261107382006097
+      "22": 1756261107382006099
+      "23": 1756261107382006107
+      "24": 1756261107382006103
+      "25": 1756261107382006101
+      "26": 1756261107382005646
+      "27": 1756261107382005647
+      "28": 1756261107382006105
+      "29": 1756261107382006111
+      "30": 1756261107382005654
+      "31": 1756261107382006113
+      "32": 1756261107382006115
+      "33": 1756261107382006117
+      "34": 1756261107382006119
+      "35": 1756261107382006123
+      "36": 1756261107382006121
+      "37": 1756261107382006127
+      "38": 1756261107382006125
+      "39": 1756261107382006129
+      "40": 1756261107382006131
+      "41": 1756261107382006133
+      "42": 1756261107382006135
+      "43": 1756261107382006143
+      "44": 1756261107382006147
+      "45": 1756261107382006149
+      "46": 1756261107382006146
+      "47": 1756261107382006148
+      "48": 1756261107382006150
+      "49": 1756261107382006151
+      "50": 1756261107382006152
+      "51": 1756261107382006153
+      "52": 1756261107382006154
+      "53": 1756261107382006047
+      "54": 1756261107382006045
+      "55": 1756261107382005934
+      "57": 1756261107382006055
+      "58": 1756261107382006049
+      "59": 1756261107382006051
+      "60": 1756261107382006053
+      "61": 1756261107382006063
+      "62": 1756261107382006057
+      "63": 1756261107382006059
+    strictAffinity: false
+    unallocated:
+    - 54
+    - 53
+    - 58
+    - 59
+    - 60
+    - 57
+    - 62
+    - 63
+    - 4
+    - 61
+    - 5
+    - 2
+    - 6
+    - 3
+    - 8
+    - 9
+    - 10
+    - 12
+    - 11
+    - 13
+    - 15
+    - 16
+    - 14
+    - 18
+    - 19
+    - 17
+    - 21
+    - 22
+    - 25
+    - 24
+    - 28
+    - 23
+    - 0
+    - 29
+    - 31
+    - 32
+    - 33
+    - 34
+    - 36
+    - 35
+    - 38
+    - 37
+    - 39
+    - 40
+    - 41
+    - 56
+    - 20
+    - 26
+    - 7
+    - 30
+    - 55
+    - 42
+    - 43
+    - 1
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,171 @@
+apiVersion: v1
+items:
+- apiVersion: flowcontrol.apiserver.k8s.io/v1
+  kind: PriorityLevelConfiguration
+  metadata:
+    annotations:
+      apf.kubernetes.io/autoupdate-spec: "true"
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    generation: 1
+    name: catch-all
+    resourceVersion: "64"
+    uid: 4ae1dec8-95e7-4704-a6d9-e5ffd4833483
+  spec:
+    limited:
+      lendablePercent: 0
+      limitResponse:
+        type: Reject
+      nominalConcurrencyShares: 5
+    type: Limited
+  status: {}
+- apiVersion: flowcontrol.apiserver.k8s.io/v1
+  kind: PriorityLevelConfiguration
+  metadata:
+    annotations:
+      apf.kubernetes.io/autoupdate-spec: "true"
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    generation: 1
+    name: exempt
+    resourceVersion: "68"
+    uid: b5ba4dd5-4ee5-4450-be44-6d67dc8f7b82
+  spec:
+    exempt:
+      lendablePercent: 0
+      nominalConcurrencyShares: 0
+    type: Exempt
+  status: {}
+- apiVersion: flowcontrol.apiserver.k8s.io/v1
+  kind: PriorityLevelConfiguration
+  metadata:
+    annotations:
+      apf.kubernetes.io/autoupdate-spec: "true"
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    generation: 1
+    name: global-default
+    resourceVersion: "39"
+    uid: 313da91a-deea-4cfd-85c7-9d9e26e5b10d
+  spec:
+    limited:
+      lendablePercent: 50
+      limitResponse:
+        queuing:
+          handSize: 6
+          queueLengthLimit: 50
+          queues: 128
+        type: Queue
+      nominalConcurrencyShares: 20
+    type: Limited
+  status: {}
+- apiVersion: flowcontrol.apiserver.k8s.io/v1
+  kind: PriorityLevelConfiguration
+  metadata:
+    annotations:
+      apf.kubernetes.io/autoupdate-spec: "true"
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    generation: 1
+    name: leader-election
+    resourceVersion: "22"
+    uid: db921184-0d1d-4b70-bd05-238a3c03e11a
+  spec:
+    limited:
+      lendablePercent: 0
+      limitResponse:
+        queuing:
+          handSize: 4
+          queueLengthLimit: 50
+          queues: 16
+        type: Queue
+      nominalConcurrencyShares: 10
+    type: Limited
+  status: {}
+- apiVersion: flowcontrol.apiserver.k8s.io/v1
+  kind: PriorityLevelConfiguration
+  metadata:
+    annotations:
+      apf.kubernetes.io/autoupdate-spec: "true"
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    generation: 1
+    name: node-high
+    resourceVersion: "14"
+    uid: 74f70f5b-3731-43c0-9bd4-c0c217d251ce
+  spec:
+    limited:
+      lendablePercent: 25
+      limitResponse:
+        queuing:
+          handSize: 6
+          queueLengthLimit: 50
+          queues: 64
+        type: Queue
+      nominalConcurrencyShares: 40
+    type: Limited
+  status: {}
+- apiVersion: flowcontrol.apiserver.k8s.io/v1
+  kind: PriorityLevelConfiguration
+  metadata:
+    annotations:
+      apf.kubernetes.io/autoupdate-spec: "true"
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    generation: 1
+    name: system
+    resourceVersion: "4"
+    uid: 5da59930-1a39-4f97-8839-c79651b5dcfd
+  spec:
+    limited:
+      lendablePercent: 33
+      limitResponse:
+        queuing:
+          handSize: 6
+          queueLengthLimit: 50
+          queues: 64
+        type: Queue
+      nominalConcurrencyShares: 30
+    type: Limited
+  status: {}
+- apiVersion: flowcontrol.apiserver.k8s.io/v1
+  kind: PriorityLevelConfiguration
+  metadata:
+    annotations:
+      apf.kubernetes.io/autoupdate-spec: "true"
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    generation: 1
+    name: workload-high
+    resourceVersion: "31"
+    uid: 731a005a-3baf-48b2-b1ce-13e3d061414b
+  spec:
+    limited:
+      lendablePercent: 50
+      limitResponse:
+        queuing:
+          handSize: 6
+          queueLengthLimit: 50
+          queues: 128
+        type: Queue
+      nominalConcurrencyShares: 40
+    type: Limited
+  status: {}
+- apiVersion: flowcontrol.apiserver.k8s.io/v1
+  kind: PriorityLevelConfiguration
+  metadata:
+    annotations:
+      apf.kubernetes.io/autoupdate-spec: "true"
+    creationTimestamp: "2025-08-27T00:28:41Z"
+    generation: 1
+    name: workload-low
+    resourceVersion: "36"
+    uid: 100fc109-38a5-419b-bf11-0e46474d8492
+  spec:
+    limited:
+      lendablePercent: 90
+      limitResponse:
+        queuing:
+          handSize: 6
+          queueLengthLimit: 50
+          queues: 128
+        type: Queue
+      nominalConcurrencyShares: 100
+    type: Limited
+  status: {}
+kind: List
+metadata:
+  resourceVersion: ""

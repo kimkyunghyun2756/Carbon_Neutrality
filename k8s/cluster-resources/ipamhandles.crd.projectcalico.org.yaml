@@ -1,0 +1,485 @@
+apiVersion: v1
+items:
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-28T08:24:30Z"
+    generation: 1
+    name: ipip-tunnel-addr-k8s-backend
+    resourceVersion: "99477"
+    uid: 5368222d-a269-4c54-b7d1-5af5f7b23456
+  spec:
+    block:
+      10.244.148.192/26: 1
+    deleted: false
+    handleID: ipip-tunnel-addr-k8s-backend
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-28T08:31:31Z"
+    generation: 1
+    name: ipip-tunnel-addr-k8s-frontend
+    resourceVersion: "101051"
+    uid: 0b19f7ad-9f6a-439d-a058-6fe8095960a7
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: ipip-tunnel-addr-k8s-frontend
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-28T08:31:33Z"
+    generation: 1
+    name: ipip-tunnel-addr-k8s-master-cp
+    resourceVersion: "101072"
+    uid: ebdaeec9-5138-4fe0-a75e-7ea3e22bcf45
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: ipip-tunnel-addr-k8s-master-cp
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-28T08:24:30Z"
+    generation: 1
+    name: ipip-tunnel-addr-k8s-monitoring
+    resourceVersion: "99475"
+    uid: d2368794-e9df-4730-83d3-2161802fbf8f
+  spec:
+    block:
+      10.244.134.192/26: 1
+    deleted: false
+    handleID: ipip-tunnel-addr-k8s-monitoring
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:16Z"
+    generation: 1
+    name: k8s-pod-network.064f59a727c5e521d02ab9ef1d751487d57584f4e3c9c3acacd9317bb0cae2ec
+    resourceVersion: "876576"
+    uid: c2bf3184-368a-4f63-a38f-00ca7479d2a3
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.064f59a727c5e521d02ab9ef1d751487d57584f4e3c9c3acacd9317bb0cae2ec
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:12Z"
+    generation: 1
+    name: k8s-pod-network.0944bf0163a511a8031a4c3470cbd259b6d4568a2f0bc9d0d9d815a162006d82
+    resourceVersion: "876504"
+    uid: 809491e2-afc4-4ec5-863d-a06c8cf7f58b
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.0944bf0163a511a8031a4c3470cbd259b6d4568a2f0bc9d0d9d815a162006d82
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:15Z"
+    generation: 1
+    name: k8s-pod-network.0a44cbb10ba5337e9c9e4a0ec963f0d8440c0f77d8533f36e65140ce35cdd4d2
+    resourceVersion: "876566"
+    uid: 013d4659-8e29-4369-8e69-53b9ddf41f85
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.0a44cbb10ba5337e9c9e4a0ec963f0d8440c0f77d8533f36e65140ce35cdd4d2
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:16Z"
+    generation: 1
+    name: k8s-pod-network.0d345bf02efdd3d342978f8508586a297ae5d0184202b70e77db296f6c53cdd5
+    resourceVersion: "876584"
+    uid: 49bd896e-c0ef-4d4b-8c99-84f00307416c
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.0d345bf02efdd3d342978f8508586a297ae5d0184202b70e77db296f6c53cdd5
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:23Z"
+    generation: 1
+    name: k8s-pod-network.0e63c5ed5db5906f6855cda450eb5ee06641a9c11b0bffc46e5fd7d171706e31
+    resourceVersion: "876693"
+    uid: 2f6487eb-87a8-459e-b771-191e754d5212
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.0e63c5ed5db5906f6855cda450eb5ee06641a9c11b0bffc46e5fd7d171706e31
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-28T14:16:12Z"
+    generation: 1
+    name: k8s-pod-network.145b7fe455468b597c213b2a688cfc50b0321e2b70ce77871fcbf15a010001d8
+    resourceVersion: "272204"
+    uid: 77b0b0f4-0b9c-4d52-83b2-95fde14563e0
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.145b7fe455468b597c213b2a688cfc50b0321e2b70ce77871fcbf15a010001d8
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-29T04:54:01Z"
+    generation: 1
+    name: k8s-pod-network.1f7203c6671c5649dd460233508a0c9d006828e32a2a922d88c98ad9bfcc20ef
+    resourceVersion: "412782"
+    uid: 8b5c846e-fa49-4c3e-bf67-7c2ba4f185f9
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.1f7203c6671c5649dd460233508a0c9d006828e32a2a922d88c98ad9bfcc20ef
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-01T09:35:10Z"
+    generation: 1
+    name: k8s-pod-network.20638bae42955cccc4e5bb8bfdda636356d59113efb908a346a2e1b7929c4b7b
+    resourceVersion: "701877"
+    uid: f7b4e988-8dfb-4a49-b64b-4090510dea1d
+  spec:
+    block:
+      10.244.148.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.20638bae42955cccc4e5bb8bfdda636356d59113efb908a346a2e1b7929c4b7b
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-01T09:35:14Z"
+    generation: 1
+    name: k8s-pod-network.235bba5fdec6aa169e3015f88776f807405e76621a7642caa8407648e3c4e68c
+    resourceVersion: "701900"
+    uid: d4b45b63-97c8-447b-ac0c-78b3259562d6
+  spec:
+    block:
+      10.244.148.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.235bba5fdec6aa169e3015f88776f807405e76621a7642caa8407648e3c4e68c
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:17Z"
+    generation: 1
+    name: k8s-pod-network.33d672b4ffdf4911493fa95608aba0276a6ff3eb35773b20cf2e1306e3a25ea7
+    resourceVersion: "876590"
+    uid: 67e674b0-39f0-4b49-b362-f980189d1cd9
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.33d672b4ffdf4911493fa95608aba0276a6ff3eb35773b20cf2e1306e3a25ea7
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-01T09:35:10Z"
+    generation: 1
+    name: k8s-pod-network.3a5f1f1bac869c93a4429d4db08ccfae3d5adaafb437e0ee851699d0e1998ee7
+    resourceVersion: "701878"
+    uid: 2fe294f5-4ada-4cc3-b0e7-a1c944c4fe4c
+  spec:
+    block:
+      10.244.134.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.3a5f1f1bac869c93a4429d4db08ccfae3d5adaafb437e0ee851699d0e1998ee7
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-27T02:01:23Z"
+    generation: 1
+    name: k8s-pod-network.41d334c41cb32f7d558dfcfa875d7710c5783a57c09f814797a3a1de948731a1
+    resourceVersion: "3988"
+    uid: 1d4b82fc-9ddd-4840-aaa5-099d68098af1
+  spec:
+    block:
+      10.244.148.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.41d334c41cb32f7d558dfcfa875d7710c5783a57c09f814797a3a1de948731a1
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-01T09:35:12Z"
+    generation: 1
+    name: k8s-pod-network.492ca2433571671156ee793bcdcb758d8f4e7f82a713a3dfa5046e4caf6cffab
+    resourceVersion: "701888"
+    uid: 1a43d44e-3ab0-4c82-9982-fc1adf694e56
+  spec:
+    block:
+      10.244.148.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.492ca2433571671156ee793bcdcb758d8f4e7f82a713a3dfa5046e4caf6cffab
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:21Z"
+    generation: 1
+    name: k8s-pod-network.524b10ec70514fbef4df99f29befa2074ee053e81fbcacc079780c6435e666ec
+    resourceVersion: "876669"
+    uid: c024ee7e-ed4a-4da6-8322-71ee0171d3e9
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.524b10ec70514fbef4df99f29befa2074ee053e81fbcacc079780c6435e666ec
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-01T09:35:09Z"
+    generation: 1
+    name: k8s-pod-network.5e9d2999e081f6170e0aac3d7a641d8fb715739c54b54b334f0968b02dccaab3
+    resourceVersion: "701866"
+    uid: 8ddabe38-db86-4eab-be14-532aebe9a2ad
+  spec:
+    block:
+      10.244.134.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.5e9d2999e081f6170e0aac3d7a641d8fb715739c54b54b334f0968b02dccaab3
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-01T00:48:54Z"
+    generation: 1
+    name: k8s-pod-network.6a571439cc7868cf57dd71651a125fb2a8d25880908139f66be292ebc27f0ef8
+    resourceVersion: "617817"
+    uid: c07c5931-633b-4556-99c9-bd3e4942294b
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.6a571439cc7868cf57dd71651a125fb2a8d25880908139f66be292ebc27f0ef8
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-29T04:53:59Z"
+    generation: 1
+    name: k8s-pod-network.6e814f3377699dd12bc16f7525dbecb9a719d4da6e7895768b96aaea14dbb0b2
+    resourceVersion: "412760"
+    uid: 462258d7-c699-4b67-934f-5d7163a3226f
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.6e814f3377699dd12bc16f7525dbecb9a719d4da6e7895768b96aaea14dbb0b2
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-28T14:16:11Z"
+    generation: 1
+    name: k8s-pod-network.82eeeafb086fd852681ce1c29ba9a54828c3079b44c296dcdcd24cb03dc430d1
+    resourceVersion: "272197"
+    uid: 2c8842d7-4ca7-4a1b-84a2-1d10dae0bdee
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.82eeeafb086fd852681ce1c29ba9a54828c3079b44c296dcdcd24cb03dc430d1
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-30T08:24:05Z"
+    generation: 1
+    name: k8s-pod-network.87d2d56238490ce00e66c60d62d8e680a39d92022dbc37f3d02fa376a487ccb7
+    resourceVersion: "469949"
+    uid: 7805d0e5-434c-4558-a6b5-17e2d6e7c98e
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.87d2d56238490ce00e66c60d62d8e680a39d92022dbc37f3d02fa376a487ccb7
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-01T09:35:09Z"
+    generation: 1
+    name: k8s-pod-network.93c7854e2021c9ea0de4a742233168ee583566ccb3638e1278ff0ae5b052b20b
+    resourceVersion: "701867"
+    uid: 62f32089-736b-4eef-b2f9-605793758a1c
+  spec:
+    block:
+      10.244.148.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.93c7854e2021c9ea0de4a742233168ee583566ccb3638e1278ff0ae5b052b20b
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:15Z"
+    generation: 1
+    name: k8s-pod-network.9f733e303daa9382bf10af5c27f335bc3db4012c296c3a78fe3158153c3f5244
+    resourceVersion: "876563"
+    uid: 0ea84083-b625-4409-9a26-12690e5b7e7e
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.9f733e303daa9382bf10af5c27f335bc3db4012c296c3a78fe3158153c3f5244
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-15T01:03:17Z"
+    generation: 1
+    name: k8s-pod-network.b0535ad24819d5f5f5bad491d698dba9e1d5dfa8a91f878f1d6be46d43158169
+    resourceVersion: "876594"
+    uid: f02ee34f-8af1-45f0-9a6e-9bbd1b371b40
+  spec:
+    block:
+      10.244.43.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.b0535ad24819d5f5f5bad491d698dba9e1d5dfa8a91f878f1d6be46d43158169
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-28T10:04:11Z"
+    generation: 1
+    name: k8s-pod-network.b633f83fb4441976c0ba6505a319b9298b1ef898b8ca86054a824529773ba163
+    resourceVersion: "144395"
+    uid: 5f8b5d16-2602-4d76-b70a-2376ab67db85
+  spec:
+    block:
+      10.244.134.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.b633f83fb4441976c0ba6505a319b9298b1ef898b8ca86054a824529773ba163
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-09-01T00:48:06Z"
+    generation: 1
+    name: k8s-pod-network.bdf7bb9b6516414742df3ee5afd684bff14e94bfb7e38cad2e87be1584278c75
+    resourceVersion: "617650"
+    uid: 5a1addc2-7283-49f4-9fcf-9905a1386a66
+  spec:
+    block:
+      10.244.134.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.bdf7bb9b6516414742df3ee5afd684bff14e94bfb7e38cad2e87be1584278c75
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-27T01:43:58Z"
+    generation: 1
+    name: k8s-pod-network.e8e77b8ecdb0af07dc7294d22d8ca6891b6ae61e521e452f0b7d311d8f699d24
+    resourceVersion: "1731"
+    uid: a3ef7ca1-c4cb-49b6-b71f-32d0336b7534
+  spec:
+    block:
+      10.244.134.192/26: 1
+    deleted: false
+    handleID: k8s-pod-network.e8e77b8ecdb0af07dc7294d22d8ca6891b6ae61e521e452f0b7d311d8f699d24
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-29T04:54:00Z"
+    generation: 1
+    name: k8s-pod-network.f0f869a27fca76a5ca9c2dfd44fcff9252497b3daef1473457f39efd241791a2
+    resourceVersion: "412767"
+    uid: 84d04f21-8025-4ced-a238-89230e58adfb
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.f0f869a27fca76a5ca9c2dfd44fcff9252497b3daef1473457f39efd241791a2
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-29T04:54:00Z"
+    generation: 1
+    name: k8s-pod-network.f4e0b26c9facd002b577c6585f43b7f9c7c345f1f4a7475552b9aaa615a14837
+    resourceVersion: "412773"
+    uid: bb12edc6-54eb-49a6-a8d3-b89cba0a0ee6
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.f4e0b26c9facd002b577c6585f43b7f9c7c345f1f4a7475552b9aaa615a14837
+- apiVersion: crd.projectcalico.org/v1
+  kind: IPAMHandle
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":null}'
+    creationTimestamp: "2025-08-29T04:53:58Z"
+    generation: 1
+    name: k8s-pod-network.fec56b38560b4e08f6b37cb8794296b14e670e50c469161ad83252b1d1854039
+    resourceVersion: "412754"
+    uid: 521091f0-8451-4902-a03f-6217f161b070
+  spec:
+    block:
+      10.244.58.0/26: 1
+    deleted: false
+    handleID: k8s-pod-network.fec56b38560b4e08f6b37cb8794296b14e670e50c469161ad83252b1d1854039
+kind: List
+metadata:
+  resourceVersion: ""

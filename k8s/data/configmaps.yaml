@@ -1,0 +1,76 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    CSV_CHUNKSIZE: "800"
+    CSV_ENCODING: utf-8
+    CSV_PATH: /data/Data_fixed.csv
+    CSV_SEP: ','
+    CSV_TABLE: data
+    DB_HOST: 192.168.4.105
+    DB_NAME: appdb
+    DB_PORT: "5432"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"CSV_CHUNKSIZE":"2000","CSV_ENCODING":"utf-8","CSV_PATH":"/data/Data_fixed.csv","CSV_SEP":",","CSV_TABLE":"data","DB_HOST":"192.168.4.105","DB_NAME":"appdb","DB_PORT":"5432"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":null,"name":"carbon-etl-config","namespace":"data"}}
+    creationTimestamp: "2025-08-27T09:00:11Z"
+    name: carbon-etl-config
+    namespace: data
+    resourceVersion: "36470"
+    uid: 32dcb69c-56e4-4da6-a916-56748a8f07fd
+- apiVersion: v1
+  data:
+    CSV_TABLE: data
+    DB_HOST: 192.168.4.105
+    DB_NAME: appdb
+    DB_PORT: "5432"
+    FRONTEND_PORT: "8501"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"CSV_TABLE":"data","DB_HOST":"192.168.4.105","DB_NAME":"appdb","DB_PORT":"5432","FRONTEND_PORT":"8501"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"carbon-frontend-config","namespace":"data"}}
+    creationTimestamp: "2025-08-27T11:18:56Z"
+    name: carbon-frontend-config
+    namespace: data
+    resourceVersion: "38242"
+    uid: f4d7d09e-5325-4126-a54d-29063d005b2b
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIDBTCCAe2gAwIBAgIIPZiK+wmj/7kwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczAeFw0yNTA4MjcwMDIzMjlaFw0zNTA4MjUwMDI4MjlaMBUx
+      EzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+      AoIBAQDZ/7JmKELjZ6EhMsNLbDpHbx0UpzV4etMmJISfvL2+76iDIFVGCul6XqU3
+      VFArVgE0Avdk4M9Own5wwxBizPRjmUQpbJ+9pPc3mIt7H7Iz1WmC3jq2s/PhpRjC
+      5Zpj+fvVcheaVcEgvSeKpdeM+87fjqUTZIIVqXOCq07SjHfzdZUMTvjWED5pRki2
+      YrR7BjSIU1FObBJl98KZ9emeu4JSg0/krx+Y8Exjt9k9VoGhlrd+6T5MxDjqw+xm
+      ig/byhbcoE7eKN1TgW9w/NgMLAVs87Gsdm5ySvuGK7StCYZriUX7AahWK9D3kK8e
+      wKf6L3XBZGM/cNUdjqEMXw5oHubpAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSpe+F4QmCuVS1cEtyV+SE/51cgVzAV
+      BgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQAtC3CZWb0X
+      fXuVicWwlh36TkFtfZleKn4uFyFpqxXySaogMRWs4gJ25L0qTb3GOLkYfKksSouY
+      k2xNcO5MJsWsq1DCBgbpfeTBpnvBV/M4vqh+ylk6DOzLRMQJjxMZ44HvK5DB6iln
+      Xi54SRaKuIPiXtbmHegBf0dUd8vHDuQC16dmnaphXOHjqddqg5dy+WZFvg+jBNQu
+      Fs0PTtG5GZ/y2UqAsj6b4nCSd88ziBx70og6+A0oOjL+XwKOTa5M2b5B7uiTvn4f
+      X1dg9XHv+NO0ldXfPKkebjeflGtJq+6gP/jND2DSqz66X3j8uwLMabNbn1rOLFVa
+      QyqNeObCUtxf
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2025-08-27T08:34:31Z"
+    name: kube-root-ca.crt
+    namespace: data
+    resourceVersion: "27362"
+    uid: 63ec081f-b5f7-4b8a-98f4-9587c6f09b59
+kind: List
+metadata:
+  resourceVersion: ""

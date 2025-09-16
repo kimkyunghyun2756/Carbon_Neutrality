@@ -1,0 +1,82 @@
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.244.58.50
+    conditions:
+      ready: false
+      serving: false
+      terminating: true
+    nodeName: k8s-frontend
+    targetRef:
+      kind: Pod
+      name: calico-apiserver-5d8c5f665c-cdzpl
+      namespace: calico-apiserver
+      uid: c2a878de-1bf0-43a8-a4b3-ea4fe8025ff5
+  - addresses:
+    - 10.244.148.217
+    conditions:
+      ready: false
+      serving: false
+      terminating: true
+    nodeName: k8s-backend
+    targetRef:
+      kind: Pod
+      name: calico-apiserver-5d8c5f665c-2z26l
+      namespace: calico-apiserver
+      uid: fb1ab96f-e41b-4078-a08d-7b746c8582a8
+  - addresses:
+    - 10.244.43.20
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: k8s-master-cp
+    targetRef:
+      kind: Pod
+      name: calico-apiserver-5d8c5f665c-fldcp
+      namespace: calico-apiserver
+      uid: 3f0351b8-3d84-4ec9-a697-ef1875cdf0fe
+  - addresses:
+    - 10.244.43.23
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: k8s-master-cp
+    targetRef:
+      kind: Pod
+      name: calico-apiserver-5d8c5f665c-lfgzr
+      namespace: calico-apiserver
+      uid: d5b638bc-3edd-4d6a-8c34-91962526c4a6
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-15T01:03:24Z"
+    creationTimestamp: "2025-08-27T01:42:34Z"
+    generateName: calico-api-
+    generation: 205
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      k8s-app: tigera-api
+      kubernetes.io/service-name: calico-api
+    name: calico-api-wmjpv
+    namespace: calico-apiserver
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: calico-api
+      uid: 31978022-3de9-4db0-a3ea-7496233e72c3
+    resourceVersion: "876706"
+    uid: c4497ce6-e0c9-4032-8029-5e87cfe2590e
+  ports:
+  - name: apiserver
+    port: 5443
+    protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""

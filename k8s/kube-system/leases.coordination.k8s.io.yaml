@@ -1,0 +1,48 @@
+apiVersion: v1
+items:
+- apiVersion: coordination.k8s.io/v1
+  kind: Lease
+  metadata:
+    creationTimestamp: "2025-09-15T23:33:53Z"
+    labels:
+      apiserver.kubernetes.io/identity: kube-apiserver
+      kubernetes.io/hostname: k8s-master-cp
+    name: apiserver-mwzjorxkcyxohn5y5a7tap4g64
+    namespace: kube-system
+    resourceVersion: "908131"
+    uid: 3ab00b3f-6827-4c04-9981-1aed8cb613fe
+  spec:
+    holderIdentity: apiserver-mwzjorxkcyxohn5y5a7tap4g64_dd50ae6e-cfce-4952-b2b6-98dfe09a0456
+    leaseDurationSeconds: 3600
+    renewTime: "2025-09-16T02:51:30.363999Z"
+- apiVersion: coordination.k8s.io/v1
+  kind: Lease
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:45Z"
+    name: kube-controller-manager
+    namespace: kube-system
+    resourceVersion: "908133"
+    uid: 49655ad5-1c9d-4127-a1cc-a381143b55de
+  spec:
+    acquireTime: "2025-09-16T00:00:40.013907Z"
+    holderIdentity: k8s-master-cp_a00a75f8-19fd-4120-abb4-81ba706c8c28
+    leaseDurationSeconds: 15
+    leaseTransitions: 23
+    renewTime: "2025-09-16T02:51:31.740004Z"
+- apiVersion: coordination.k8s.io/v1
+  kind: Lease
+  metadata:
+    creationTimestamp: "2025-08-27T00:28:46Z"
+    name: kube-scheduler
+    namespace: kube-system
+    resourceVersion: "908134"
+    uid: 3fc32aee-acf0-4fd1-963b-51230715e360
+  spec:
+    acquireTime: "2025-09-16T00:00:25.344645Z"
+    holderIdentity: k8s-master-cp_e6a96f89-3c19-4346-a0f1-69075bcd1800
+    leaseDurationSeconds: 15
+    leaseTransitions: 21
+    renewTime: "2025-09-16T02:51:31.742065Z"
+kind: List
+metadata:
+  resourceVersion: ""

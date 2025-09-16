@@ -1,0 +1,13 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2025-08-29T00:12:41Z"
+    name: carbon-frontend-nodeport
+    namespace: data
+    resourceVersion: "705540"
+    uid: def1b8d7-f2ba-445a-bb0a-0076f0a7fd69
+kind: List
+metadata:
+  resourceVersion: ""

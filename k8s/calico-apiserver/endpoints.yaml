@@ -1,0 +1,37 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2025-09-15T01:03:24Z"
+    creationTimestamp: "2025-08-27T01:42:34Z"
+    labels:
+      k8s-app: tigera-api
+    name: calico-api
+    namespace: calico-apiserver
+    resourceVersion: "876708"
+    uid: 044b83a8-f967-4c22-a96b-4b1e3feb501a
+  subsets:
+  - addresses:
+    - ip: 10.244.43.20
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: calico-apiserver-5d8c5f665c-fldcp
+        namespace: calico-apiserver
+        uid: 3f0351b8-3d84-4ec9-a697-ef1875cdf0fe
+    - ip: 10.244.43.23
+      nodeName: k8s-master-cp
+      targetRef:
+        kind: Pod
+        name: calico-apiserver-5d8c5f665c-lfgzr
+        namespace: calico-apiserver
+        uid: d5b638bc-3edd-4d6a-8c34-91962526c4a6
+    ports:
+    - name: apiserver
+      port: 5443
+      protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""

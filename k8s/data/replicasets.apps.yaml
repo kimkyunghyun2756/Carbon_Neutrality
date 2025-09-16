@@ -1,0 +1,754 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "9"
+    creationTimestamp: "2025-08-29T01:50:12Z"
+    generation: 3
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 54fc98f8fd
+    name: carbon-frontend-54fc98f8fd
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "383367"
+    uid: cd7b201f-db8e-4d62-a517-79d360d39c91
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 54fc98f8fd
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T01:44:24Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 54fc98f8fd
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 3
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "16"
+    creationTimestamp: "2025-08-29T04:55:45Z"
+    generation: 2
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 58dfddb4f8
+    name: carbon-frontend-58dfddb4f8
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "414514"
+    uid: 2c31f81b-63fb-4c48-b7bb-25ab8ac8a59a
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 58dfddb4f8
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T04:55:45Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 58dfddb4f8
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "15"
+    creationTimestamp: "2025-08-29T04:45:25Z"
+    generation: 2
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 64dccc784c
+    name: carbon-frontend-64dccc784c
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "413154"
+    uid: 0095a315-bf5c-4943-8edf-7500dc9387f9
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 64dccc784c
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T04:45:25Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 64dccc784c
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "7"
+    creationTimestamp: "2025-08-29T01:36:46Z"
+    generation: 2
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 66d79978d8
+    name: carbon-frontend-66d79978d8
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "382274"
+    uid: d082fe43-0392-4587-b1fc-bdc67a4324d3
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 66d79978d8
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T00:06:21Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 66d79978d8
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/Carbon_Neutrality/carbon-frontend:sha-d088d683e0d73f63202a7ceec77748f95e4c779e
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "10"
+    creationTimestamp: "2025-08-29T01:50:41Z"
+    generation: 2
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 6795f97564
+    name: carbon-frontend-6795f97564
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "384228"
+    uid: fc129e02-2f79-4575-93bf-c77dc8ed2f2a
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 6795f97564
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T01:50:41Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 6795f97564
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "8"
+    creationTimestamp: "2025-08-29T01:44:24Z"
+    generation: 3
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 697974cd94
+    name: carbon-frontend-697974cd94
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "383204"
+    uid: 2a5c3256-6e3f-48d0-ae5b-8f1f9ddd23b6
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 697974cd94
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T01:44:24Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 697974cd94
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/Carbon_Neutrality/carbon-frontend:sha-d088d683e0d73f63202a7ceec77748f95e4c779e
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 3
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "13"
+    creationTimestamp: "2025-08-29T02:46:12Z"
+    generation: 2
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 6bf86d4f97
+    name: carbon-frontend-6bf86d4f97
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "392988"
+    uid: 389d7812-4b74-4e0a-a315-58265d37dc58
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 6bf86d4f97
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T02:46:11Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 6bf86d4f97
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "11"
+    creationTimestamp: "2025-08-29T01:55:57Z"
+    generation: 2
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 795b6f8c86
+    name: carbon-frontend-795b6f8c86
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "385554"
+    uid: 3707dc12-7a2b-4f82-a792-74b92bf3909c
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 795b6f8c86
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T01:55:57Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 795b6f8c86
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "17"
+    creationTimestamp: "2025-08-29T05:04:18Z"
+    generation: 1
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 7df495597c
+    name: carbon-frontend-7df495597c
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "705574"
+    uid: 5255f8dd-3837-4532-9e9b-a9d57837adc5
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 7df495597c
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T05:04:18Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 7df495597c
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "12"
+    creationTimestamp: "2025-08-29T02:02:20Z"
+    generation: 2
+    labels:
+      app: carbon-frontend
+      pod-template-hash: 965cf8f8f
+    name: carbon-frontend-965cf8f8f
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "392438"
+    uid: 69dd58a4-322b-4ee1-a7c8-fdfa0c7308bc
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: 965cf8f8f
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T02:02:20Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: 965cf8f8f
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "14"
+    creationTimestamp: "2025-08-29T02:50:50Z"
+    generation: 2
+    labels:
+      app: carbon-frontend
+      pod-template-hash: d66c98bc5
+    name: carbon-frontend-d66c98bc5
+    namespace: data
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: carbon-frontend
+      uid: 134efea0-2fd5-4431-92ee-d4074cb4a7f5
+    resourceVersion: "411285"
+    uid: 127e9579-8a18-4229-a7cc-74a76acddcd1
+  spec:
+    replicas: 0
+    selector:
+      matchLabels:
+        app: carbon-frontend
+        pod-template-hash: d66c98bc5
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2025-08-29T02:50:50Z"
+        creationTimestamp: null
+        labels:
+          app: carbon-frontend
+          pod-template-hash: d66c98bc5
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-frontend-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-frontend:main
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+          - containerPort: 8501
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 2
+    replicas: 0
+kind: List
+metadata:
+  resourceVersion: ""

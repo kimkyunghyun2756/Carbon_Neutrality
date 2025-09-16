@@ -1,0 +1,19 @@
+apiVersion: v1
+items:
+- apiVersion: coordination.k8s.io/v1
+  kind: Lease
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:32Z"
+    name: operator-lock
+    namespace: tigera-operator
+    resourceVersion: "705416"
+    uid: 6c77686d-958c-436a-af44-a18b0419fa5b
+  spec:
+    acquireTime: "2025-09-01T00:48:23.255528Z"
+    holderIdentity: k8s-monitoring_930b74d3-c2cf-4833-8829-bf25a07ef2b5
+    leaseDurationSeconds: 15
+    leaseTransitions: 23
+    renewTime: "2025-09-01T09:57:32.712426Z"
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,20 @@
+apiVersion: v1
+items:
+- apiVersion: crd.projectcalico.org/v1
+  kind: ClusterInformation
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"uid":"7130ef0b-98fa-4a0b-8fc0-468e27fa6bb1","creationTimestamp":"2025-08-27T01:42:51Z"}'
+    creationTimestamp: "2025-08-27T01:42:51Z"
+    generation: 11
+    name: default
+    resourceVersion: "100957"
+    uid: 7130ef0b-98fa-4a0b-8fc0-468e27fa6bb1
+  spec:
+    calicoVersion: v3.27.3
+    clusterGUID: b62ba9b63299458495c9ba50e273f5ff
+    clusterType: typha,kdd,k8s,operator,kubeadm,bgp
+    datastoreReady: true
+kind: List
+metadata:
+  resourceVersion: ""

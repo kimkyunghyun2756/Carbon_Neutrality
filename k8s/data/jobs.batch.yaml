@@ -1,0 +1,167 @@
+apiVersion: v1
+items:
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    annotations:
+      batch.kubernetes.io/cronjob-scheduled-timestamp: "2025-09-01T03:00:00Z"
+    creationTimestamp: "2025-09-01T03:00:00Z"
+    generation: 1
+    labels:
+      batch.kubernetes.io/controller-uid: b22f699d-1d02-4806-ab00-7d93cfa0ae65
+      batch.kubernetes.io/job-name: carbon-etl-29278260
+      controller-uid: b22f699d-1d02-4806-ab00-7d93cfa0ae65
+      job-name: carbon-etl-29278260
+    name: carbon-etl-29278260
+    namespace: data
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CronJob
+      name: carbon-etl
+      uid: 242e7262-b93c-4df8-9e9e-ab5fd13bf6c8
+    resourceVersion: "639940"
+    uid: b22f699d-1d02-4806-ab00-7d93cfa0ae65
+  spec:
+    backoffLimit: 1
+    completionMode: NonIndexed
+    completions: 1
+    manualSelector: false
+    parallelism: 1
+    podReplacementPolicy: TerminatingOrFailed
+    selector:
+      matchLabels:
+        batch.kubernetes.io/controller-uid: b22f699d-1d02-4806-ab00-7d93cfa0ae65
+    suspend: false
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          batch.kubernetes.io/controller-uid: b22f699d-1d02-4806-ab00-7d93cfa0ae65
+          batch.kubernetes.io/job-name: carbon-etl-29278260
+          controller-uid: b22f699d-1d02-4806-ab00-7d93cfa0ae65
+          job-name: carbon-etl-29278260
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-etl-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-etl:main
+          imagePullPolicy: Always
+          name: etl
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data
+            name: csv
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        imagePullSecrets:
+        - name: ghcr-creds
+        nodeSelector:
+          kubernetes.io/hostname: k8s-backend
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: csv
+          persistentVolumeClaim:
+            claimName: carbon-data-pvc
+  status:
+    completionTime: "2025-09-01T03:06:32Z"
+    conditions:
+    - lastProbeTime: "2025-09-01T03:06:32Z"
+      lastTransitionTime: "2025-09-01T03:06:32Z"
+      status: "True"
+      type: Complete
+    ready: 0
+    startTime: "2025-09-01T03:00:00Z"
+    succeeded: 1
+    terminating: 0
+    uncountedTerminatedPods: {}
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    annotations:
+      batch.kubernetes.io/cronjob-scheduled-timestamp: "2025-09-02T03:00:00Z"
+    creationTimestamp: "2025-09-02T03:00:00Z"
+    generation: 1
+    labels:
+      batch.kubernetes.io/controller-uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+      batch.kubernetes.io/job-name: carbon-etl-29279700
+      controller-uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+      job-name: carbon-etl-29279700
+    name: carbon-etl-29279700
+    namespace: data
+    ownerReferences:
+    - apiVersion: batch/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CronJob
+      name: carbon-etl
+      uid: 242e7262-b93c-4df8-9e9e-ab5fd13bf6c8
+    resourceVersion: "773859"
+    uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+  spec:
+    backoffLimit: 1
+    completionMode: NonIndexed
+    completions: 1
+    manualSelector: false
+    parallelism: 1
+    podReplacementPolicy: TerminatingOrFailed
+    selector:
+      matchLabels:
+        batch.kubernetes.io/controller-uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+    suspend: false
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          batch.kubernetes.io/controller-uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+          batch.kubernetes.io/job-name: carbon-etl-29279700
+          controller-uid: 3c5d952a-ee57-412b-9b64-e9886783e7b2
+          job-name: carbon-etl-29279700
+      spec:
+        containers:
+        - envFrom:
+          - configMapRef:
+              name: carbon-etl-config
+          - secretRef:
+              name: appdb-credentials
+          image: ghcr.io/kimkyunghyun2756/carbon_neutrality/carbon-etl:main
+          imagePullPolicy: Always
+          name: etl
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data
+            name: csv
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        imagePullSecrets:
+        - name: ghcr-creds
+        nodeSelector:
+          kubernetes.io/hostname: k8s-backend
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: csv
+          persistentVolumeClaim:
+            claimName: carbon-data-pvc
+  status:
+    active: 1
+    ready: 0
+    startTime: "2025-09-02T03:00:00Z"
+    terminating: 0
+    uncountedTerminatedPods: {}
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,127 @@
+apiVersion: v1
+items:
+- apiVersion: monitoring.coreos.com/v1
+  kind: Prometheus
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2025-08-28T08:50:06Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-prometheus
+      app.kubernetes.io/instance: kube-prometheus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 77.0.2
+      chart: kube-prometheus-stack-77.0.2
+      heritage: Helm
+      release: kube-prometheus
+    name: kube-prometheus-kube-prome-prometheus
+    namespace: monitoring
+    resourceVersion: "702478"
+    uid: 3a40bc89-eec2-4f31-a279-06f3e40d5487
+  spec:
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - prometheus
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                - kube-prometheus-kube-prome-prometheus
+            topologyKey: kubernetes.io/hostname
+          weight: 100
+    alerting:
+      alertmanagers:
+      - apiVersion: v2
+        name: kube-prometheus-kube-prome-alertmanager
+        namespace: monitoring
+        pathPrefix: /
+        port: http-web
+    automountServiceAccountToken: true
+    enableAdminAPI: false
+    enableOTLPReceiver: false
+    evaluationInterval: 30s
+    externalUrl: http://kube-prometheus-kube-prome-prometheus.monitoring:9090
+    hostNetwork: false
+    image: quay.io/prometheus/prometheus:v3.5.0
+    imagePullPolicy: IfNotPresent
+    listenLocal: false
+    logFormat: logfmt
+    logLevel: info
+    paused: false
+    podMonitorNamespaceSelector: {}
+    podMonitorSelector:
+      matchLabels:
+        release: kube-prometheus
+    portName: http-web
+    probeNamespaceSelector: {}
+    probeSelector:
+      matchLabels:
+        release: kube-prometheus
+    replicas: 1
+    retention: 10d
+    routePrefix: /
+    ruleNamespaceSelector: {}
+    ruleSelector:
+      matchLabels:
+        release: kube-prometheus
+    scrapeConfigNamespaceSelector: {}
+    scrapeConfigSelector:
+      matchLabels:
+        release: kube-prometheus
+    scrapeInterval: 30s
+    securityContext:
+      fsGroup: 2000
+      runAsGroup: 2000
+      runAsNonRoot: true
+      runAsUser: 1000
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccountName: kube-prometheus-kube-prome-prometheus
+    serviceMonitorNamespaceSelector: {}
+    serviceMonitorSelector:
+      matchLabels:
+        release: kube-prometheus
+    shards: 1
+    tsdb:
+      outOfOrderTimeWindow: 0s
+    version: v3.5.0
+    walCompression: true
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2025-09-01T09:38:20Z"
+      message: ""
+      observedGeneration: 1
+      reason: ""
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2025-09-01T09:38:20Z"
+      message: ""
+      observedGeneration: 1
+      reason: ""
+      status: "True"
+      type: Reconciled
+    paused: false
+    replicas: 1
+    selector: app.kubernetes.io/instance=kube-prometheus-kube-prome-prometheus,app.kubernetes.io/managed-by=prometheus-operator,app.kubernetes.io/name=prometheus,operator.prometheus.io/name=kube-prometheus-kube-prome-prometheus,prometheus=kube-prometheus-kube-prome-prometheus
+    shardStatuses:
+    - availableReplicas: 1
+      replicas: 1
+      shardID: "0"
+      unavailableReplicas: 0
+      updatedReplicas: 1
+    shards: 1
+    unavailableReplicas: 0
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,146 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      prometheus.io/port: "9094"
+      prometheus.io/scrape: "true"
+    creationTimestamp: "2025-08-27T01:44:44Z"
+    labels:
+      k8s-app: calico-kube-controllers
+    name: calico-kube-controllers-metrics
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Installation
+      name: default
+      uid: 55efc27a-ab47-47c5-80f3-3c474ac3753a
+    resourceVersion: "1910"
+    uid: 38d98074-f574-40d6-964b-a2af6f2266d2
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics-port
+      port: 9094
+      protocol: TCP
+      targetPort: 9094
+    selector:
+      k8s-app: calico-kube-controllers
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    labels:
+      k8s-app: calico-typha
+    name: calico-typha
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Installation
+      name: default
+      uid: 55efc27a-ab47-47c5-80f3-3c474ac3753a
+    resourceVersion: "1187"
+    uid: bd31fe0a-3072-42d9-8dc1-f2224294e4ef
+  spec:
+    clusterIP: 10.105.233.64
+    clusterIPs:
+    - 10.105.233.64
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: calico-typha
+      port: 5473
+      protocol: TCP
+      targetPort: calico-typha
+    selector:
+      k8s-app: calico-typha
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: goldmane
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Goldmane
+      name: default
+      uid: 6d657107-94ee-4c2e-a139-a6f20e5849cc
+    resourceVersion: "1173"
+    uid: c8b3906b-7bd6-4d51-86b5-db878330784a
+  spec:
+    clusterIP: 10.109.242.5
+    clusterIPs:
+    - 10.109.242.5
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7443
+      protocol: TCP
+      targetPort: 7443
+    selector:
+      k8s-app: goldmane
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2025-08-27T01:42:38Z"
+    name: whisker
+    namespace: calico-system
+    ownerReferences:
+    - apiVersion: operator.tigera.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Whisker
+      name: default
+      uid: 77e363cc-dc5f-4d04-aa25-66621666306a
+    resourceVersion: "1149"
+    uid: 4c24a2fb-6d45-44bf-ba98-4fef963c822b
+  spec:
+    clusterIP: 10.98.32.46
+    clusterIPs:
+    - 10.98.32.46
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8081
+      protocol: TCP
+      targetPort: 8081
+    selector:
+      k8s-app: whisker
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

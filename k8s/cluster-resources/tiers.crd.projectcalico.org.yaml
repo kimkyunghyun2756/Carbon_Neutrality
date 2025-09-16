@@ -1,0 +1,44 @@
+apiVersion: v1
+items:
+- apiVersion: crd.projectcalico.org/v1
+  kind: Tier
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":"2025-08-27T01:42:51Z"}'
+    creationTimestamp: "2025-08-27T01:42:51Z"
+    generation: 1
+    name: adminnetworkpolicy
+    resourceVersion: "1329"
+    uid: 2c17a67f-0956-4754-a017-7ee698012a4b
+  spec:
+    defaultAction: Pass
+    order: 1000
+- apiVersion: crd.projectcalico.org/v1
+  kind: Tier
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":"2025-08-27T01:42:51Z"}'
+    creationTimestamp: "2025-08-27T01:42:51Z"
+    generation: 1
+    name: baselineadminnetworkpolicy
+    resourceVersion: "1331"
+    uid: f1d6c150-88e6-4dd2-949f-7f91ad22ca6c
+  spec:
+    defaultAction: Pass
+    order: 10000000
+- apiVersion: crd.projectcalico.org/v1
+  kind: Tier
+  metadata:
+    annotations:
+      projectcalico.org/metadata: '{"creationTimestamp":"2025-08-27T01:42:51Z"}'
+    creationTimestamp: "2025-08-27T01:42:51Z"
+    generation: 1
+    name: default
+    resourceVersion: "1327"
+    uid: 7b43d1b7-b1e6-446f-937c-50df3d85b8ea
+  spec:
+    defaultAction: Deny
+    order: 1000000
+kind: List
+metadata:
+  resourceVersion: ""

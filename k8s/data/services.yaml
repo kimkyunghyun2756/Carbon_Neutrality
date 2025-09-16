@@ -1,0 +1,37 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"carbon-frontend-nodeport","namespace":"data"},"spec":{"ports":[{"name":"http","nodePort":30080,"port":80,"targetPort":8501}],"selector":{"app":"carbon-frontend"},"type":"NodePort"}}
+    creationTimestamp: "2025-08-29T00:12:41Z"
+    name: carbon-frontend-nodeport
+    namespace: data
+    resourceVersion: "367535"
+    uid: ebb75275-0332-44a1-917e-73f15d77f238
+  spec:
+    clusterIP: 10.108.182.33
+    clusterIPs:
+    - 10.108.182.33
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      nodePort: 30080
+      port: 80
+      protocol: TCP
+      targetPort: 8501
+    selector:
+      app: carbon-frontend
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

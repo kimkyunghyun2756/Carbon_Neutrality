@@ -1,0 +1,1710 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          creationTimestamp: null
+          labels:
+            k8s-app: calico-node
+        spec:
+          containers:
+          - env:
+            - name: DATASTORE_TYPE
+              value: kubernetes
+            - name: IP
+              value: autodetect
+            - name: CALICO_NETWORKING_BACKEND
+              value: bird
+            - name: CLUSTER_TYPE
+              value: k8s,bgp
+            - name: CALICO_IPV4POOL_CIDR
+              value: 10.244.0.0/16
+            - name: CALICO_IPV4POOL_IPIP
+              value: Always
+            - name: CALICO_IPV4POOL_VXLAN
+              value: Never
+            - name: FELIX_HEALTHENABLED
+              value: "true"
+            - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
+              value: ACCEPT
+            image: docker.io/calico/node:v3.27.3
+            imagePullPolicy: IfNotPresent
+            name: calico-node
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+            - mountPath: /var/run/calico
+              name: var-run-calico
+          dnsPolicy: ClusterFirst
+          nodeSelector:
+            kubernetes.io/os: linux
+            node-role.kubernetes.io/control-plane: "false"
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: calico-node
+          serviceAccountName: calico-node
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+          - hostPath:
+              path: /var/run/calico
+              type: ""
+            name: var-run-calico
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"k8s-app":"calico-node"},"name":"calico-node","namespace":"kube-system"},"spec":{"selector":{"matchLabels":{"k8s-app":"calico-node"}},"template":{"metadata":{"labels":{"k8s-app":"calico-node"}},"spec":{"containers":[{"env":[{"name":"DATASTORE_TYPE","value":"kubernetes"},{"name":"IP","value":"autodetect"},{"name":"CALICO_NETWORKING_BACKEND","value":"bird"},{"name":"CLUSTER_TYPE","value":"k8s,bgp"},{"name":"CALICO_IPV4POOL_CIDR","value":"10.244.0.0/16"},{"name":"CALICO_IPV4POOL_IPIP","value":"Always"},{"name":"CALICO_IPV4POOL_VXLAN","value":"Never"},{"name":"FELIX_HEALTHENABLED","value":"true"},{"name":"FELIX_DEFAULTENDPOINTTOHOSTACTION","value":"ACCEPT"}],"image":"docker.io/calico/node:v3.27.3","name":"calico-node","volumeMounts":[{"mountPath":"/lib/modules","name":"lib-modules","readOnly":true},{"mountPath":"/var/run/calico","name":"var-run-calico"}]}],"nodeSelector":{"kubernetes.io/os":"linux"},"serviceAccountName":"calico-node","tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/control-plane","operator":"Exists"}],"volumes":[{"hostPath":{"path":"/lib/modules"},"name":"lib-modules"},{"hostPath":{"path":"/var/run/calico"},"name":"var-run-calico"}]}}}}
+    creationTimestamp: "2025-08-28T08:27:27Z"
+    labels:
+      controller-revision-hash: 5d8ff78c4f
+      k8s-app: calico-node
+    name: calico-node-5d8ff78c4f
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: calico-node
+      uid: 7424ee30-fb1c-41e6-b7bd-a32528205027
+    resourceVersion: "100094"
+    uid: 4bf21644-3bbd-4a3f-a5f2-ab9b8ee0f823
+  revision: 2
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          creationTimestamp: null
+          labels:
+            k8s-app: calico-node
+        spec:
+          containers:
+          - env:
+            - name: DATASTORE_TYPE
+              value: kubernetes
+            - name: WAIT_FOR_DATASTORE
+              value: "true"
+            - name: NODENAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CALICO_NETWORKING_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  key: calico_backend
+                  name: calico-config
+            - name: CLUSTER_TYPE
+              value: k8s,bgp
+            - name: IP
+              value: autodetect
+            - name: CALICO_IPV4POOL_IPIP
+              value: Always
+            - name: CALICO_IPV4POOL_VXLAN
+              value: Never
+            - name: CALICO_IPV6POOL_VXLAN
+              value: Never
+            - name: FELIX_IPINIPMTU
+              valueFrom:
+                configMapKeyRef:
+                  key: veth_mtu
+                  name: calico-config
+            - name: FELIX_VXLANMTU
+              valueFrom:
+                configMapKeyRef:
+                  key: veth_mtu
+                  name: calico-config
+            - name: FELIX_WIREGUARDMTU
+              valueFrom:
+                configMapKeyRef:
+                  key: veth_mtu
+                  name: calico-config
+            - name: CALICO_DISABLE_FILE_LOGGING
+              value: "true"
+            - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
+              value: ACCEPT
+            - name: FELIX_IPV6SUPPORT
+              value: "false"
+            - name: FELIX_HEALTHENABLED
+              value: "true"
+            envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+            image: docker.io/calico/node:v3.27.3
+            imagePullPolicy: IfNotPresent
+            lifecycle:
+              preStop:
+                exec:
+                  command:
+                  - /bin/calico-node
+                  - -shutdown
+            livenessProbe:
+              exec:
+                command:
+                - /bin/calico-node
+                - -felix-live
+                - -bird-live
+              failureThreshold: 6
+              initialDelaySeconds: 10
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 10
+            name: calico-node
+            readinessProbe:
+              exec:
+                command:
+                - /bin/calico-node
+                - -felix-ready
+                - -bird-ready
+              failureThreshold: 3
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 10
+            resources:
+              requests:
+                cpu: 250m
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /host/etc/cni/net.d
+              name: cni-net-dir
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /var/run/calico
+              name: var-run-calico
+            - mountPath: /var/lib/calico
+              name: var-lib-calico
+            - mountPath: /var/run/nodeagent
+              name: policysync
+            - mountPath: /sys/fs/bpf
+              name: bpffs
+            - mountPath: /var/log/calico/cni
+              name: cni-log-dir
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          initContainers:
+          - command:
+            - /opt/cni/bin/calico-ipam
+            - -upgrade
+            env:
+            - name: KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CALICO_NETWORKING_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  key: calico_backend
+                  name: calico-config
+            envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+            image: docker.io/calico/cni:v3.27.3
+            imagePullPolicy: IfNotPresent
+            name: upgrade-ipam
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/cni/networks
+              name: host-local-net-dir
+            - mountPath: /host/opt/cni/bin
+              name: cni-bin-dir
+          - command:
+            - /opt/cni/bin/install
+            env:
+            - name: CNI_CONF_NAME
+              value: 10-calico.conflist
+            - name: CNI_NETWORK_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  key: cni_network_config
+                  name: calico-config
+            - name: KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CNI_MTU
+              valueFrom:
+                configMapKeyRef:
+                  key: veth_mtu
+                  name: calico-config
+            - name: SLEEP
+              value: "false"
+            envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+            image: docker.io/calico/cni:v3.27.3
+            imagePullPolicy: IfNotPresent
+            name: install-cni
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /host/opt/cni/bin
+              name: cni-bin-dir
+            - mountPath: /host/etc/cni/net.d
+              name: cni-net-dir
+          - command:
+            - calico-node
+            - -init
+            - -best-effort
+            image: docker.io/calico/node:v3.27.3
+            imagePullPolicy: IfNotPresent
+            name: mount-bpffs
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /sys/fs
+              mountPropagation: Bidirectional
+              name: sys-fs
+            - mountPath: /var/run/calico
+              mountPropagation: Bidirectional
+              name: var-run-calico
+            - mountPath: /nodeproc
+              name: nodeproc
+              readOnly: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: calico-node
+          serviceAccountName: calico-node
+          terminationGracePeriodSeconds: 0
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          - key: CriticalAddonsOnly
+            operator: Exists
+          - effect: NoExecute
+            operator: Exists
+          volumes:
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+          - hostPath:
+              path: /var/run/calico
+              type: ""
+            name: var-run-calico
+          - hostPath:
+              path: /var/lib/calico
+              type: ""
+            name: var-lib-calico
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /sys/fs/
+              type: DirectoryOrCreate
+            name: sys-fs
+          - hostPath:
+              path: /sys/fs/bpf
+              type: Directory
+            name: bpffs
+          - hostPath:
+              path: /proc
+              type: ""
+            name: nodeproc
+          - hostPath:
+              path: /opt/cni/bin
+              type: ""
+            name: cni-bin-dir
+          - hostPath:
+              path: /etc/cni/net.d
+              type: ""
+            name: cni-net-dir
+          - hostPath:
+              path: /var/log/calico/cni
+              type: ""
+            name: cni-log-dir
+          - hostPath:
+              path: /var/lib/cni/networks
+              type: ""
+            name: host-local-net-dir
+          - hostPath:
+              path: /var/run/nodeagent
+              type: DirectoryOrCreate
+            name: policysync
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "4"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"k8s-app":"calico-node"},"name":"calico-node","namespace":"kube-system"},"spec":{"selector":{"matchLabels":{"k8s-app":"calico-node"}},"template":{"metadata":{"labels":{"k8s-app":"calico-node"}},"spec":{"containers":[{"env":[{"name":"DATASTORE_TYPE","value":"kubernetes"},{"name":"WAIT_FOR_DATASTORE","value":"true"},{"name":"NODENAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"CALICO_NETWORKING_BACKEND","valueFrom":{"configMapKeyRef":{"key":"calico_backend","name":"calico-config"}}},{"name":"CLUSTER_TYPE","value":"k8s,bgp"},{"name":"IP","value":"autodetect"},{"name":"CALICO_IPV4POOL_IPIP","value":"Always"},{"name":"CALICO_IPV4POOL_VXLAN","value":"Never"},{"name":"CALICO_IPV6POOL_VXLAN","value":"Never"},{"name":"FELIX_IPINIPMTU","valueFrom":{"configMapKeyRef":{"key":"veth_mtu","name":"calico-config"}}},{"name":"FELIX_VXLANMTU","valueFrom":{"configMapKeyRef":{"key":"veth_mtu","name":"calico-config"}}},{"name":"FELIX_WIREGUARDMTU","valueFrom":{"configMapKeyRef":{"key":"veth_mtu","name":"calico-config"}}},{"name":"CALICO_DISABLE_FILE_LOGGING","value":"true"},{"name":"FELIX_DEFAULTENDPOINTTOHOSTACTION","value":"ACCEPT"},{"name":"FELIX_IPV6SUPPORT","value":"false"},{"name":"FELIX_HEALTHENABLED","value":"true"}],"envFrom":[{"configMapRef":{"name":"kubernetes-services-endpoint","optional":true}}],"image":"docker.io/calico/node:v3.27.3","imagePullPolicy":"IfNotPresent","lifecycle":{"preStop":{"exec":{"command":["/bin/calico-node","-shutdown"]}}},"livenessProbe":{"exec":{"command":["/bin/calico-node","-felix-live","-bird-live"]},"failureThreshold":6,"initialDelaySeconds":10,"periodSeconds":10,"timeoutSeconds":10},"name":"calico-node","readinessProbe":{"exec":{"command":["/bin/calico-node","-felix-ready","-bird-ready"]},"periodSeconds":10,"timeoutSeconds":10},"resources":{"requests":{"cpu":"250m"}},"securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/host/etc/cni/net.d","name":"cni-net-dir","readOnly":false},{"mountPath":"/lib/modules","name":"lib-modules","readOnly":true},{"mountPath":"/run/xtables.lock","name":"xtables-lock","readOnly":false},{"mountPath":"/var/run/calico","name":"var-run-calico","readOnly":false},{"mountPath":"/var/lib/calico","name":"var-lib-calico","readOnly":false},{"mountPath":"/var/run/nodeagent","name":"policysync"},{"mountPath":"/sys/fs/bpf","name":"bpffs"},{"mountPath":"/var/log/calico/cni","name":"cni-log-dir","readOnly":true}]}],"hostNetwork":true,"initContainers":[{"command":["/opt/cni/bin/calico-ipam","-upgrade"],"env":[{"name":"KUBERNETES_NODE_NAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"CALICO_NETWORKING_BACKEND","valueFrom":{"configMapKeyRef":{"key":"calico_backend","name":"calico-config"}}}],"envFrom":[{"configMapRef":{"name":"kubernetes-services-endpoint","optional":true}}],"image":"docker.io/calico/cni:v3.27.3","imagePullPolicy":"IfNotPresent","name":"upgrade-ipam","securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/var/lib/cni/networks","name":"host-local-net-dir"},{"mountPath":"/host/opt/cni/bin","name":"cni-bin-dir"}]},{"command":["/opt/cni/bin/install"],"env":[{"name":"CNI_CONF_NAME","value":"10-calico.conflist"},{"name":"CNI_NETWORK_CONFIG","valueFrom":{"configMapKeyRef":{"key":"cni_network_config","name":"calico-config"}}},{"name":"KUBERNETES_NODE_NAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"CNI_MTU","valueFrom":{"configMapKeyRef":{"key":"veth_mtu","name":"calico-config"}}},{"name":"SLEEP","value":"false"}],"envFrom":[{"configMapRef":{"name":"kubernetes-services-endpoint","optional":true}}],"image":"docker.io/calico/cni:v3.27.3","imagePullPolicy":"IfNotPresent","name":"install-cni","securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/host/opt/cni/bin","name":"cni-bin-dir"},{"mountPath":"/host/etc/cni/net.d","name":"cni-net-dir"}]},{"command":["calico-node","-init","-best-effort"],"image":"docker.io/calico/node:v3.27.3","imagePullPolicy":"IfNotPresent","name":"mount-bpffs","securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/sys/fs","mountPropagation":"Bidirectional","name":"sys-fs"},{"mountPath":"/var/run/calico","mountPropagation":"Bidirectional","name":"var-run-calico"},{"mountPath":"/nodeproc","name":"nodeproc","readOnly":true}]}],"nodeSelector":{"kubernetes.io/os":"linux"},"priorityClassName":"system-node-critical","serviceAccountName":"calico-node","terminationGracePeriodSeconds":0,"tolerations":[{"effect":"NoSchedule","operator":"Exists"},{"key":"CriticalAddonsOnly","operator":"Exists"},{"effect":"NoExecute","operator":"Exists"}],"volumes":[{"hostPath":{"path":"/lib/modules"},"name":"lib-modules"},{"hostPath":{"path":"/var/run/calico"},"name":"var-run-calico"},{"hostPath":{"path":"/var/lib/calico"},"name":"var-lib-calico"},{"hostPath":{"path":"/run/xtables.lock","type":"FileOrCreate"},"name":"xtables-lock"},{"hostPath":{"path":"/sys/fs/","type":"DirectoryOrCreate"},"name":"sys-fs"},{"hostPath":{"path":"/sys/fs/bpf","type":"Directory"},"name":"bpffs"},{"hostPath":{"path":"/proc"},"name":"nodeproc"},{"hostPath":{"path":"/opt/cni/bin"},"name":"cni-bin-dir"},{"hostPath":{"path":"/etc/cni/net.d"},"name":"cni-net-dir"},{"hostPath":{"path":"/var/log/calico/cni"},"name":"cni-log-dir"},{"hostPath":{"path":"/var/lib/cni/networks"},"name":"host-local-net-dir"},{"hostPath":{"path":"/var/run/nodeagent","type":"DirectoryOrCreate"},"name":"policysync"}]}},"updateStrategy":{"rollingUpdate":{"maxUnavailable":1},"type":"RollingUpdate"}}}
+    creationTimestamp: "2025-08-28T08:31:16Z"
+    labels:
+      controller-revision-hash: 7cdf66d5f5
+      k8s-app: calico-node
+    name: calico-node-7cdf66d5f5
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: calico-node
+      uid: 7424ee30-fb1c-41e6-b7bd-a32528205027
+    resourceVersion: "100855"
+    uid: 33e4e9a5-94a0-4180-97fd-47f29844e9b3
+  revision: 4
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          creationTimestamp: null
+          labels:
+            k8s-app: calico-node
+        spec:
+          containers:
+          - env:
+            - name: DATASTORE_TYPE
+              value: kubernetes
+            - name: WAIT_FOR_DATASTORE
+              value: "true"
+            - name: NODENAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CALICO_NETWORKING_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  key: calico_backend
+                  name: calico-config
+            - name: CLUSTER_TYPE
+              value: k8s,bgp
+            - name: IP
+              value: autodetect
+            - name: CALICO_IPV4POOL_IPIP
+              value: Always
+            - name: CALICO_IPV4POOL_VXLAN
+              value: Never
+            - name: CALICO_IPV6POOL_VXLAN
+              value: Never
+            - name: FELIX_IPINIPMTU
+              valueFrom:
+                configMapKeyRef:
+                  key: veth_mtu
+                  name: calico-config
+            - name: FELIX_VXLANMTU
+              valueFrom:
+                configMapKeyRef:
+                  key: veth_mtu
+                  name: calico-config
+            - name: FELIX_WIREGUARDMTU
+              valueFrom:
+                configMapKeyRef:
+                  key: veth_mtu
+                  name: calico-config
+            - name: CALICO_DISABLE_FILE_LOGGING
+              value: "true"
+            - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
+              value: ACCEPT
+            - name: FELIX_IPV6SUPPORT
+              value: "false"
+            - name: FELIX_HEALTHENABLED
+              value: "true"
+            envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+            image: docker.io/calico/node:v3.27.3
+            imagePullPolicy: IfNotPresent
+            lifecycle:
+              preStop:
+                exec:
+                  command:
+                  - /bin/calico-node
+                  - -shutdown
+            livenessProbe:
+              exec:
+                command:
+                - /bin/calico-node
+                - -felix-live
+                - -bird-live
+              failureThreshold: 6
+              initialDelaySeconds: 10
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 10
+            name: calico-node
+            readinessProbe:
+              exec:
+                command:
+                - /bin/calico-node
+                - -felix-ready
+                - -bird-ready
+              failureThreshold: 3
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 10
+            resources:
+              requests:
+                cpu: 250m
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /host/etc/cni/net.d
+              name: cni-net-dir
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /var/run/calico
+              name: var-run-calico
+            - mountPath: /var/lib/calico
+              name: var-lib-calico
+            - mountPath: /var/run/nodeagent
+              name: policysync
+            - mountPath: /sys/fs/bpf
+              name: bpffs
+            - mountPath: /var/log/calico/cni
+              name: cni-log-dir
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          initContainers:
+          - command:
+            - /opt/cni/bin/calico-ipam
+            - -upgrade
+            env:
+            - name: KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CALICO_NETWORKING_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  key: calico_backend
+                  name: calico-config
+            envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+            image: docker.io/calico/cni:v3.27.3
+            imagePullPolicy: IfNotPresent
+            name: upgrade-ipam
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/cni/networks
+              name: host-local-net-dir
+            - mountPath: /host/opt/cni/bin
+              name: cni-bin-dir
+          - command:
+            - /opt/cni/bin/install
+            env:
+            - name: CNI_CONF_NAME
+              value: 10-calico.conflist
+            - name: CNI_NETWORK_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  key: cni_network_config
+                  name: calico-config
+            - name: KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CNI_MTU
+              valueFrom:
+                configMapKeyRef:
+                  key: veth_mtu
+                  name: calico-config
+            - name: SLEEP
+              value: "false"
+            envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+            image: docker.io/calico/cni:v3.27.3
+            imagePullPolicy: IfNotPresent
+            name: install-cni
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /host/opt/cni/bin
+              name: cni-bin-dir
+            - mountPath: /host/etc/cni/net.d
+              name: cni-net-dir
+          - command:
+            - calico-node
+            - -init
+            - -best-effort
+            image: docker.io/calico/node:v3.27.3
+            imagePullPolicy: IfNotPresent
+            name: mount-bpffs
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /sys/fs
+              mountPropagation: Bidirectional
+              name: sys-fs
+            - mountPath: /var/run/calico
+              mountPropagation: Bidirectional
+              name: var-run-calico
+            - mountPath: /nodeproc
+              name: nodeproc
+              readOnly: true
+          nodeSelector:
+            kubernetes.io/os: linux
+            node-role.kubernetes.io/control-plane: "false"
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: calico-node
+          serviceAccountName: calico-node
+          terminationGracePeriodSeconds: 0
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          - key: CriticalAddonsOnly
+            operator: Exists
+          - effect: NoExecute
+            operator: Exists
+          volumes:
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+          - hostPath:
+              path: /var/run/calico
+              type: ""
+            name: var-run-calico
+          - hostPath:
+              path: /var/lib/calico
+              type: ""
+            name: var-lib-calico
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /sys/fs/
+              type: DirectoryOrCreate
+            name: sys-fs
+          - hostPath:
+              path: /sys/fs/bpf
+              type: Directory
+            name: bpffs
+          - hostPath:
+              path: /proc
+              type: ""
+            name: nodeproc
+          - hostPath:
+              path: /opt/cni/bin
+              type: ""
+            name: cni-bin-dir
+          - hostPath:
+              path: /etc/cni/net.d
+              type: ""
+            name: cni-net-dir
+          - hostPath:
+              path: /var/log/calico/cni
+              type: ""
+            name: cni-log-dir
+          - hostPath:
+              path: /var/lib/cni/networks
+              type: ""
+            name: host-local-net-dir
+          - hostPath:
+              path: /var/run/nodeagent
+              type: DirectoryOrCreate
+            name: policysync
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"k8s-app":"calico-node"},"name":"calico-node","namespace":"kube-system"},"spec":{"selector":{"matchLabels":{"k8s-app":"calico-node"}},"template":{"metadata":{"labels":{"k8s-app":"calico-node"}},"spec":{"containers":[{"env":[{"name":"DATASTORE_TYPE","value":"kubernetes"},{"name":"WAIT_FOR_DATASTORE","value":"true"},{"name":"NODENAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"CALICO_NETWORKING_BACKEND","valueFrom":{"configMapKeyRef":{"key":"calico_backend","name":"calico-config"}}},{"name":"CLUSTER_TYPE","value":"k8s,bgp"},{"name":"IP","value":"autodetect"},{"name":"CALICO_IPV4POOL_IPIP","value":"Always"},{"name":"CALICO_IPV4POOL_VXLAN","value":"Never"},{"name":"CALICO_IPV6POOL_VXLAN","value":"Never"},{"name":"FELIX_IPINIPMTU","valueFrom":{"configMapKeyRef":{"key":"veth_mtu","name":"calico-config"}}},{"name":"FELIX_VXLANMTU","valueFrom":{"configMapKeyRef":{"key":"veth_mtu","name":"calico-config"}}},{"name":"FELIX_WIREGUARDMTU","valueFrom":{"configMapKeyRef":{"key":"veth_mtu","name":"calico-config"}}},{"name":"CALICO_DISABLE_FILE_LOGGING","value":"true"},{"name":"FELIX_DEFAULTENDPOINTTOHOSTACTION","value":"ACCEPT"},{"name":"FELIX_IPV6SUPPORT","value":"false"},{"name":"FELIX_HEALTHENABLED","value":"true"}],"envFrom":[{"configMapRef":{"name":"kubernetes-services-endpoint","optional":true}}],"image":"docker.io/calico/node:v3.27.3","imagePullPolicy":"IfNotPresent","lifecycle":{"preStop":{"exec":{"command":["/bin/calico-node","-shutdown"]}}},"livenessProbe":{"exec":{"command":["/bin/calico-node","-felix-live","-bird-live"]},"failureThreshold":6,"initialDelaySeconds":10,"periodSeconds":10,"timeoutSeconds":10},"name":"calico-node","readinessProbe":{"exec":{"command":["/bin/calico-node","-felix-ready","-bird-ready"]},"periodSeconds":10,"timeoutSeconds":10},"resources":{"requests":{"cpu":"250m"}},"securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/host/etc/cni/net.d","name":"cni-net-dir","readOnly":false},{"mountPath":"/lib/modules","name":"lib-modules","readOnly":true},{"mountPath":"/run/xtables.lock","name":"xtables-lock","readOnly":false},{"mountPath":"/var/run/calico","name":"var-run-calico","readOnly":false},{"mountPath":"/var/lib/calico","name":"var-lib-calico","readOnly":false},{"mountPath":"/var/run/nodeagent","name":"policysync"},{"mountPath":"/sys/fs/bpf","name":"bpffs"},{"mountPath":"/var/log/calico/cni","name":"cni-log-dir","readOnly":true}]}],"hostNetwork":true,"initContainers":[{"command":["/opt/cni/bin/calico-ipam","-upgrade"],"env":[{"name":"KUBERNETES_NODE_NAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"CALICO_NETWORKING_BACKEND","valueFrom":{"configMapKeyRef":{"key":"calico_backend","name":"calico-config"}}}],"envFrom":[{"configMapRef":{"name":"kubernetes-services-endpoint","optional":true}}],"image":"docker.io/calico/cni:v3.27.3","imagePullPolicy":"IfNotPresent","name":"upgrade-ipam","securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/var/lib/cni/networks","name":"host-local-net-dir"},{"mountPath":"/host/opt/cni/bin","name":"cni-bin-dir"}]},{"command":["/opt/cni/bin/install"],"env":[{"name":"CNI_CONF_NAME","value":"10-calico.conflist"},{"name":"CNI_NETWORK_CONFIG","valueFrom":{"configMapKeyRef":{"key":"cni_network_config","name":"calico-config"}}},{"name":"KUBERNETES_NODE_NAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"CNI_MTU","valueFrom":{"configMapKeyRef":{"key":"veth_mtu","name":"calico-config"}}},{"name":"SLEEP","value":"false"}],"envFrom":[{"configMapRef":{"name":"kubernetes-services-endpoint","optional":true}}],"image":"docker.io/calico/cni:v3.27.3","imagePullPolicy":"IfNotPresent","name":"install-cni","securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/host/opt/cni/bin","name":"cni-bin-dir"},{"mountPath":"/host/etc/cni/net.d","name":"cni-net-dir"}]},{"command":["calico-node","-init","-best-effort"],"image":"docker.io/calico/node:v3.27.3","imagePullPolicy":"IfNotPresent","name":"mount-bpffs","securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/sys/fs","mountPropagation":"Bidirectional","name":"sys-fs"},{"mountPath":"/var/run/calico","mountPropagation":"Bidirectional","name":"var-run-calico"},{"mountPath":"/nodeproc","name":"nodeproc","readOnly":true}]}],"nodeSelector":{"kubernetes.io/os":"linux"},"priorityClassName":"system-node-critical","serviceAccountName":"calico-node","terminationGracePeriodSeconds":0,"tolerations":[{"effect":"NoSchedule","operator":"Exists"},{"key":"CriticalAddonsOnly","operator":"Exists"},{"effect":"NoExecute","operator":"Exists"}],"volumes":[{"hostPath":{"path":"/lib/modules"},"name":"lib-modules"},{"hostPath":{"path":"/var/run/calico"},"name":"var-run-calico"},{"hostPath":{"path":"/var/lib/calico"},"name":"var-lib-calico"},{"hostPath":{"path":"/run/xtables.lock","type":"FileOrCreate"},"name":"xtables-lock"},{"hostPath":{"path":"/sys/fs/","type":"DirectoryOrCreate"},"name":"sys-fs"},{"hostPath":{"path":"/sys/fs/bpf","type":"Directory"},"name":"bpffs"},{"hostPath":{"path":"/proc"},"name":"nodeproc"},{"hostPath":{"path":"/opt/cni/bin"},"name":"cni-bin-dir"},{"hostPath":{"path":"/etc/cni/net.d"},"name":"cni-net-dir"},{"hostPath":{"path":"/var/log/calico/cni"},"name":"cni-log-dir"},{"hostPath":{"path":"/var/lib/cni/networks"},"name":"host-local-net-dir"},{"hostPath":{"path":"/var/run/nodeagent","type":"DirectoryOrCreate"},"name":"policysync"}]}},"updateStrategy":{"rollingUpdate":{"maxUnavailable":1},"type":"RollingUpdate"}}}
+    creationTimestamp: "2025-08-28T08:27:35Z"
+    labels:
+      controller-revision-hash: 847d5b8446
+      k8s-app: calico-node
+    name: calico-node-847d5b8446
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: calico-node
+      uid: 7424ee30-fb1c-41e6-b7bd-a32528205027
+    resourceVersion: "100173"
+    uid: aa199ffa-447e-43f3-b4c8-957a2993ea96
+  revision: 3
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          creationTimestamp: null
+          labels:
+            k8s-app: calico-node
+        spec:
+          containers:
+          - env:
+            - name: DATASTORE_TYPE
+              value: kubernetes
+            - name: IP
+              value: autodetect
+            - name: CALICO_NETWORKING_BACKEND
+              value: bird
+            - name: CLUSTER_TYPE
+              value: k8s,bgp
+            - name: CALICO_IPV4POOL_CIDR
+              value: 10.244.0.0/16
+            - name: CALICO_IPV4POOL_IPIP
+              value: Always
+            - name: CALICO_IPV4POOL_VXLAN
+              value: Never
+            - name: FELIX_HEALTHENABLED
+              value: "true"
+            - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
+              value: ACCEPT
+            image: docker.io/calico/node:v3.27.3
+            imagePullPolicy: IfNotPresent
+            name: calico-node
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+            - mountPath: /var/run/calico
+              name: var-run-calico
+          dnsPolicy: ClusterFirst
+          nodeSelector:
+            kubernetes.io/os: linux
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: calico-node
+          serviceAccountName: calico-node
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - effect: NoSchedule
+            key: node-role.kubernetes.io/control-plane
+            operator: Exists
+          volumes:
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+          - hostPath:
+              path: /var/run/calico
+              type: ""
+            name: var-run-calico
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"k8s-app":"calico-node"},"name":"calico-node","namespace":"kube-system"},"spec":{"selector":{"matchLabels":{"k8s-app":"calico-node"}},"template":{"metadata":{"labels":{"k8s-app":"calico-node"}},"spec":{"containers":[{"env":[{"name":"DATASTORE_TYPE","value":"kubernetes"},{"name":"IP","value":"autodetect"},{"name":"CALICO_NETWORKING_BACKEND","value":"bird"},{"name":"CLUSTER_TYPE","value":"k8s,bgp"},{"name":"CALICO_IPV4POOL_CIDR","value":"10.244.0.0/16"},{"name":"CALICO_IPV4POOL_IPIP","value":"Always"},{"name":"CALICO_IPV4POOL_VXLAN","value":"Never"},{"name":"FELIX_HEALTHENABLED","value":"true"},{"name":"FELIX_DEFAULTENDPOINTTOHOSTACTION","value":"ACCEPT"}],"image":"docker.io/calico/node:v3.27.3","name":"calico-node","volumeMounts":[{"mountPath":"/lib/modules","name":"lib-modules","readOnly":true},{"mountPath":"/var/run/calico","name":"var-run-calico"}]}],"nodeSelector":{"kubernetes.io/os":"linux"},"serviceAccountName":"calico-node","tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/control-plane","operator":"Exists"}],"volumes":[{"hostPath":{"path":"/lib/modules"},"name":"lib-modules"},{"hostPath":{"path":"/var/run/calico"},"name":"var-run-calico"}]}}}}
+    creationTimestamp: "2025-08-28T08:24:29Z"
+    labels:
+      controller-revision-hash: 9665f4d6f
+      k8s-app: calico-node
+    name: calico-node-9665f4d6f
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: calico-node
+      uid: 7424ee30-fb1c-41e6-b7bd-a32528205027
+    resourceVersion: "99446"
+    uid: 4f730790-f15f-4001-b688-4442dba53708
+  revision: 1
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T06:37:58Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "8"
+    creationTimestamp: "2025-08-28T06:37:58Z"
+    labels:
+      controller-revision-hash: 55b66b7657
+      k8s-app: kube-proxy
+    name: kube-proxy-55b66b7657
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "80713"
+    uid: 8539a42f-2070-41e9-a8cb-4c04f588215c
+  revision: 8
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "1"
+    creationTimestamp: "2025-08-27T00:28:59Z"
+    labels:
+      controller-revision-hash: 66648fc774
+      k8s-app: kube-proxy
+    name: kube-proxy-66648fc774
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "386"
+    uid: f56513bd-f1c2-4cdc-9a9b-107af85b6264
+  revision: 1
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T06:26:17Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "6"
+    creationTimestamp: "2025-08-28T06:26:17Z"
+    labels:
+      controller-revision-hash: 677bddfd46
+      k8s-app: kube-proxy
+    name: kube-proxy-677bddfd46
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "78910"
+    uid: 27d87519-104c-4904-b148-3364edbee99a
+  revision: 6
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T05:00:33Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "3"
+    creationTimestamp: "2025-08-28T05:00:33Z"
+    labels:
+      controller-revision-hash: 6869957b89
+      k8s-app: kube-proxy
+    name: kube-proxy-6869957b89
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "67377"
+    uid: a7dfbc0c-8eed-4141-87cb-efb7e19f057f
+  revision: 3
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T06:21:14Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "4"
+    creationTimestamp: "2025-08-28T06:21:14Z"
+    labels:
+      controller-revision-hash: 68779965d4
+      k8s-app: kube-proxy
+    name: kube-proxy-68779965d4
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "78111"
+    uid: 470eb3d1-7bf0-4fbf-9281-eab6e0562326
+  revision: 4
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T09:11:49Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "9"
+    creationTimestamp: "2025-08-28T09:11:50Z"
+    labels:
+      controller-revision-hash: 68f8c7b75d
+      k8s-app: kube-proxy
+    name: kube-proxy-68f8c7b75d
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "116374"
+    uid: fcc84f1d-5fb4-4e00-a6fb-56f724e2d8e0
+  revision: 9
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T06:24:25Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "5"
+    creationTimestamp: "2025-08-28T06:24:25Z"
+    labels:
+      controller-revision-hash: 6fbf4c9889
+      k8s-app: kube-proxy
+    name: kube-proxy-6fbf4c9889
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "78598"
+    uid: 4a05a371-4a6c-4002-b24e-f2f5890d320d
+  revision: 5
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T06:36:34Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "7"
+    creationTimestamp: "2025-08-28T06:36:34Z"
+    labels:
+      controller-revision-hash: 7fffc7cf7d
+      k8s-app: kube-proxy
+    name: kube-proxy-7fffc7cf7d
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "80445"
+    uid: 81843c35-f7ab-4078-b88f-fb37d94734ba
+  revision: 7
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T15:30:52Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "11"
+    creationTimestamp: "2025-08-28T15:30:52Z"
+    labels:
+      controller-revision-hash: 88584678d
+      k8s-app: kube-proxy
+    name: kube-proxy-88584678d
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "284394"
+    uid: cbe10077-2c76-4066-82d2-44513c3b2339
+  revision: 11
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T15:10:36Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "10"
+    creationTimestamp: "2025-08-28T15:10:36Z"
+    labels:
+      controller-revision-hash: bbc64fc88
+      k8s-app: kube-proxy
+    name: kube-proxy-bbc64fc88
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "280958"
+    uid: 6276a8bf-07a6-41d6-89dd-d60ea9e78262
+  revision: 10
+- apiVersion: apps/v1
+  data:
+    spec:
+      template:
+        $patch: replace
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/restartedAt: "2025-08-28T03:44:50Z"
+          creationTimestamp: null
+          labels:
+            k8s-app: kube-proxy
+        spec:
+          containers:
+          - command:
+            - /usr/local/bin/kube-proxy
+            - --config=/var/lib/kube-proxy/config.conf
+            - --hostname-override=$(NODE_NAME)
+            env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            image: registry.k8s.io/kube-proxy:v1.30.14
+            imagePullPolicy: IfNotPresent
+            name: kube-proxy
+            resources: {}
+            securityContext:
+              privileged: true
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /var/lib/kube-proxy
+              name: kube-proxy
+            - mountPath: /run/xtables.lock
+              name: xtables-lock
+            - mountPath: /lib/modules
+              name: lib-modules
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: true
+          nodeSelector:
+            kubernetes.io/os: linux
+          priorityClassName: system-node-critical
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: kube-proxy
+          serviceAccountName: kube-proxy
+          terminationGracePeriodSeconds: 30
+          tolerations:
+          - operator: Exists
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: kube-proxy
+            name: kube-proxy
+          - hostPath:
+              path: /run/xtables.lock
+              type: FileOrCreate
+            name: xtables-lock
+          - hostPath:
+              path: /lib/modules
+              type: ""
+            name: lib-modules
+  kind: ControllerRevision
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "2"
+    creationTimestamp: "2025-08-28T03:44:50Z"
+    labels:
+      controller-revision-hash: bfc45897b
+      k8s-app: kube-proxy
+    name: kube-proxy-bfc45897b
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: kube-proxy
+      uid: 8847a461-3107-4406-a5d3-1d2fe1ab7038
+    resourceVersion: "57641"
+    uid: b8362b86-e227-4893-938e-40d21fea0c26
+  revision: 2
+kind: List
+metadata:
+  resourceVersion: ""

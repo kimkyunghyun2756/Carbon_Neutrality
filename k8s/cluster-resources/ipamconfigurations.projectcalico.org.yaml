@@ -1,0 +1,14 @@
+apiVersion: v1
+items:
+- apiVersion: projectcalico.org/v3
+  kind: IPAMConfiguration
+  metadata:
+    creationTimestamp: "2025-08-27T01:43:44Z"
+    name: default
+    resourceVersion: "1590"
+    uid: 2c2e300b-5181-4d02-8e86-4595a4072adb
+  spec:
+    strictAffinity: false
+kind: List
+metadata:
+  resourceVersion: ""
